@@ -15,12 +15,12 @@
     box-sizing: border-box;
 }
 
-.icon-droite{
+.right-icon{
     display: flex;
     gap: 20px;
 }
 
-.login-icone a:link,a:visited,a:active{
+.login-icon a:link,a:visited,a:active{
     color: white;
 }
 
@@ -28,3 +28,5 @@
     margin-left: auto;
     text-decoration: none;
 }
+
+.main
