@@ -29,4 +29,40 @@
     text-decoration: none;
 }
 
-.main
+.main-div{
+    display: grid;
+    place-items: center;
+    padding-top: 200px;
+    border-bottom: 2px solid black;
+    padding-bottom: 20px;
+    background-image: url("../img/portal_background.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.main-portal{
+    width: 450px;
+    height: auto;
+}
+
+.link-portal-text{
+    text-decoration: none;
+    color: black;
+    font-family: Montserrat, sans-serif;
+    font-size: 50px;
+}
+
+.link-portal-text a:link,a:visited,a:active{
+    color: white;
+}
+
+.link-portal-img:hover{
+    transform: rotate(1440deg);
+    filter: brightness(150%);
+    transition: transform 4s ease, filter 4s ease;
+}
+
+.headliner-div{
+
+}
