@@ -1,4 +1,30 @@
-.site-banner{
+.site-header{
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: space-between;
     position: fixed;
-    
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: black;
+    padding: 0 100px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.icon-droite{
+    display: flex;
+    gap: 20px;
+}
+
+.login-icone a:link,a:visited,a:active{
+    color: white;
+}
+
+.site-header a{
+    margin-left: auto;
+    text-decoration: none;
 }
