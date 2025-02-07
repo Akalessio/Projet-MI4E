@@ -12,7 +12,7 @@
     z-index: 1000;
 }
 
-* {
+*{
     box-sizing: border-box;
 }
 
@@ -20,6 +20,16 @@
     display: flex;
     gap: 20px;
 }
+
+.mid-link{
+    display: flex;
+    gap: 30px;
+}
+
+.mid-link-item:hover{
+    text-decoration: none;
+}
+
 
 .login-icon a:link,a:visited,a:active{
     color: white;
@@ -98,4 +108,6 @@
 .headliner-box{
     background-color: #41e00b;
     border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
 }
