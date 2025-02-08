@@ -40,16 +40,17 @@
     text-decoration: none;
 }
 
-.main-div{
+.main-div {
     display: grid;
     place-items: center;
     padding-top: 200px;
-    border-bottom: 2px solid black;
     padding-bottom: 20px;
     background-image: url("../img/portal_background.png");
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
+    margin-bottom: 200px;
+    width: 100%;
 }
 
 .main-portal{
@@ -76,13 +77,13 @@
     z-index: 999;
     transform: rotate(1440deg);
     filter: brightness(150%);
-    transition: transform 4s ease, filter 4s ease;
+    transition: transform 4s ease-in-out, filter 4s ease;
 }
 
 .headliner-div{
     display: flex;
     width: 100%;
-    margin: 20px auto;
+    margin: 100px auto;
     flex-wrap: wrap;
 }
 
@@ -107,7 +108,7 @@
 
 .headliner-box{
     background-color: #41e00b;
-    border-bottom: 2px solid black;
-    border-left: 2px solid black;
-    border-right: 2px solid black;
+    width: 100%;
+    clip-path: polygon(0% 0%, 10% 0%, 20% 15%, 100% 15%, 100% 87%, 20% 87%, 10% 100%, 0% 100%);
 }
+
