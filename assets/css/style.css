@@ -62,7 +62,7 @@
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;*/
-    margin-bottom: 200px;
+    margin-bottom: 130px;
     width: 100%;
 }
 
@@ -130,3 +130,36 @@
     clip-path: polygon(0% 0%, 10% 0%, 20% 15%, 100% 15%, 100% 100%, 90% 100%, 80% 80%, 0% 80%);
 }
 
+.site-presentation-title{
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 50px;
+}
+
+.site-presentation-text{
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+}
+
+.site-footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100px;
+    width: 100%;
+    margin-top: 100px;
+    background-color: black;
+}
+
+.social-icon{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.team-div{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
