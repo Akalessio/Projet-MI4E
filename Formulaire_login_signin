@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+
+<p>sign in</p>
+
+<form action="xxxx" method="post">
+  <label for="fname">Prénom* :</label>
+  <input type="text" id="fname" name="fname" maxlength="50" required>
+  <br>
+
+  <label for="lname">Nom* :</label>
+  <input type="text" id="lname" name="lname" maxlength="50" required>
+  <br>
+
+  <label for="mail">Email* :</label>
+  <input type="email" id="mail" name="mail" required>
+  <br>
+
+  <p>Veuillez sélectionner votre genre :</p>
+  <input type="radio" name="gender" value="woman" checked> Femme
+  <input type="radio" name="gender" value="man"> Homme
+  <br>
+
+  <label for="birthdate">Date de naissance* :</label>
+  <input type="date" id="birthdate" name="date" required>
+  <br>
+
+  <input type="checkbox" id="terms" required>
+  <label for="terms">*En cochant cette case, vous déclarez avoir lu et accepté nos <a href="conditions-d-utilisation.html">conditions d'utilisation</a></label>
+  <br>
+
+  <button type="submit">S'inscrire</button>
+  <br>
+
+  <p>* Mentions obligatoires</p>
+</form>
+<br><br><br><br><br>
+<p>Log in</p>
+  <form action="yyyy" method="post">
+    <label for="loginMail">Email :</label>
+    <input type="email" id="loginMail" name="loginMail" required>
+    <br>
+
+    <label for="psw">Mot de passe :</label>
+    <input type="password" id="psw" name="psw" required>
+    <br>
+
+    <button type="submit">Se connecter</button>
+  </form>
+
+</body>
+
+</html>
