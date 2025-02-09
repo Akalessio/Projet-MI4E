@@ -53,27 +53,41 @@
 </div>
 
 <div class="form-container">
-    <div class="form">
-        <form action="profile.html" method="post">
-            <div class="form-item" style="margin: 50px">
-                <label for="loginMail" class="label-text">E-mail :</label>
-                <input type="email" id="loginMail" name="loginMail" required class="input" placeholder="E-mail" >
-            </div>
-            <div class="form-item" style="margin-bottom: 100px">
-                <label for="psw" class="label-text">Password :</label>
-                <input type="password" id="psw" name="psw" required class="input" placeholder="Password..." >
+    <div class="form-2">
+        <form action="login.html" method="post">
+
+            <div class="form-item-2">
+                <label class="label-text" for="fname">First Name* :</label>
+                <input class="input" type="text" id="fname" name="fname" maxlength="50" required placeholder="First Name...">
             </div>
 
-            <div class="form-item">
-                    <button type="submit" style="font-family: 'Montserrat', sans-serif; z-index: 999">Login</button>
+            <div class="form-item-2">
+            <label class="label-text" for="lname">Name* :</label>
+            <input class="input" type="text" id="lname" name="lname" maxlength="50" required placeholder="Name...">
             </div>
-        </form>
 
-        <div class="item-bsb">
-            <a href="sign.html">
-                <button style="font-family: 'Montserrat', sans-serif">Sign-In</button>
-            </a>
-        </div>
+            <div class="form-item-2">
+            <label class="label-text" for="mail">E-mail* :</label>
+            <input class="input" type="email" id="mail" name="mail" required placeholder="E-mail">
+            </div>
+
+            <div class="form-item-2">
+            <label class="label-text" for="birthdate">Birthdate* :</label>
+            <input class="input" type="date" id="birthdate" name="date" required>
+            </div>
+
+            <div class="form-item-2">
+            <input type="checkbox" id="terms" required>
+            <label style="font-family: 'Montserrat', sans-serif; text-align: center" for="terms">By checking this box, you declare that you have read and accepted our<a href="terms.html" target="_blank" style="text-decoration: none"> terms</a></label>
+            </div>
+
+            <div class="form-item-2">
+            <button type="submit" style="font-family: 'Montserrat', sans-serif">Sign in</button>
+            <br>
+            </div>
+
+            <p style="font-family: 'Montserrat', sans-serif; text-align: center"> * Mandatory</p>
+            </form>
     </div>
 </div>
 
