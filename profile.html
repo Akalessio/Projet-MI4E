@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/profile.css">
     <link  rel="stylesheet" href="https://db.onlinewebfonts.com/c/485fe91395665a0ac50e25744ff3a19c?family=Get+Schwifty">
 </head>
 <body style="width: 100%; margin: 0; padding: 0;">
@@ -50,7 +51,112 @@
         </a>
     </div>
 </div>
-/*a*/
+
+<section class="profile-section">
+        <div class="profile-container">
+            <div class="my-account">
+                <ul class="account-list">
+                    <li class="list-item-name">
+                        <h1>
+                            My Account
+                        </h1>
+                        <a href="profile.html">
+                            <img src="assets/img/modif.png" alt="modif-icon" width="50" height="50">
+                        </a>
+                    </li>
+                    <li class="list-item">
+                        <label>
+                            Firstname
+                        </label>
+                        <input type="text" value="Jules" id="firstname" class="input-account" readonly>
+                    </li >
+                    <li class="list-item">
+                        <label>
+                            Name
+                        </label>
+                        <input type="text" value="Pel" id="name" class="input-account" readonly>
+                    </li>
+                    <li class="list-item">
+                        <label>
+                            Birthdate
+                        </label>
+                        <input type="text" value="09/10/06" id="date" class="input-account" readonly>
+                    </li>
+                    <li class="list-item">
+                        <label>
+                            E-mail
+                        </label>
+                        <input type="email" value="julescoc@gmail.com" id="email" class="input-account" readonly>
+                    </li>
+                    <li class="list-item">
+                        <label>
+                            Password
+                        </label>
+                        <input type="password" value="EKIP" id="password" class="input-account" readonly>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="profile-container">
+            <div class="my-reservation">
+                <ul style="padding: 0 40px; font-family: 'Montserrat', sans-serif">
+                    <li class="list-item" >
+                        <h1>
+                            Admin Pannel
+                        </h1>
+                    </li>
+                    <li class="list-reservation">
+                        <p style="font-family: 'Montserrat', sans-serif; font-size: 30px">Change customer status</p>
+                        <form action="user.file" method="post">
+                            <input type="mail" required placeholder="Account E-mail..." class="input-account">
+                            <ul class="ul-button">
+                                <li>
+                                    <button class="green-light" type="submit">
+                                        Add VIP rank
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="red-light" type="submit">
+                                        Ban account
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="blue-light" type="submit">
+                                        Unban account
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="pink-light" type="submit">
+                                        Gift a free Trip
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="orange-light" type="submit">
+                                        Add Admin Rank
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="black-light" type="submit">
+                                        Remove Admin Rank
+                                    </button>
+                                </li>
+                            </ul>
+                        </form>
+                    </li>
+                    <li class="list-reservation">
+
+                    </li>
+                    <li class="list-reservation">
+
+                    </li>
+                    <li class="list-reservation">
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+</section>
+
 <div id="contact" class="site-footer">
     <div>
         <a href="https://github.com/Akalessio/Projet-MI4E" target="_blank" style="margin-left: 10px; text-decoration: none; font-family: 'Montserrat', sans-serif" class="team-div">
