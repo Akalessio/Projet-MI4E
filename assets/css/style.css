@@ -22,6 +22,14 @@
     width: auto;
 }
 
+#here{
+    color: #41e00b;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    align-content: center;
+}
+
 .search-bar{
     margin-top: 11px;
     height: 30px;
