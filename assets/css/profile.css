@@ -7,7 +7,7 @@
 
 .profile-container{
     display: flex;
-    background: #91d17b;
+    background: grey;
     height: auto;
     width: auto;
     border-radius: 30px;
@@ -32,6 +32,7 @@
     justify-content: center;
     font-family: 'Montserrat', sans-serif;
     font-size: 30px;
+    color: white;
 }
 
 .list-item-name{
@@ -43,6 +44,7 @@
     gap: 20px;
     font-family: 'Montserrat', sans-serif;
     font-size: 30px;
+    color: white;
 }
 
 .input-account{
@@ -52,6 +54,8 @@
     font-size: 20px;
     padding: 20px;
     font-family: 'Montserrat', sans-serif;
+    color: black;
+    background-color: white;
 }
 
 .green-light{

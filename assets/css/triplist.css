@@ -1,0 +1,47 @@
+.body-section{
+    display: flex;
+    margin: 200px;
+    flex-direction: column;
+    width: 80%;
+    background-color: grey;
+    padding: 50px;
+    border-radius: 30px;
+    gap: 50px;
+    justify-content: center;
+    align-content: center;
+}
+
+.title-section{
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 50px;
+    background-color: #41e00b;
+    border-radius: 30px;
+    color: white;
+}
+
+.selection-field{
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    align-content: center;
+}
+
+.input-trip{
+    margin-top: 11px;
+    height: 30px;
+    display: flex;
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: white;
+    border-radius: 30px;
+    align-items: center;
+}
+
+.trip-list{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
