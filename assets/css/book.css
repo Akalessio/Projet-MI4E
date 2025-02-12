@@ -1,0 +1,98 @@
+.main-section{
+    margin: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    background-color: #41e00b;
+    padding: 50px;
+    border-radius: 30px;
+}
+
+.book-presentation{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    text-align: left;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    background-color: white;
+    border-radius: 30px;
+}
+
+.options-box{
+    display: flex;
+    gap: 25px;
+    margin: 10px;
+    background-color: grey;
+    border-radius: 30px;
+    padding: 20px;
+}
+
+.main-presentation{
+    font-size: 25px;
+}
+
+.options-presentation{
+    overflow: auto;
+    max-height: 400px;
+}
+
+.options-presentation h3{
+    color: white;
+
+}
+
+.book-features{
+    display: flex;
+    gap: 50px;
+    flex-direction: column;
+}
+
+.book-options{
+    display: flex;
+    gap: 15px;
+    background-color:white;
+    border-radius: 30px;
+    justify-content: center;
+}
+
+.options{
+    display: flex;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+    background-color: grey;
+    border-radius: 30px;
+    margin: 10px;
+}
+
+.options h2{
+    margin-left: 25px;
+}
+
+.options-button{
+    border-radius: 30px;
+    margin: 25px;
+    height: 50px;
+    width: 200px;
+}
+
+.pic-container{
+    background: white;
+    margin: 50px;
+    padding: 45px;
+    justify-content: center;
+}
+
+.book-pic{
+    display: flex;
+    overflow: auto;
+    gap: 50px;
+    background: grey;
+    border-radius: 30px;
+}
+
+.pic{
+    height: 510px;
+    width: 825px;
+}
