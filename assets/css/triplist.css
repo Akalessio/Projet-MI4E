@@ -17,7 +17,7 @@
     font-size: 50px;
     background-color: #8FB43A;
     border-radius: 30px;
-    color: white;
+    color: #DCDFDA;
 }
 
 .selection-field{
@@ -33,7 +33,7 @@
     display: flex;
     cursor: pointer;
     padding: 10px 20px;
-    background-color: white;
+    background-color: #DCDFDA;
     border-radius: 30px;
     align-items: center;
 }

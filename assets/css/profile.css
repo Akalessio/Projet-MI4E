@@ -3,15 +3,31 @@
     place-items: center;
     justify-content: space-evenly;
     margin: 200px auto;
+
 }
 
-.profile-container{
+.profile-container {
     display: flex;
     background: #C8D6A2;
-    height: auto;
-    width: auto;
+    width: 510px;
+    height: 601.69px;
     border-radius: 30px;
     border: 15px solid #4B5943;
+    overflow: auto;
+    scrollbar-width: none;
+    place-content: center;
+}
+
+.profile-container-bis{
+    display: flex;
+    background: #C8D6A2;
+    width: auto;
+    height: 601.69px;
+    border-radius: 30px;
+    border: 15px solid #4B5943;
+    overflow: auto;
+    scrollbar-width: none;
+    place-content: center;
 }
 
 .account-list{
@@ -20,10 +36,15 @@
     padding-bottom: 40px;
 }
 
+.account-list-bis{
+    padding-left: 70px;
+    padding-right: 70px;
+    padding-bottom: 40px;
+}
+
 .my-account{
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 .list-item{
@@ -33,7 +54,7 @@
     justify-content: center;
     font-family: 'Montserrat', sans-serif;
     font-size: 30px;
-    color: white;
+    color: #DCDFDA;
 }
 
 .list-item-name{
@@ -45,7 +66,7 @@
     gap: 20px;
     font-family: 'Montserrat', sans-serif;
     font-size: 30px;
-    color: white;
+    color: #DCDFDA;
 }
 
 .input-account{
@@ -56,7 +77,7 @@
     padding: 20px;
     font-family: 'Montserrat', sans-serif;
     color: black;
-    background-color: white;
+    background-color: #DCDFDA;
 }
 
 .green-light{
@@ -74,13 +95,13 @@
 }
 
 .green-light:hover{
-    color: white;
+    color: #DCDFDA;
     background: #41e00b;
     transition: color 0.3s, background-color 0.3s;
 }
 
 .red-light:hover{
-    color: white;
+    color: #DCDFDA;
     background: red;
     transition: color 0.3s, background-color 0.3s;
 }
@@ -99,12 +120,14 @@
     padding: 0;
     flex-wrap: wrap;
     overflow: auto;
+    scrollbar-width: none;
     width: 400px;
     height: 200px;
 }
 
 .my-reservation{
     overflow: auto;
+    scrollbar-width: none;
     width: 510px;
     height: 601.69px;
 }
@@ -116,7 +139,7 @@
     font-family: 'Montserrat', sans-serif;
 }
 .blue-light:hover {
-    color: white;
+    color: #DCDFDA;
     background: blue;
     transition: color 0.3s, background-color 0.3s;
 }
@@ -127,7 +150,7 @@
     font-family: 'Montserrat', sans-serif;
 }
 .pink-light:hover {
-    color: white;
+    color: #DCDFDA;
     background: deeppink;
     transition: color 0.3s, background-color 0.3s;
 }
@@ -138,7 +161,7 @@
     font-family: 'Montserrat', sans-serif;
 }
 .orange-light:hover {
-    color: white;
+    color: #DCDFDA;
     background: darkorange;
     transition: color 0.3s, background-color 0.3s;
 }
@@ -150,7 +173,7 @@
     font-family: 'Montserrat', sans-serif;
 }
 .black-light:hover {
-    color: white;
+    color: #DCDFDA;
     background: black;
     transition: color 0.3s, background-color 0.3s;
 }
@@ -158,4 +181,36 @@
 button{
     border: none;
     border-radius: 10px;
+}
+
+.change-pannel{
+    border: none;
+    background: #DCDFDA;
+    padding: 16px 30px;
+    color: black;
+    border-radius: 6px;
+    transition: 0.2s;
+    margin-bottom: 100px;
+    margin-top: 50px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.change-pannel:hover{
+    box-shadow: 0 0 0 4px #8FB43A, 0 0 0 8px #DCDFDA;
+    color: #8FB43A;
+}
+
+.account-list-item{
+    gap: 5px;
+    display: flex;
+    text-align: left;
+    padding: 5px;
+    color: #4B5943;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 19px;
+    background: #C8D6A2;
+    border: 2px solid #4B5943;
+    border-radius: 10px;
+    margin: 5px;
+    overflow: auto;
 }
