@@ -18,6 +18,28 @@
     place-content: center;
 }
 
+.profile-container-3{
+    display: flex;
+    background: #C8D6A2;
+    width: 510px;
+    height: 601.69px;
+    border-radius: 30px;
+    border: 15px solid #4B5943;
+    overflow: auto;
+    place-content: center;
+}
+
+.profile-container-4{
+    display: flex;
+    background: #C8D6A2;
+    width: auto;
+    height: 601.69px;
+    border-radius: 30px;
+    border: 15px solid #4B5943;
+    overflow: auto;
+    place-content: center;
+}
+
 .profile-container-bis{
     display: flex;
     background: #C8D6A2;
@@ -191,7 +213,7 @@ button{
     border-radius: 6px;
     transition: 0.2s;
     margin-bottom: 100px;
-    margin-top: 50px;
+    margin-top: 30px;
     font-family: 'Montserrat', sans-serif;
 }
 
