@@ -14,7 +14,8 @@
     height: 600px;
     border-radius: 50px;
     position: page;
-    background-color: grey;
+    background-color: #C8D6A2;
+    border: 15px solid #4B5943;
 }
 
 .form-2{
@@ -24,10 +25,13 @@
     align-items: center;
     background: #91d17b;
     width: 600px;
-    height: 800px;
+    height: 900px;
     border-radius: 50px;
     position: page;
-    background-color: grey;
+    background-color: #C8D6A2;
+    border: 15px solid #4B5943;
+    overflow: auto;
+    scrollbar-width: none;
 }
 
 .form-item{
@@ -69,8 +73,8 @@ button{
 }
 
 button:hover{
-    box-shadow: 0 0 0 4px #41e00b, 0 0 0 8px white;
-    color: #41e00b;
+    box-shadow: 0 0 0 4px #8FB43A, 0 0 0 8px white;
+    color: #8FB43A;
 }
 
 .label-text{

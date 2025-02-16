@@ -7,10 +7,11 @@
 
 .profile-container{
     display: flex;
-    background: grey;
+    background: #C8D6A2;
     height: auto;
     width: auto;
     border-radius: 30px;
+    border: 15px solid #4B5943;
 }
 
 .account-list{

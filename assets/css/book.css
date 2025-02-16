@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     gap: 50px;
-    background-color: #41e00b;
+    background-color: #8FB43A;
     padding: 50px;
     border-radius: 30px;
 }
@@ -23,7 +23,7 @@
     display: flex;
     gap: 25px;
     margin: 10px;
-    background-color: grey;
+    background-color: #C8D6A2;
     border-radius: 30px;
     padding: 20px;
 }
@@ -61,7 +61,7 @@
     flex-direction: column;
     font-family: 'Montserrat', sans-serif;
     font-size: 30px;
-    background-color: grey;
+    background-color: #C8D6A2;
     border-radius: 30px;
     margin: 10px;
 }
@@ -88,7 +88,7 @@
     display: flex;
     overflow: auto;
     gap: 50px;
-    background: grey;
+    background: #C8D6A2;
     border-radius: 30px;
 }
 
