@@ -1,4 +1,15 @@
-<!DOCTYPE html>
+<?php
+session_start();
+if(!isset($_SESSION['user'])){
+    header("Location:login.php");
+    exit();
+}
+
+$user = $_SESSION['user'];
+
+?>
+
+ html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -43,10 +54,10 @@
             Contact Us
         </a>
 
-        <a href="profile.html">
+        <a href="profile.php">
             <img src="assets/img/user.png" alt="profile icon" width="50" height="50">
         </a>
-        <a href="login.html" class="mid-link-item">
+        <a href="login.php" class="mid-link-item">
             Login
         </a>
     </div>
@@ -68,31 +79,31 @@
                         <label>
                             Firstname
                         </label>
-                        <input type="text" value="Jules" id="firstname" class="input-account" readonly>
+                        <input type="text" value="<?php echo htmlspecialchars($_SESSION["user"]["fname"]); ?>" id="firstname" class="input-account" readonly>
                     </li >
                     <li class="list-item">
                         <label>
                             Name
                         </label>
-                        <input type="text" value="Pel" id="name" class="input-account" readonly>
+                        <input type="text" value="<?php echo htmlspecialchars($_SESSION["user"]["lname"]); ?>" id="name" class="input-account" readonly>
                     </li>
                     <li class="list-item">
                         <label>
                             Birthdate
                         </label>
-                        <input type="text" value="09/10/06" id="date" class="input-account" readonly>
+                        <input type="text" value="<?php echo htmlspecialchars($_SESSION["user"]["date"]); ?>" id="date" class="input-account" readonly>
                     </li>
                     <li class="list-item">
                         <label>
                             E-mail
                         </label>
-                        <input type="email" value="julescoc@gmail.com" id="email" class="input-account" readonly>
+                        <input type="email" value="<?php echo htmlspecialchars($_SESSION["user"]["mail"]); ?>" id="email" class="input-account" readonly>
                     </li>
                     <li class="list-item">
                         <label>
                             Password
                         </label>
-                        <input type="password" value="EKIP" id="password" class="input-account" readonly>
+                        <input type="password" value="xxxxxxxxxx" id="password" class="input-account" readonly>
                     </li>
                     <li class="list-item">
                         <a href="admin.html">
@@ -113,7 +124,7 @@
                         </h1>
                     </li>
                     <li class="list-reservation">
-                        <p style="font-family: 'Montserrat', sans-serif; font-size: 30px; color: #DCDFDA">future reservation :</p>
+                        <p style="font-family: 'Montserrat', sans-serif; font-size: 30px; color: #4B5943">future reservation :</p>
                         <div style="background: #DCDFDA; padding: 7px; border: 5px solid #4B5943; border-radius: 15px; text-align: left">
                             <ul style="list-style: none">
                                 <li>
@@ -127,7 +138,7 @@
                         </div>
                     </li>
                     <li class="list-reservation">
-                        <p style="font-family: 'Montserrat', sans-serif; font-size: 30px; color: #DCDFDA">Past reservation :</p>
+                        <p style="font-family: 'Montserrat', sans-serif; font-size: 30px; color: #4B5943">Past reservation :</p>
                         <div style="background: #DCDFDA; padding: 7px; border: 5px solid #4B5943; border-radius: 15px; text-align: left">
                             <ul style="list-style: none">
                                 <li>

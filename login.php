@@ -1,3 +1,51 @@
+<?php
+session_start();
+
+$mail='';
+$password='';
+$f_name='';
+$l_name='';
+$date='';
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $mail=$_POST["loginMail"];
+    $password=$_POST["psw"];
+
+    $user_file = 'assets/php/user_list.json';
+
+    $found=false;
+
+    if(file_exists($user_file)){
+        $registered_users = json_decode(file_get_contents($user_file), true);
+        foreach($registered_users as $user_read){
+            if($mail==$user_read["mail"] && password_verify($password, $user_read["password"])){
+                $_SESSION["user"] = [
+                    "mail" => $user_read["mail"],
+                    "fname" => $user_read["fname"],
+                    "lname" => $user_read["lname"],
+                    "date" => $user_read["date"],
+                    "password" => $user_read["password"]
+                ];
+                $found=true;
+            }else{
+                $found=false;
+            }
+        }
+    }else{
+        die("User list not found");
+    }
+
+    if(!$found){
+        echo "Email or password not found";
+        header("location:login.php?error=invalid_credentials");
+        exit();
+    }
+
+header("location:profile.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,61 +91,40 @@
             Contact Us
         </a>
 
-        <a href="profile.html">
+        <a href="profile.php">
             <img src="assets/img/user.png" alt="profile icon" width="50" height="50">
         </a>
-        <a href="login.html" id="here">
+        <a href="login.php" id="here">
             <u>Login</u>
         </a>
     </div>
 </div>
 
 <div class="form-container">
-    <div class="form-2">
-        <form action="login.html" method="post">
-
-            <div class="form-item-2">
-                <label class="label-text" for="fname">First Name* :</label>
-                <input class="input" type="text" id="fname" name="fname" maxlength="50" required placeholder="First Name...">
+    <div class="form">
+        <form action="login.php" method="post">
+            <div class="form-item" style="margin: 50px">
+                <label for="loginMail" class="label-text">E-mail :</label>
+                <input type="email" id="loginMail" name="loginMail" required class="input" placeholder="E-mail" >
+            </div>
+            <div class="form-item" style="margin-bottom: 100px">
+                <label for="psw" class="label-text">Password :</label>
+                <input type="password" id="psw" name="psw" required class="input" placeholder="Password..." >
             </div>
 
-            <div class="form-item-2">
-            <label class="label-text" for="lname">Name* :</label>
-            <input class="input" type="text" id="lname" name="lname" maxlength="50" required placeholder="Name...">
+            <div class="form-item">
+                    <button type="submit" style="font-family: 'Montserrat', sans-serif; z-index: 999">Login</button>
             </div>
+        </form>
 
-            <div class="form-item-2">
-            <label class="label-text" for="mail">E-mail* :</label>
-            <input class="input" type="email" id="mail" name="mail" required placeholder="E-mail">
-            </div>
-
-            <div class="form-item-2">
-            <label class="label-text" for="birthdate">Birthdate* :</label>
-            <input class="input" type="date" id="birthdate" name="date" required>
-            </div>
-
-            <div class="form-item-2">
-            <input type="checkbox" id="terms" required>
-            <label style="font-family: 'Montserrat', sans-serif; text-align: center; color: #DCDFDA" for="terms">By checking this box, you declare that you have read and accepted our<a href="terms.html" target="_blank" style="text-decoration: none; color: #8FB43A"> terms</a></label>
-            </div>
-
-            <div class="form-item-2">
-            <button type="submit" style="font-family: 'Montserrat', sans-serif">Sign in</button>
-            <br>
-            </div>
-
-            <p style="font-family: 'Montserrat', sans-serif; text-align: center"> * Mandatory</p>
-
-            <div class="item-bsb">
-                <p style="font-family: 'Montserrat', sans-serif; font-size: 25px; color: #DCDFDA">
-                    You have an account ?
-                </p>
-                <a href="login.html">
-                    <button style="font-family: 'Montserrat', sans-serif" type="button">Log in</button>
-                </a>
-            </div>
-
-            </form>
+        <div class="item-bsb">
+            <p style="font-family: 'Montserrat', sans-serif; font-size: 25px; color: #4B5943">
+                You don't have an account ?
+            </p>
+            <a href="sign.php">
+                <button style="font-family: 'Montserrat', sans-serif">Sign-In</button>
+            </a>
+        </div>
     </div>
 </div>
 

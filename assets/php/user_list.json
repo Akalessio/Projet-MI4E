@@ -1,0 +1,16 @@
+[
+    {
+        "lname": "Landier",
+        "fname": "Gabin",
+        "date": "2005-03-02",
+        "mail": "lhommeinhumain@gmail.com",
+        "password": "$2y$10$SYG8QWyq3cRgvEcGFDaNLebMNTRB69VSnDtUGOgcQYyfjTlw1nFGK"
+    },
+    {
+        "lname": "Peralta",
+        "fname": "Anto",
+        "date": "2005-08-10",
+        "mail": "topeestla@gmail.com",
+        "password": "$2y$10$uJD.u1AJ.X9pa1lOJKhtHOUrc0p9Hc8ib.hhYhGxEAzOR5PdMfS7W"
+    }
+]
