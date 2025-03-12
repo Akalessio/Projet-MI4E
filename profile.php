@@ -72,7 +72,7 @@ $user = $_SESSION['user'];
                         <h1>
                             My Account
                         </h1>
-                        <a href="profile.html">
+                        <a href="modify.php">
                             <img src="assets/img/modif.png" alt="modif-icon" width="50" height="50">
                         </a>
                     </li>

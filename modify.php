@@ -1,12 +1,16 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header("location:login.php");
+    exit();
+}
 
 $lname='';
 $fname='';
 $date='';
 $mail='';
 $password='';
-$rank='user';
-$discount='0';
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $fname=$_POST["fname"];
@@ -28,29 +32,29 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if (file_exists($user_file)) {
         $registered_user = json_decode(file_get_contents($user_file), true);
         if($registered_user == null){
-            $registered_user = [];
+            die("Unable to load user file");
         }
     }else{
-        $registered_user = [];
+        die("User file does not exist");
     }
 
-    foreach ($registered_user as $user) {
-        if($user["mail"]==$mail){
-            die("This mail is already registered");
+    foreach ($registered_user as &$new_user) {
+        if($new_user["mail"]==$mail){
+            $new_user = [ "lname" => $lname, "fname" => $fname, "date" => $date, "mail" => $mail, "password" => $password, "rank" => $new_user['rank'], "discount" => $new_user["discount"]];
+            $_SESSION['user']['mail'] = $mail;
+            $_SESSION['user']['fname'] = $fname;
+            $_SESSION['user']['lname'] = $lname;
+            $_SESSION['user']['date'] = $date;
         }
     }
-
-
-
-    $new_user = [ "lname" => $lname, "fname" => $fname, "date" => $date, "mail" => $mail, "password" => $password, "rank" => $rank, "discount" => $discount];
-
-    $registered_user[] = $new_user;
 
     if (file_put_contents($user_file, json_encode($registered_user, JSON_PRETTY_PRINT)) === false) {
         die("Error writing to file.");
     }
 
-    header("location: login.php");
+
+
+    header("location: profile.php");
     exit();
 }
 ?>
@@ -115,57 +119,43 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 <div class="form-container">
     <div class="form-2">
-        <form action="sign.php" method="post">
+        <form action="modify.php" method="post">
 
             <div class="form-item-2">
                 <label class="label-text" for="fname">First Name* :</label>
-                <input class="input" type="text" id="fname" name="fname" maxlength="50" required placeholder="First Name...">
+                <input class="input" type="text" id="fname" name="fname" maxlength="50" required placeholder="First Name..." value="<?php echo htmlspecialchars($_SESSION['user']['fname'])?>">
             </div>
 
             <div class="form-item-2">
-            <!-- <label class="label-text" for="lname">Name* :</label> -->
-            <input class="input" type="text" id="lname" name="lname" maxlength="50" required placeholder="Name...">
+                <label class="label-text" for="lname">Name* :</label>
+                <input class="input" type="text" id="lname" name="lname" maxlength="50" required placeholder="Name..." value="<?php echo htmlspecialchars($_SESSION['user']['lname'])?>">
             </div>
 
             <div class="form-item-2">
-                <!-- <label class="label-text" for="mail">E-mail* :</label> -->
-            <input class="input" type="email" id="mail" name="mail" required placeholder="E-mail">
+                <label class="label-text" for="mail">E-mail* :</label>
+                <input class="input" type="email" id="mail" name="mail" required placeholder="E-mail" value="<?php echo htmlspecialchars($_SESSION['user']['mail'])?>">
             </div>
 
             <div class="form-item-2">
-                <!--  <label class="label-text" for="mail">Password* :</label> -->
-            <input class="input" type="password" id="password" name="password" required placeholder="Password">
+                <label class="label-text" for="mail">Password* :</label>
+                <input class="input" type="password" id="password" name="password" required placeholder="Password" value="value="<?php echo htmlspecialchars($_SESSION['user']['password'])?>"">
             </div>
 
             <div class="form-item-2">
-                <!-- <label class="label-text" for="birthdate">Birthdate* :</label> -->
-            <input class="input" type="date" id="birthdate" name="date" required>
+                <label class="label-text" for="birthdate">Birthdate* :</label>
+                <input class="input" type="date" id="birthdate" name="date" required value="<?php echo htmlspecialchars($_SESSION['user']['date'])?>">
             </div>
 
             <div class="form-item-2">
-            <input type="checkbox" id="terms" required>
-            <label style="font-family: 'Montserrat', sans-serif; text-align: center; color: #DCDFDA" for="terms">By checking this box, you declare that you have read and accepted our<a href="terms.html" target="_blank" style="text-decoration: none; color: #8FB43A"> terms</a></label>
+                <input type="checkbox" id="terms" required>
+                <label style="font-family: 'Montserrat', sans-serif; text-align: center; color: #DCDFDA" for="terms">By checking this box, you declare that you have read and accepted our<a href="terms.html" target="_blank" style="text-decoration: none; color: #8FB43A"> terms</a></label>
             </div>
 
             <div class="form-item-2">
-            <button type="submit" style="font-family: 'Montserrat', sans-serif; margin-bottom: 25px">Sign in</button>
-            <br>
+                <button type="submit" style="font-family: 'Montserrat', sans-serif; margin-bottom: 25px">Save changes</button>
+                <br>
             </div>
-
-
-
-            <div class="item-bsb">
-                <p style="font-family: 'Montserrat', sans-serif; font-size: 25px; color: #DCDFDA">
-                    You have an account ?
-                </p>
-                <a href="login.php">
-                    <button style="font-family: 'Montserrat', sans-serif" type="button">Log in</button>
-                </a>
-            </div>
-
-            <p style="font-family: 'Montserrat', sans-serif; text-align: center"> * Mandatory</p>
-
-            </form>
+        </form>
     </div>
 </div>
 

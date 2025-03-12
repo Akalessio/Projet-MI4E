@@ -4,7 +4,7 @@
         "fname": "Gabin",
         "date": "2005-03-02",
         "mail": "lhommeinhumain@gmail.com",
-        "password": "$2y$10$SYG8QWyq3cRgvEcGFDaNLebMNTRB69VSnDtUGOgcQYyfjTlw1nFGK",
+        "password": "$2y$10$xSN0r9vf2g6jjeEVjIZIlelQSKNLxclu7ZfQGigRniQx6EbvwBuKm",
         "rank": "vip",
         "discount": "0"
     },
@@ -13,7 +13,7 @@
         "fname": "Anto",
         "date": "2005-08-10",
         "mail": "topeestla@gmail.com",
-        "password": "$2y$10$uJD.u1AJ.X9pa1lOJKhtHOUrc0p9Hc8ib.hhYhGxEAzOR5PdMfS7W",
+        "password": "$2y$10$xSN0r9vf2g6jjeEVjIZIlelQSKNLxclu7ZfQGigRniQx6EbvwBuKm",
         "rank": "user",
         "discount": "0"
     },
@@ -22,7 +22,7 @@
         "fname": "Flopinou",
         "date": "2005-05-27",
         "mail": "haineux@gmail.com",
-        "password": "$2y$10$krXiCt8lQ0LKnRY4y6584OCL05jNXhUwByNCcK7BHZ6UZ4pdp6Zz.",
+        "password": "$2y$10$xSN0r9vf2g6jjeEVjIZIlelQSKNLxclu7ZfQGigRniQx6EbvwBuKm",
         "rank": "admin",
         "discount": "0"
     },
@@ -31,7 +31,7 @@
         "fname": "Nathaniel",
         "date": "2005-06-20",
         "mail": "pianoteurfou@gmail.com",
-        "password": "$2y$10$nV0OG4xHJnTU8.OLgn4OSeBphsIOXt5q1FbExLcE4TqjidpBEmsYu",
+        "password": "$2y$10$xSN0r9vf2g6jjeEVjIZIlelQSKNLxclu7ZfQGigRniQx6EbvwBuKm",
         "rank": "admin",
         "discount": "0"
     },
@@ -40,7 +40,7 @@
         "fname": "Romain",
         "date": "2005-03-20",
         "mail": "xyotha@gmail.com",
-        "password": "$2y$10$xSN0r9vf2g6jjeEVjIZIlelQSKNLxclu7ZfQGigRniQx6EbvwBuKm",
+        "password": "$2y$10$QsJJrGSr0pQ7.wvfR6Vxk.YfvjIkUbjvJsnGhNrLLwj9aFGNJK.Hq",
         "rank": "admin",
         "discount": "0"
     }
