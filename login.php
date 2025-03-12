@@ -3,9 +3,6 @@ session_start();
 
 $mail='';
 $password='';
-$f_name='';
-$l_name='';
-$date='';
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $mail=$_POST["loginMail"];
@@ -24,8 +21,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     "fname" => $user_read["fname"],
                     "lname" => $user_read["lname"],
                     "date" => $user_read["date"],
-                    "password" => $user_read["password"]
+                    "password" => $user_read["password"],
+                    "rank" => $user_read["rank"],
+                    "discount" => $user_read["discount"]
                 ];
+                if($user_read["rank"]=="ban"){
+                    die('this account is banned');
+                }
                 $found=true;
             }else{
                 $found=false;
@@ -59,7 +61,7 @@ header("location:profile.php");
 <div class="site-header">
     <div class="title">
         <h2>
-            <a href="index.html">
+            <a href="index.php">
                 <span style=" font-family: 'Get Schwifty', sans-serif;
                 font-size: 48px;
                 font-weight: bold;
@@ -84,7 +86,7 @@ header("location:profile.php");
                 <i class="fas fa-search"></i>
             </a>
         </div>
-        <a href="triplist.html" class="mid-link-item">
+        <a href="triplist.php" class="mid-link-item">
             Book a trip
         </a>
         <a href="#contact" class="mid-link-item">
@@ -94,9 +96,13 @@ header("location:profile.php");
         <a href="profile.php">
             <img src="assets/img/user.png" alt="profile icon" width="50" height="50">
         </a>
-        <a href="login.php" id="here">
-            <u>Login</u>
-        </a>
+        <?php
+        if(!isset($_SESSION['user'])){
+            echo '<a href="login.php" class="mid-link-item">
+                        Login
+                     </a>';
+        }
+        ?>
     </div>
 </div>
 

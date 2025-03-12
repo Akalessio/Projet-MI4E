@@ -1,3 +1,60 @@
+<?php
+
+$lname='';
+$fname='';
+$date='';
+$mail='';
+$password='';
+$rank='user';
+$discount='0';
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $fname=$_POST["fname"];
+    $lname=$_POST["lname"];
+    $date=$_POST["date"];
+    $mail=$_POST["mail"];
+    $password=password_hash($_POST["password"],PASSWORD_DEFAULT);
+
+    if(!$mail){
+        exit("Please enter a valid email address");
+    }
+
+    if(empty($password)){
+        die("Please enter a password");
+    }
+
+    $user_file = "assets/php/user_list.json";
+
+    if (file_exists($user_file)) {
+        $registered_user = json_decode(file_get_contents($user_file), true);
+        if($registered_user == null){
+            $registered_user = [];
+        }
+    }else{
+        $registered_user = [];
+    }
+
+    foreach ($registered_user as $user) {
+        if($user["mail"]==$mail){
+            die("This mail is already registered");
+        }
+    }
+
+
+
+    $new_user = [ "lname" => $lname, "fname" => $fname, "date" => $date, "mail" => $mail, "password" => $password, "rank" => $rank, "discount" => $discount];
+
+    $registered_user[] = $new_user;
+
+    if (file_put_contents($user_file, json_encode($registered_user, JSON_PRETTY_PRINT)) === false) {
+        die("Error writing to file.");
+    }
+
+    header("location: login.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +68,7 @@
 <div class="site-header">
     <div class="title">
         <h2>
-            <a href="index.html">
+            <a href="index.php">
                 <span style=" font-family: 'Get Schwifty', sans-serif;
                 font-size: 48px;
                 font-weight: bold;
@@ -36,7 +93,7 @@
                 <i class="fas fa-search"></i>
             </a>
         </div>
-        <a href="triplist.html" class="mid-link-item">
+        <a href="triplist.php" class="mid-link-item">
             Book a trip
         </a>
         <a href="#contact" class="mid-link-item">
@@ -46,9 +103,13 @@
         <a href="profile.php">
             <img src="assets/img/user.png" alt="profile icon" width="50" height="50">
         </a>
-        <a href="login.php" id="here">
-            <u>Login</u>
-        </a>
+        <?php
+        if(!isset($_SESSION['user'])){
+            echo '<a href="login.php" class="mid-link-item">
+                        Login
+                     </a>';
+        }
+        ?>
     </div>
 </div>
 
@@ -107,61 +168,6 @@
             </form>
     </div>
 </div>
-
-<?php
-
-    $lname='';
-    $fname='';
-    $date='';
-    $mail='';
-    $password='';
-
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
-        $fname=$_POST["fname"];
-        $lname=$_POST["lname"];
-        $date=$_POST["date"];
-        $mail=$_POST["mail"];
-        $password=password_hash($_POST["password"],PASSWORD_DEFAULT);
-
-        if(!$mail){
-            exit("Please enter a valid email address");
-        }
-
-        if(empty($password)){
-            die("Please enter a password");
-        }
-
-        $user_file = "assets/php/user_list.json";
-
-        if (file_exists($user_file)) {
-            $registered_user = json_decode(file_get_contents($user_file), true);
-            if($registered_user == null){
-                $registered_user = [];
-            }
-        }else{
-            $registered_user = [];
-        }
-
-        foreach ($registered_user as $user) {
-            if($user["mail"]==$mail){
-                die("This mail is already registered");
-            }
-        }
-
-
-
-        $new_user = [ "lname" => $lname, "fname" => $fname, "date" => $date, "mail" => $mail, "password" => $password];
-
-        $registered_user[] = $new_user;
-
-        if (file_put_contents($user_file, json_encode($registered_user, JSON_PRETTY_PRINT)) === false) {
-            die("Error writing to file.");
-        }
-
-        header("location: login.php");
-        exit();
-    }
-?>
 
 <div id="contact" class="site-footer">
     <div>

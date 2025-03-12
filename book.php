@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if(isset($_SESSION['user'])){
+    $user = $_SESSION['user'];
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +20,7 @@
 <div class="site-header">
     <div class="title">
         <h2>
-            <a href="index.html">
+            <a href="index.php">
                 <span style=" font-family: 'Get Schwifty', sans-serif;
                 font-size: 48px;
                 font-weight: bold;
@@ -36,7 +45,7 @@
                 <i class="fas fa-search"></i>
             </a>
         </div>
-        <a  href="triplist.html" class="mid-link-item">
+        <a href="triplist.php" class="mid-link-item">
             Book a trip
         </a>
         <a href="#contact" class="mid-link-item">
@@ -46,9 +55,13 @@
         <a href="profile.php">
             <img src="assets/img/user.png" alt="profile icon" width="50" height="50">
         </a>
-        <a href="login.php" class="mid-link-item">
-            Login
-        </a>
+        <?php
+        if(!isset($_SESSION['user'])){
+            echo '<a href="login.php" class="mid-link-item">
+                        Login
+                     </a>';
+        }
+        ?>
     </div>
 </div>
 
@@ -62,7 +75,7 @@
         <div class="main-presentation">
             You've always wanted to meet a Jedi, a Sith or even both ?<br>
             It's your day!!!<br>
-            With <a href="index.html" style="font-family: 'Get Schwifty', sans-serif; text-decoration: none; color: black">dimension'<samp style="color: #8FB43A; font-family: 'Get Schwifty', sans-serif">trip</samp></a>
+            With <a href="index.php" style="font-family: 'Get Schwifty', sans-serif; text-decoration: none; color: black">dimension'<samp style="color: #8FB43A; font-family: 'Get Schwifty', sans-serif">trip</samp></a>
             you can now visit the Star wars universe with our trip you can choose some option to custom your dream adventure <br>
             you can choose a planet to spend your whole trip, many activity for the trip (max amount of 3) and a vehicle that will allow you to travel on the planet and even explore it if you want<br>
             the availible option are :<br>

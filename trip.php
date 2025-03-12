@@ -10,7 +10,7 @@
 <div class="site-header">
     <div class="title">
         <h2>
-            <a href="index.html">
+            <a href="index.php">
                 <span style=" font-family: 'Get Schwifty', sans-serif;
                 font-size: 48px;
                 font-weight: bold;
@@ -35,7 +35,7 @@
                 <i class="fas fa-search"></i>
             </a>
         </div>
-        <a href="triplist.html" class="mid-link-item">
+        <a href="triplist.php" class="mid-link-item">
             Book a trip
         </a>
         <a href="#contact" class="mid-link-item">

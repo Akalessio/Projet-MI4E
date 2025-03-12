@@ -1,3 +1,76 @@
+<?php
+session_start();
+
+if(!isset($_SESSION['user'])){
+    header('location:login.php');
+    exit();
+}
+
+$user = $_SESSION['user'];
+$user_list='assets/php/user_list.json';
+
+if(file_exists($user_list)){
+    $registred_user=json_decode(file_get_contents($user_list), true);
+    if($registred_user == null){
+        $registred_user = [];
+    }
+}else{
+    die('user_list not found');
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $mail=$_POST["mail"];
+    $action=$_POST["action"];
+
+    $rank='';
+    $discount='';
+
+    switch ($action) {
+        case "add_admin":
+            $rank="admin";
+            break;
+        case "unban_account":
+        case "remove_admin":
+            $rank='user';
+            break;
+        case "add_vip":
+            $rank="vip";
+            break;
+        case "ban_account":
+            $rank="ban";
+            break;
+        case "free_trip":
+            $discount="100";
+            break;
+        default:
+            break;
+    }
+
+    foreach ($registred_user as &$user_read) {
+        if($user_read['mail']==$mail AND $rank!=''){
+            $user_read['rank']=$rank;
+        }
+        if($user_read['mail']==$mail AND $discount!=''){
+            $user_read['discount']=$discount;
+        }
+    }
+
+    unset($user_read);
+
+    if($_SESSION['user']['mail']==$mail){
+        if($rank!='')$_SESSION['user']['rank']=$rank;
+        if($discount!='')$_SESSION['user']['discount']=$discount;
+    }
+    if(file_put_contents($user_list, json_encode($registred_user, JSON_PRETTY_PRINT)) === false){
+        die('Error writing to file');
+    }
+
+   header('location:admin.php');
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +84,7 @@
 <div class="site-header">
     <div class="title">
         <h2>
-            <a href="index.html">
+            <a href="index.php">
                 <span style=" font-family: 'Get Schwifty', sans-serif;
                 font-size: 48px;
                 font-weight: bold;
@@ -36,7 +109,7 @@
                 <i class="fas fa-search"></i>
             </a>
         </div>
-        <a href="triplist.html" class="mid-link-item">
+        <a href="triplist.php" class="mid-link-item">
             Book a trip
         </a>
         <a href="#contact" class="mid-link-item">
@@ -46,9 +119,13 @@
         <a href="profile.php">
             <img src="assets/img/user.png" alt="profile icon" width="50" height="50">
         </a>
-        <a href="login.php" class="mid-link-item">
-            Login
-        </a>
+        <?php
+        if(!isset($_SESSION['user'])){
+            echo '<a href="login.php" class="mid-link-item">
+                        Login
+                     </a>';
+        }
+        ?>
     </div>
 </div>
 
@@ -63,120 +140,41 @@
                 </li>
                 <li>
                     <ul style="background: #DCDFDA; padding: 7px; border: 5px solid #4B5943; border-radius: 15px; text-align: left; list-style: none; place-self: center">
-                        <li class="list-item">
+                       <?php
+                        $user_list='assets/php/user_list.json';
+                        if(file_exists($user_list)){
+                            $registred_user=json_decode(file_get_contents($user_list), true);
+                            if($registred_user == null){
+                                $registred_user = [];
+                            }
+                        }else{
+                            die('user_list not found');
+                        }
+
+                        foreach ($registred_user as $user_read) {
+                            if($user_read!=null){
+                                echo '<li class="list-item">
                             <div class="account-list-item">
                                 <p>
-                                    Roccia
+                                    '.$user_read['lname'].'
                                 </p>
                                 <p style="color: #DCDFDA">
-                                    Matio
+                                    '.$user_read['fname'].'
                                 </p>
                                 <p>
-                                    steakblack@gmail.com
+                                    '.$user_read['mail'].'
                                 </p>
                                 <p style="color: #DCDFDA">
                                     *******
                                 </p>
                                 <p>
-                                    Ban
+                                    '.$user_read['rank'].'
                                 </p>
                             </div>
-                        </li >
-                        <li class="list-item">
-                            <div class="account-list-item">
-                                <p>
-                                    Wielss
-                                </p>
-                                <p style="color: #DCDFDA">
-                                    Gab
-                                </p>
-                                <p>
-                                    oqtfwielss@gmail.com
-                                </p>
-                                <p style="color: #DCDFDA">
-                                    ****
-                                </p>
-                                <p>
-                                    VIP
-                                </p>
-                            </div>
-                        </li>
-                        <li class="list-item">
-                            <div class="account-list-item">
-                                <p>
-                                    Le Don
-                                </p>
-                                <p style="color: #DCDFDA">
-                                    Alessio
-                                </p>
-                                <p>
-                                    akalessio@gmail.com
-                                </p>
-                                <p style="color: #DCDFDA">
-                                    **********
-                                </p>
-                                <p>
-                                    Admin
-                                </p>
-                            </div>
-                        </li>
-                        <li class="list-item">
-                            <div class="account-list-item">
-                                <p>
-                                    Joron
-                                </p>
-                                <p style="color: #DCDFDA">
-                                    Nono
-                                </p>
-                                <p>
-                                    taylorswiftfan@gmail.com
-                                </p>
-                                <p style="color: #DCDFDA">
-                                    ********
-                                </p>
-                                <p>
-                                    VIP
-                                </p>
-                            </div>
-                        </li>
-                        <li class="list-item">
-                            <div class="account-list-item">
-                                <p>
-                                    Zahramane
-                                </p>
-                                <p style="color: #DCDFDA">
-                                    Gabriel
-                                </p>
-                                <p>
-                                    longmailpourtesterdefou@gmail.com
-                                </p>
-                                <p style="color: #DCDFDA">
-                                    ******
-                                </p>
-                                <p>
-                                    Aucun
-                                </p>
-                            </div>
-                        </li>
-                        <li class="list-item">
-                            <div class="account-list-item">
-                                <p>
-                                    Musk
-                                </p>
-                                <p style="color: #DCDFDA">
-                                    Elon
-                                </p>
-                                <p>
-                                    pathofexilenjoyer@gmail.com
-                                </p>
-                                <p style="color: #DCDFDA">
-                                    ******
-                                </p>
-                                <p>
-                                    Ban
-                                </p>
-                            </div>
-                        </li>
+                        </li >';
+                            }
+                        }
+                       ?>
                     </ul>
                     <div>
                         <a href="profile.php">
@@ -199,36 +197,36 @@
                 </li>
                 <li class="list-reservation">
                     <p style="font-family: 'Montserrat', sans-serif; font-size: 30px; color: #DCDFDA">Change customer status</p>
-                    <form action="user.file" method="post">
-                        <input type="mail" required placeholder="Account E-mail..." class="input-account">
+                    <form action="admin.php" method="post">
+                        <input type="email"  name="mail" required placeholder="Account E-mail..." class="input-account">
                         <ul class="ul-button">
                             <li>
-                                <button class="green-light" type="submit">
+                                <button class="green-light" type="submit" name="action" value="add_vip">
                                     Add VIP rank
                                 </button>
                             </li>
                             <li>
-                                <button class="red-light" type="submit">
+                                <button class="red-light" type="submit" name="action" value="ban_account">
                                     Ban account
                                 </button>
                             </li>
                             <li>
-                                <button class="blue-light" type="submit">
+                                <button class="blue-light" type="submit" name="action" value="unban_account">
                                     Unban account
                                 </button>
                             </li>
                             <li>
-                                <button class="pink-light" type="submit">
+                                <button class="pink-light" type="submit" name="action" value="free_trip">
                                     Gift a free Trip
                                 </button>
                             </li>
                             <li>
-                                <button class="orange-light" type="submit">
+                                <button class="orange-light" type="submit" name="action" value="add_admin">
                                     Add Admin Rank
                                 </button>
                             </li>
                             <li>
-                                <button class="black-light" type="submit">
+                                <button class="black-light" type="submit" name="action" value="remove_admin">
                                     Remove Admin Rank
                                 </button>
                             </li>

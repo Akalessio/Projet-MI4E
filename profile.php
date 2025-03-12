@@ -22,7 +22,7 @@ $user = $_SESSION['user'];
 <div class="site-header">
     <div class="title">
         <h2>
-            <a href="index.html">
+            <a href="index.php">
                 <span style=" font-family: 'Get Schwifty', sans-serif;
                 font-size: 48px;
                 font-weight: bold;
@@ -47,7 +47,7 @@ $user = $_SESSION['user'];
                 <i class="fas fa-search"></i>
             </a>
         </div>
-        <a href="triplist.html" class="mid-link-item">
+        <a href="triplist.php" class="mid-link-item">
             Book a trip
         </a>
         <a href="#contact" class="mid-link-item">
@@ -58,8 +58,9 @@ $user = $_SESSION['user'];
             <img src="assets/img/user.png" alt="profile icon" width="50" height="50">
         </a>
         <a href="login.php" class="mid-link-item">
-            Login
-        </a>
+                        Log-out
+        </a>;
+
     </div>
 </div>
 
@@ -105,13 +106,17 @@ $user = $_SESSION['user'];
                         </label>
                         <input type="password" value="xxxxxxxxxx" id="password" class="input-account" readonly>
                     </li>
-                    <li class="list-item">
-                        <a href="admin.html">
-                            <button style="border: 4px solid #4B5943" class="change-pannel">
-                                Admin Pannel
-                            </button>
-                        </a>
-                    </li>
+                    <?php
+                    if ($_SESSION["user"]["rank"] == "admin"){
+                        echo   '<li class="list-item">
+                                    <a href="admin.php">
+                                        <button style="border: 4px solid #4B5943" class="change-pannel">
+                                            Admin Pannel
+                                        </button>
+                                    </a>
+                                </li>';
+                    }
+                    ?>
                 </ul>
             </div>
         </div>
