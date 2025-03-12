@@ -11,12 +11,14 @@ $fname='';
 $date='';
 $mail='';
 $password='';
+$profile_picture='';
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $fname=$_POST["fname"];
     $lname=$_POST["lname"];
     $date=$_POST["date"];
     $mail=$_POST["mail"];
+    $profile_picture=$_POST["profile_picture"];
     $password=password_hash($_POST["password"],PASSWORD_DEFAULT);
 
     if(!$mail){
@@ -40,11 +42,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     foreach ($registered_user as &$new_user) {
         if($new_user["mail"]==$mail){
-            $new_user = [ "lname" => $lname, "fname" => $fname, "date" => $date, "mail" => $mail, "password" => $password, "rank" => $new_user['rank'], "discount" => $new_user["discount"]];
+            $new_user = [ "lname" => $lname, "fname" => $fname, "date" => $date, "mail" => $mail, "password" => $password, "rank" => $new_user['rank'], "discount" => $new_user["discount"], "profile_picture" => $profile_picture ];
             $_SESSION['user']['mail'] = $mail;
             $_SESSION['user']['fname'] = $fname;
             $_SESSION['user']['lname'] = $lname;
             $_SESSION['user']['date'] = $date;
+            $_SESSION['user']['profile_picture'] = $profile_picture;
         }
     }
 
@@ -105,7 +108,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         </a>
 
         <a href="profile.php">
-            <img src="assets/img/user.png" alt="profile icon" width="50" height="50">
+            <img src="assets/img/PP/<?php if(isset($_SESSION['user'])){echo $_SESSION['user']['profile_picture'];}else{echo 1;};?>.png" alt="profile icon" width="50" height="50">
         </a>
         <?php
         if(!isset($_SESSION['user'])){
@@ -147,14 +150,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
 
             <div class="form-item-2">
-                <input type="checkbox" id="terms" required>
-                <label style="font-family: 'Montserrat', sans-serif; text-align: center; color: #DCDFDA" for="terms">By checking this box, you declare that you have read and accepted our<a href="terms.html" target="_blank" style="text-decoration: none; color: #8FB43A"> terms</a></label>
+               <label class="label-text">Profiles Picture:</label>
+               <select class="input" name="profile_picture" required>
+                   <option value="1">none</option>
+                   <option value="2">astronaut</option>
+                   <option value="3">robot</option>
+                   <option value="4">spiderman</option>
+                   <option value="5">alien</option>
+                   <option value="6">music</option>
+
+               </select>
+            </div>
+
+            <div class="form-item-2-3">
+                <img class="profile_picture" src="assets/img/user.png" alt="user base png">
+                <img class="profile_picture" src="assets/img/PP/2.png" alt="user base png">
+                <img class="profile_picture" src="assets/img/PP/3.png" alt="user base png">
+                <img class="profile_picture" src="assets/img/PP/4.png" alt="user base png">
+                <img class="profile_picture" src="assets/img/PP/5.png" alt="user base png">
+                <img class="profile_picture" src="assets/img/PP/6.png" alt="user base png">
             </div>
 
             <div class="form-item-2">
                 <button type="submit" style="font-family: 'Montserrat', sans-serif; margin-bottom: 25px">Save changes</button>
                 <br>
             </div>
+
         </form>
     </div>
 </div>

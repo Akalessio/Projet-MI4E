@@ -25,7 +25,7 @@
     align-items: center;
     background: #91d17b;
     width: 600px;
-    height: 900px;
+    height: auto;
     border-radius: 50px;
     position: page;
     background-color: #C8D6A2;
@@ -50,6 +50,23 @@
     width: auto;
     display: grid;
     place-items: center;
+}
+
+.form-item-2-3{
+    margin: 50px;
+    padding: 25px;
+    font-family: 'Montserrat', sans-serif;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.profile_picture{
+    width: 100px;
+    height: 100px;
 }
 
 .input{

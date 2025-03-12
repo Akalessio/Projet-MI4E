@@ -55,9 +55,9 @@ $user = $_SESSION['user'];
         </a>
 
         <a href="profile.php">
-            <img src="assets/img/user.png" alt="profile icon" width="50" height="50">
+            <img src="assets/img/PP/<?php if(isset($_SESSION['user'])){echo $_SESSION['user']['profile_picture'];}else{echo 1;};?>.png" alt="profile icon" width="50" height="50">
         </a>
-        <a href="login.php" class="mid-link-item">
+        <a href="assets/php/logout.php" class="mid-link-item">
                         Log-out
         </a>;
 
@@ -112,6 +112,36 @@ $user = $_SESSION['user'];
                                     <a href="admin.php">
                                         <button style="border: 4px solid #4B5943" class="change-pannel">
                                             Admin Pannel
+                                        </button>
+                                    </a>
+                                </li>';
+                    }
+                    ?>
+                    <?php
+                    if ($_SESSION["user"]["discount"] == "0"){
+                        echo   '<li class="list-item">
+                                    <p>Discount availble:</p>
+                                    <a>
+                                        <button style="border: 4px solid #4B5943" class="change-pannel">
+                                            None
+                                        </button>
+                                    </a>
+                                </li>';
+                    }elseif($_SESSION["user"]["discount"] == "100"){
+                        echo   '<li class="list-item">
+                                    <p>Discount availble:</p>
+                                    <a href="triplist.php">
+                                        <button style="border: 4px solid #4B5943" class="change-pannel">
+                                            You have a free trip !!!!
+                                        </button>
+                                    </a>
+                                </li>';
+                    }else{
+                        echo   '<li class="list-item">
+                                    <p>Discount availble:</p>
+                                    <a href="triplist.php">
+                                        <button style="border: 4px solid #4B5943" class="change-pannel">
+                                            <p>-' . htmlspecialchars($_SESSION["user"]["discount"]) . '% </p>
                                         </button>
                                     </a>
                                 </li>';

@@ -117,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </a>
 
         <a href="profile.php">
-            <img src="assets/img/user.png" alt="profile icon" width="50" height="50">
+            <img src="assets/img/PP/<?php if(isset($_SESSION['user'])){echo $_SESSION['user']['profile_picture'];}else{echo 1;};?>.png" alt="profile icon" width="50" height="50">
         </a>
         <?php
         if(!isset($_SESSION['user'])){
@@ -140,7 +140,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </li>
                 <li>
                     <ul style="background: #DCDFDA; padding: 7px; border: 5px solid #4B5943; border-radius: 15px; text-align: left; list-style: none; place-self: center">
-                       <?php
+                        <li class="list-item">
+                        <div class="account-list-item">
+                            <p>
+                                First Name
+                            </p>
+                            <p style="color: #002b5c">
+                                Last Name
+                            </p>
+                            <p>
+                                E-Mail
+                            </p>
+                            <p style="color: #002b5c">
+                                    Password
+                            </p>
+                            <p>
+                                Rank
+                            </p>
+                        </div>
+                        </li >'
+                        <?php
                         $user_list='assets/php/user_list.json';
                         if(file_exists($user_list)){
                             $registred_user=json_decode(file_get_contents($user_list), true);
@@ -158,13 +177,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <p>
                                     '.$user_read['lname'].'
                                 </p>
-                                <p style="color: #DCDFDA">
+                                <p style="color: #002b5c">
                                     '.$user_read['fname'].'
                                 </p>
                                 <p>
                                     '.$user_read['mail'].'
                                 </p>
-                                <p style="color: #DCDFDA">
+                                <p style="color: #002b5c">
                                     *******
                                 </p>
                                 <p>

@@ -6,7 +6,8 @@
         "mail": "lhommeinhumain@gmail.com",
         "password": "$2y$10$xSN0r9vf2g6jjeEVjIZIlelQSKNLxclu7ZfQGigRniQx6EbvwBuKm",
         "rank": "vip",
-        "discount": "0"
+        "discount": "0",
+        "profile_picture": "1"
     },
     {
         "lname": "Peralta",
@@ -15,7 +16,8 @@
         "mail": "topeestla@gmail.com",
         "password": "$2y$10$xSN0r9vf2g6jjeEVjIZIlelQSKNLxclu7ZfQGigRniQx6EbvwBuKm",
         "rank": "user",
-        "discount": "0"
+        "discount": "0",
+        "profile_picture": "1"
     },
     {
         "lname": "Goupil",
@@ -24,7 +26,8 @@
         "mail": "haineux@gmail.com",
         "password": "$2y$10$xSN0r9vf2g6jjeEVjIZIlelQSKNLxclu7ZfQGigRniQx6EbvwBuKm",
         "rank": "admin",
-        "discount": "0"
+        "discount": "0",
+        "profile_picture": "1"
     },
     {
         "lname": "Warwick",
@@ -33,15 +36,37 @@
         "mail": "pianoteurfou@gmail.com",
         "password": "$2y$10$xSN0r9vf2g6jjeEVjIZIlelQSKNLxclu7ZfQGigRniQx6EbvwBuKm",
         "rank": "admin",
-        "discount": "0"
+        "discount": "0",
+        "profile_picture": "1"
     },
     {
         "lname": "Calvano",
         "fname": "Romain",
         "date": "2005-03-20",
         "mail": "xyotha@gmail.com",
-        "password": "$2y$10$QsJJrGSr0pQ7.wvfR6Vxk.YfvjIkUbjvJsnGhNrLLwj9aFGNJK.Hq",
+        "password": "$2y$10$o.dbSkVx.1mfPSwyLWgDQOxySVpioxIlpW.J5QNSQUhonU17HrnJG",
         "rank": "admin",
-        "discount": "0"
+        "discount": "100",
+        "profile_picture": "5"
+    },
+    {
+        "lname": "Wielss",
+        "fname": "Gab",
+        "date": "2005-10-13",
+        "mail": "gabwiels@gmail.com",
+        "password": "$2y$10$o.dbSkVx.1mfPSwyLWgDQOxySVpioxIlpW.J5QNSQUhonU17HrnJG",
+        "rank": "user",
+        "discount": "0",
+        "profile_picture": "1"
+    },
+    {
+        "lname": "Malphite",
+        "fname": "Matteto",
+        "date": "2005-06-04",
+        "mail": "whatsapp@gmail.com",
+        "password": "$2y$10$PuW0l9OOI2TO74KLP5P\/LuB3jVEJh7UTIhLKShu.yLoIhltpDbWhu",
+        "rank": "admin",
+        "discount": "0",
+        "profile_picture": "1"
     }
 ]

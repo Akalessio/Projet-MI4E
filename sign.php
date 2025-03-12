@@ -7,6 +7,7 @@ $mail='';
 $password='';
 $rank='user';
 $discount='0';
+$profile_picture='1';
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $fname=$_POST["fname"];
@@ -42,7 +43,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
 
-    $new_user = [ "lname" => $lname, "fname" => $fname, "date" => $date, "mail" => $mail, "password" => $password, "rank" => $rank, "discount" => $discount];
+    $new_user = [ "lname" => $lname, "fname" => $fname, "date" => $date, "mail" => $mail, "password" => $password, "rank" => $rank, "discount" => $discount, "profile_picture" => $profile_picture];
 
     $registered_user[] = $new_user;
 
@@ -101,7 +102,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         </a>
 
         <a href="profile.php">
-            <img src="assets/img/user.png" alt="profile icon" width="50" height="50">
+            <img src="assets/img/PP/<?php if(isset($_SESSION['user'])){echo $_SESSION['user']['profile_picture'];}else{echo 1;};?>.png" alt="profile icon" width="50" height="50">
         </a>
         <?php
         if(!isset($_SESSION['user'])){
@@ -118,8 +119,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <form action="sign.php" method="post">
 
             <div class="form-item-2">
-                <label class="label-text" for="fname">First Name* :</label>
-                <input class="input" type="text" id="fname" name="fname" maxlength="50" required placeholder="First Name...">
+                <!--<label class="label-text" for="fname">First Name* :</label>-->
+            <input class="input" type="text" id="fname" name="fname" maxlength="50" required placeholder="First Name...">
             </div>
 
             <div class="form-item-2">

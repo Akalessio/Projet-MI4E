@@ -53,7 +53,7 @@ if(isset($_SESSION['user'])){
         </a>
 
         <a href="profile.php">
-            <img src="assets/img/user.png" alt="profile icon" width="50" height="50">
+            <img src="assets/img/PP/<?php if(isset($_SESSION['user'])){echo $_SESSION['user']['profile_picture'];}else{echo 1;};?>.png" alt="profile icon" width="50" height="50">
         </a>
         <?php
         if(!isset($_SESSION['user'])){

@@ -23,14 +23,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     "date" => $user_read["date"],
                     "password" => $user_read["password"],
                     "rank" => $user_read["rank"],
-                    "discount" => $user_read["discount"]
+                    "discount" => $user_read["discount"],
+                    "profile_picture" => $user_read["profile_picture"]
                 ];
                 if($user_read["rank"]=="ban"){
                     die('this account is banned');
                 }
                 $found=true;
-            }else{
-                $found=false;
             }
         }
     }else{
@@ -94,7 +93,7 @@ header("location:profile.php");
         </a>
 
         <a href="profile.php">
-            <img src="assets/img/user.png" alt="profile icon" width="50" height="50">
+            <img src="assets/img/PP/<?php if(isset($_SESSION['user'])){echo $_SESSION['user']['profile_picture'];}else{echo 1;};?>.png" alt="profile icon" width="50" height="50">
         </a>
         <?php
         if(!isset($_SESSION['user'])){

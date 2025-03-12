@@ -9,23 +9,21 @@
 .profile-container {
     display: flex;
     background: #C8D6A2;
-    width: 510px;
-    height: 601.69px;
+    width: 610px;
+    height: auto;
     border-radius: 30px;
     border: 15px solid #4B5943;
-    overflow: auto;
-    scrollbar-width: none;
     place-content: center;
 }
 
 .profile-container-3{
     display: flex;
     background: #C8D6A2;
-    width: 510px;
-    height: 601.69px;
+    width: 610px;
+    height: auto;
     border-radius: 30px;
     border: 15px solid #4B5943;
-    overflow: auto;
+
     place-content: center;
 }
 
