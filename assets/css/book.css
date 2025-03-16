@@ -53,7 +53,7 @@
     gap: 15px;
     background-color:#DCDFDA;
     border-radius: 30px;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .options{
@@ -64,17 +64,44 @@
     background-color: #C8D6A2;
     border-radius: 30px;
     margin: 10px;
+    align-items: center;
 }
 
 .options h2{
-    margin-left: 25px;
+    text-align: center;
+    padding: 10px;
 }
 
 .options-button{
-    border-radius: 30px;
-    margin: 25px;
-    height: 50px;
+    position: relative;
     width: 200px;
+    height: 50px;
+    border-radius: 30px;
+    margin: 10px 20px;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    text-align: center;
+    background: #DCDFDA;
+
+}
+
+.option {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 13px;
+    color: #333;
+}
+
+.price {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 14px;
+    color: #007bff;
 }
 
 .pic-container{
@@ -96,3 +123,4 @@
     height: 510px;
     width: 825px;
 }
+

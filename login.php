@@ -8,7 +8,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $mail=$_POST["loginMail"];
     $password=$_POST["psw"];
 
-    $user_file = 'assets/php/user_list.json';
+    $user_file = 'assets/php/data/user_list.json';
 
     $found=false;
 
@@ -24,7 +24,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     "password" => $user_read["password"],
                     "rank" => $user_read["rank"],
                     "discount" => $user_read["discount"],
-                    "profile_picture" => $user_read["profile_picture"]
+                    "profile_picture" => $user_read["profile_picture"],
+                    "trip_file" => $user_read["trip_file"],
                 ];
                 if($user_read["rank"]=="ban"){
                     die('this account is banned');

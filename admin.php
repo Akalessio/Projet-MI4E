@@ -7,7 +7,7 @@ if(!isset($_SESSION['user'])){
 }
 
 $user = $_SESSION['user'];
-$user_list='assets/php/user_list.json';
+$user_list='assets/php/data/user_list.json';
 
 if(file_exists($user_list)){
     $registred_user=json_decode(file_get_contents($user_list), true);
@@ -160,7 +160,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         </li >'
                         <?php
-                        $user_list='assets/php/user_list.json';
+                        $user_list='assets/php/data/user_list.json';
                         if(file_exists($user_list)){
                             $registred_user=json_decode(file_get_contents($user_list), true);
                             if($registred_user == null){

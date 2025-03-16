@@ -5,6 +5,35 @@ if(isset($_SESSION['user'])){
     $user = $_SESSION['user'];
 }
 
+if(isset($_GET['id'])){
+    $page_id = $_GET['id'];
+}else{
+    die("Erreur 404");
+}
+
+$trip_list="assets/php/data/trip_list.json";
+
+if(file_exists($trip_list)){
+    $trips = json_decode(file_get_contents($trip_list), true);
+    if($trips==null){
+        die("trip file is empty");
+    }
+}else{
+    die("trip file dont exist");
+}
+
+$current_trip='';
+
+foreach($trips as $trip){
+    if($page_id==$trip['trip_id']){
+        $current_trip = $trip;
+    }
+}
+
+if($current_trip==''){
+    die("error while loading trip information");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -69,38 +98,37 @@ if(isset($_SESSION['user'])){
     <div class="book-presentation">
         <div>
             <h1 style="font-family: 'Montserrat', sans-serif; font-size: 30px; background: #8FB43A; color: #DCDFDA; text-align: center; border-radius: 30px">
-                Star Wars Trip (template for all the trip)
+                <?php echo htmlspecialchars($current_trip["trip_name"])?>
             </h1>
         </div>
         <div class="main-presentation">
-            You've always wanted to meet a Jedi, a Sith or even both ?<br>
+            <?php echo htmlspecialchars($current_trip["trip_summary"])?><br>
             It's your day!!!<br>
-            With <a href="index.php" style="font-family: 'Get Schwifty', sans-serif; text-decoration: none; color: black">dimension'<samp style="color: #8FB43A; font-family: 'Get Schwifty', sans-serif">trip</samp></a>
-            you can now visit the Star wars universe with our trip you can choose some option to custom your dream adventure <br>
-            you can choose a planet to spend your whole trip, many activity for the trip (max amount of 3) and a vehicle that will allow you to travel on the planet and even explore it if you want<br>
+            With <a href="index.php" style="font-family: 'Get Schwifty', sans-serif; text-decoration: none; color: black">dimension'<samp style="color: #8FB43A; font-family: 'Get Schwifty', sans-serif">trip</samp></a><br>
+            <?php echo htmlspecialchars($current_trip["trip_summary_2"])?><br>
             the availible option are :<br>
         </div>
         <div class="options-box">
             <div class="options-presentation">
-                <br><h2>Planet:</h2><br>
-                <h3>Tatooine:</h3> A beautiful desert planet with many villages and market which will allow you to meet and trade with the locals but be careful it's a dangerous planets with it's lots of foes and treats<br>
-                <h3>Endor:</h3> this forest planet is full of life and lakes, the landscapes are beatiful and if you like to hike you'll fall in love with this planet, maybe you'll meet one of the cute but not to be underestimate ewok<br>
-                <h3>Coruscant:</h3> This Ecumenopolis, is the center of the galaxy in terms of economy and politics (don't go to deep)<br>
-                <h3>Naboo:</h3> this exotics planet full of grassy hills and swampy lake is a planet known for being the birthplace of palpatine<br>
+                <br><h2><?php echo htmlspecialchars($current_trip["step_type"])?>:</h2><br>
+                <h3><?php echo htmlspecialchars($current_trip["step_1"])?></h3> <?php echo htmlspecialchars($current_trip["step_1_summary"])?><br>
+                <h3><?php echo htmlspecialchars($current_trip["step_2"])?></h3> <?php echo htmlspecialchars($current_trip["step_2_summary"])?><br>
+                <h3><?php echo htmlspecialchars($current_trip["step_3"])?></h3> <?php echo htmlspecialchars($current_trip["step_3_summary"])?><br>
+                <h3><?php echo htmlspecialchars($current_trip["step_4"])?></h3> <?php echo htmlspecialchars($current_trip["step_4_summary"])?><br>
             </div>
             <div class="options-presentation">
                 <br><h2>Vehicle:</h2><br>
-                <h3>X-wings:</h3> This ship is a military ship it could be useful depending on what you're are trying to do<br>
-                <h3>Speeder:</h3> This Hovercraft allow for fast travel on land, many planet like tatooine a known for their speerder's races<br>
-                <h3>Millennium Falcon:</h3> one of the fastest if not the fastest ship of the whole galaxy<br>
-                <h3>TIE Interceptor:</h3> this TIE vessels will please all the empire enjoyer<br>
+                <h3><?php echo htmlspecialchars($current_trip["vehicle_1"])?></h3> <?php echo htmlspecialchars($current_trip["vehicle_1_summary"])?><br>
+                <h3>><?php echo htmlspecialchars($current_trip["vehicle_2"])?></h3> <?php echo htmlspecialchars($current_trip["vehicle_2_summary"])?><br>
+                <h3>><?php echo htmlspecialchars($current_trip["vehicle_3"])?></h3> <?php echo htmlspecialchars($current_trip["vehicle_3_summary"])?><br>
+                <h3>><?php echo htmlspecialchars($current_trip["vehicle_4"])?></h3> <?php echo htmlspecialchars($current_trip["vehicle_4_summary"])?><br>
             </div>
             <div class="options-presentation">
                 <br><h2>Activities:</h2><br>
-                <h3>Build your own lightsaber:</h3> Build you own lightsaber with a true kyber crystal and the help of a jedi<br>
-                <h3>Learn the way of the forces:</h3> A whole training with a jedi (be careful not everybody is worth enough to be a jedi)<br>
-                <h3>Eat some local alien food:</h3> eating food on a 5-star restaurant and try some new things<br>
-                <h3>Speeder Racing:</h3> watch or take part in a Speeder Race<br>
+                <h3>><?php echo htmlspecialchars($current_trip["activities_1"])?></h3><?php echo htmlspecialchars($current_trip["activities_1_summary"])?><br>
+                <h3><?php echo htmlspecialchars($current_trip["activities_2"])?></h3> <?php echo htmlspecialchars($current_trip["activities_2_summary"])?><br>
+                <h3><?php echo htmlspecialchars($current_trip["activities_3"])?></h3> <?php echo htmlspecialchars($current_trip["activities_3_summary"])?><br>
+                <h3><?php echo htmlspecialchars($current_trip["activities_4"])?></h3> <?php echo htmlspecialchars($current_trip["activities_4_summary"])?><br>
             </div>
         </div>
     </div>
@@ -109,42 +137,44 @@ if(isset($_SESSION['user'])){
 
         <div class="book-pic">
             <div class="pic-container">
-                <img src="assets/img/trip/st/1.png" alt="endor-picture" class="pic">
+                <img src="<?php echo htmlspecialchars($current_trip["image_1"])?>" alt="endor-picture" class="pic">
             </div>
             <div class="pic-container">
-                <img src="assets/img/trip/st/2.png" alt="endor-picture" class="pic">
+                <img src="<?php echo htmlspecialchars($current_trip["image_2"])?>" alt="endor-picture" class="pic">
             </div>
             <div class="pic-container">
-                <img src="assets/img/trip/st/3.png" alt="endor-picture" class="pic">
+                <img src="<?php echo htmlspecialchars($current_trip["image_3"])?>" alt="endor-picture" class="pic">
             </div>
         </div>
 
         <div class="book-options">
             <div class="options">
-                <h2>Planet</h2>
-                <button class="options-button">Tatooine</button>
-                <button class="options-button">Endor</button>
-                <button class="options-button">Coruscant</button>
-                <button class="options-button">Naboo</button>
+                <h2><?php echo htmlspecialchars($current_trip["step_type"])?></h2>
+                <button class="options-button"><?php echo htmlspecialchars($current_trip["option_1_1"])?></button>
+                <button class="options-button"><?php echo htmlspecialchars($current_trip["option_1_2"])?></button>
+                <button class="options-button"><?php echo htmlspecialchars($current_trip["option_1_3"])?></button>
+                <button class="options-button"><?php echo htmlspecialchars($current_trip["option_1_4"])?></button>
             </div>
             <div class="options">
                 <h2>Vehicle</h2>
-                <button class="options-button">X-wings</button>
-                <button class="options-button">Speeder</button>
-                <button class="options-button">Millennium Falcon</button>
-                <button class="options-button">TIE Interceptor</button>
+                <button class="options-button"><?php echo htmlspecialchars($current_trip["option_2_1"])?></button>
+                <button class="options-button"><?php echo htmlspecialchars($current_trip["option_2_2"])?></button>
+                <button class="options-button"><?php echo htmlspecialchars($current_trip["option_2_3"])?></button>
+                <button class="options-button"><?php echo htmlspecialchars($current_trip["option_2_4"])?></button>
             </div>
             <div class="options">
                 <h2>Activity</h2>
-                <button class="options-button">Build your own lightsaber</button>
-                <button class="options-button">Learn the way of the forces</button>
-                <button class="options-button">Eat some local alien food</button>
-                <button class="options-button">Speeder Racing</button>
+                <button class="options-button"><?php echo htmlspecialchars($current_trip["option_3_1"])?></button>
+                <button class="options-button"><?php echo htmlspecialchars($current_trip["option_3_2"])?></button>
+                <button class="options-button"><?php echo htmlspecialchars($current_trip["option_3_3"])?></button>
+                <button class="options-button"><?php echo htmlspecialchars($current_trip["option_3_4"])?></button>
             </div>
         </div>
 
         <div style="width: 200px; margin: auto">
-            <button class="options-button" style="margin: 0">BOOK</button>
+            <a href="booking.php?id=<?php echo htmlspecialchars($current_trip["trip_id"])?>">
+                <button class="options-button" style="margin: 0">BOOK</button>
+            </a>
         </div>
 
 

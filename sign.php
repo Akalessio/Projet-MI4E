@@ -24,7 +24,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         die("Please enter a password");
     }
 
-    $user_file = "assets/php/user_list.json";
+    $user_file = "assets/php/data/user_list.json";
 
     if (file_exists($user_file)) {
         $registered_user = json_decode(file_get_contents($user_file), true);
@@ -43,7 +43,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
 
-    $new_user = [ "lname" => $lname, "fname" => $fname, "date" => $date, "mail" => $mail, "password" => $password, "rank" => $rank, "discount" => $discount, "profile_picture" => $profile_picture];
+    $new_user = [ "lname" => $lname, "fname" => $fname, "date" => $date, "mail" => $mail, "password" => $password, "rank" => $rank, "discount" => $discount, "profile_picture" => $profile_picture, "trip_file" => base64_encode("$mail") . ".json"];
 
     $registered_user[] = $new_user;
 

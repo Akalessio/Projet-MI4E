@@ -89,7 +89,7 @@ if(isset($_SESSION['user'])){
     </div>
     <div class="trip-list">
         <div>
-            <a href="book.php">
+            <a href="book.php?id=1">
                 <img src="assets/img/trip/starwars.png" alt="Star Wars Picture" class="headliner-item">
             </a>
         </div>
