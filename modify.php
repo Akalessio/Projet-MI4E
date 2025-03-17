@@ -19,8 +19,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $date=$_POST["date"];
     $mail=$_POST["mail"];
     $profile_picture=$_POST["profile_picture"];
-    $password=password_hash($_POST["password"],PASSWORD_DEFAULT);
-
+    if($_POST["password"]!=$_SESSION["user"]["password"]){
+        $password=password_hash($_POST["password"],PASSWORD_DEFAULT);
+    }
     if(!$mail){
         exit("Please enter a valid email address");
     }
