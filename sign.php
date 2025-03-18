@@ -41,9 +41,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
     }
 
+    $trip_file = base64_encode("$mail") . ".json";
 
-
-    $new_user = [ "lname" => $lname, "fname" => $fname, "date" => $date, "mail" => $mail, "password" => $password, "rank" => $rank, "discount" => $discount, "profile_picture" => $profile_picture, "trip_file" => base64_encode("$mail") . ".json"];
+    $new_user = [ "lname" => $lname, "fname" => $fname, "date" => $date, "mail" => $mail, "password" => $password, "rank" => $rank, "discount" => $discount, "profile_picture" => $profile_picture, "trip_file" => $trip_file];
 
     $registered_user[] = $new_user;
 

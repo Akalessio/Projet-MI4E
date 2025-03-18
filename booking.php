@@ -79,66 +79,75 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         $option_3_3=$_POST['option_3_3'];
         $option_3_4=$_POST['option_3_4'];
 
-        if($option_1_1!='' AND $option_1_2='' AND  $option_1_3='' AND  $option_1_4=''){
+        if($option_1_1=='' AND $option_1_2=='' AND  $option_1_3=='' AND  $option_1_4==''){
             die('select at least one' . htmlspecialchars($current_trip['step_type']));
         }
 
         $price=0;
 
     if($option_1_1!=''){
-        $price+=$current_trip['option_1_1_price'];
+        $price+=(int)$current_trip['option_1_1_price'];
     }
     if($option_1_2!=''){
-        $price+=$current_trip['option_1_2_price'];
+        $price+=(int)$current_trip['option_1_2_price'];
     }
     if($option_1_3!=''){
-        $price+=$current_trip['option_1_3_price'];
+        $price+=(int)$current_trip['option_1_3_price'];
     }
     if($option_1_4!=''){
-        $price+=$current_trip['option_1_4_price'];
+        $price+=(int)$current_trip['option_1_4_price'];
     }
     if($option_2_1!=''){
-        $price+=$current_trip['option_2_1_price'];
+        $price+=(int)$current_trip['option_2_1_price'];
     }
     if($option_2_2!=''){
-        $price+=$current_trip['option_2_2_price'];
+        $price+=(int)$current_trip['option_2_2_price'];
     }
     if($option_2_3!=''){
-        $price+=$current_trip['option_2_3_price'];
+        $price+=(int)$current_trip['option_2_3_price'];
     }
     if($option_2_4!=''){
-        $price+=$current_trip['option_2_4_price'];
+        $price+=(int)$current_trip['option_2_4_price'];
     }
     if($option_3_1!=''){
-        $price+=$current_trip['option_3_1_price'];
+        $price+=(int)$current_trip['option_3_1_price'];
     }
     if($option_3_2!=''){
-        $price+=$current_trip['option_3_2_price'];
+        $price+=(int)$current_trip['option_3_2_price'];
     }
     if($option_3_3!=''){
-        $price+=$current_trip['option_3_3_price'];
+        $price+=(int)$current_trip['option_3_3_price'];
     }
     if($option_3_4!=''){
-        $price+=$current_trip['option_3_4_price'];
+        $price+=(int)$current_trip['option_3_4_price'];
     }
-    $price+=($current_trip['minimun_price']*$days*0.5);
-    $price*=$number;
+    $price+=(int)$current_trip['minimum_price']*$days*0.5;
+    $price*=(int)$number;
 
-    $reservations_list = json_decode(file_get_contents('assets/php/data/trip_file/' . $_SESSION['user']['trip_file']), true);
-    if($reservations_list==null){
-        die("trip file is empty");
+    $trip_file_path = 'assets/php/data/trip_file/' . $_SESSION['user']['trip_file'];
+
+    if(!file_exists($trip_file_path)){
+        file_put_contents($trip_file_path, json_encode([]));
     }
+
+    $reservations_list = json_decode(file_get_contents($trip_file_path, true));
 
     $error=false;
 
-    foreach ($reservations_list as $reservation){
-        if(($start_date>$reservation['start_date'] AND $start_date<$reservation['end_date']) OR
-            ($end_date>$reservation['start_date'] AND $end_date<$reservation['end_date']) OR
-            ($start_date<$reservation['start_date']  AND $end_date>$reservation['end_date']) OR
-            ($start_date==$reservation['start_date'] AND $end_date==$reservation['end_date'])){
-            $error=true;
+    if(!$reservations_list==null){
+        foreach ($reservations_list as $reservation){
+            if(($start_date>$reservation['start_date'] AND $start_date<$reservation['end_date']) OR
+                ($end_date>$reservation['start_date'] AND $end_date<$reservation['end_date']) OR
+                ($start_date<$reservation['start_date']  AND $end_date>$reservation['end_date']) OR
+                ($start_date==$reservation['start_date'] AND $end_date==$reservation['end_date'])){
+                $error=true;
+            }
         }
     }
+
+
+
+
 
     if($error){
         die("you already have a trip on this period of time");
@@ -168,6 +177,8 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 
     $_SESSION['new_trip']=$new_trip;
 
+   header("location:validation.php");
+    exit();
 }
 
 ?>
@@ -231,180 +242,198 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 </div>
 
 <section class="main-section">
-        <div>
-            <form class="book-options" action="booking.php" method="post">
-                <div class="options">
-                    <label for="start_date">Start Date</label>
-                    <input type="date" id="start_date" name="start_date" required class="options-button">
+        <div class="display-form">
+            <form class="book-options-2" action="booking.php?id=<?php echo htmlspecialchars($current_trip["trip_id"])?>" method="post">
+                <div class="book-options">
+                    <div class="options">
+                        <label for="start_date">Start Date</label>
+                        <input type="date" id="start_date" name="start_date" required class="options-button">
 
-                    <label for="end_date">End Date</label>
-                    <input type="date" id="end_date"  name="end_date" required class="options-button">
-                </div>
-                <div class="options">
-                    <h2><?php echo htmlspecialchars($current_trip["step_type"])?></h2>
-                    <div class="options-button">
-                        <label>
-                            <input type="checkbox" name="option_1_1" value="1">
-                            <span class="option">
+                        <label for="end_date">End Date</label>
+                        <input type="date" id="end_date"  name="end_date" required class="options-button">
+                    </div>
+                    <div class="options">
+                        <h2><?php echo htmlspecialchars($current_trip["step_type"])?></h2>
+                        <div class="options-button">
+                            <label>
+                                <input type="hidden" name="option_1_1" value="0">
+                                <input type="checkbox" name="option_1_1" value="1">
+                                <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_1_1"])?>
                             </span>
-                            <span class="price">
+                                <span class="price">
                                 <?php echo htmlspecialchars($current_trip["option_1_1_price"])?>$
                             </span>
-                        </label>
-                    </div>
-                    <div class="options-button">
-                        <label>
-                            <input type="checkbox" name="option_1_2" value="1">
-                            <span class="option">
+                            </label>
+                        </div>
+                        <div class="options-button">
+                            <label>
+                                <input type="hidden" name="option_1_2" value="0">
+                                <input type="checkbox" name="option_1_2" value="1">
+                                <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_1_2"])?>
                             </span>
-                            <span class="price">
+                                <span class="price">
                                 <?php echo htmlspecialchars($current_trip["option_1_2_price"])?>$
                             </span>
-                        </label>
-                    </div>
-                    <div class="options-button">
-                        <label>
-                            <input type="checkbox" name="option_1_3" value="1">
-                            <span class="option">
+                            </label>
+                        </div>
+                        <div class="options-button">
+                            <label>
+                                <input type="hidden" name="option_1_3" value="0">
+                                <input type="checkbox" name="option_1_3" value="1">
+                                <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_1_3"])?>
                             </span>
-                            <span class="price">
+                                <span class="price">
                                 <?php echo htmlspecialchars($current_trip["option_1_3_price"])?>$
                             </span>
-                        </label>
-                    </div>
-                    <div class="options-button">
-                        <label>
-                            <input type="checkbox" name="option_1_4" value="1">
-                            <span class="option">
+                            </label>
+                        </div>
+                        <div class="options-button">
+                            <label>
+                                <input type="hidden" name="option_1_4" value="0">
+                                <input type="checkbox" name="option_1_4" value="1">
+                                <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_1_4"])?>
                             </span>
-                            <span class="price">
+                                <span class="price">
                                 <?php echo htmlspecialchars($current_trip["option_1_4_price"])?>$
                             </span>
-                        </label>
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <div class="options">
-                    <h2>Vehicle</h2>
-                    <div class="options-button">
-                        <label>
-                            <input type="checkbox" name="option_2_1" value="1">
-                            <span class="option">
+                    <div class="options">
+                        <h2>Vehicle</h2>
+                        <div class="options-button">
+                            <label>
+                                <input type="hidden" name="option_2_1" value="0">
+                                <input type="checkbox" name="option_2_1" value="1">
+                                <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_2_1"])?>
                             </span>
-                            <span class="price">
+                                <span class="price">
                                 <?php echo htmlspecialchars($current_trip["option_2_1_price"])?>$
                             </span>
-                        </label>
-                    </div>
-                    <div class="options-button">
-                        <label>
-                            <input type="checkbox" name="option_2_2" value="1">
-                            <span class="option">
+                            </label>
+                        </div>
+                        <div class="options-button">
+                            <label>
+                                <input type="hidden" name="option_2_2" value="0">
+                                <input type="checkbox" name="option_2_2" value="1">
+                                <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_2_2"])?>
                             </span>
-                            <span class="price">
+                                <span class="price">
                                 <?php echo htmlspecialchars($current_trip["option_2_2_price"])?>$
                             </span>
-                        </label>
-                    </div>
-                    <div class="options-button">
-                        <label>
-                            <input type="checkbox" name="option_2_3" value="1">
-                            <span class="option">
+                            </label>
+                        </div>
+                        <div class="options-button">
+                            <label>
+                                <input type="hidden" name="option_2_3" value="0">
+                                <input type="checkbox" name="option_2_3" value="1">
+                                <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_2_3"])?>
                             </span>
-                            <span class="price">
+                                <span class="price">
                                 <?php echo htmlspecialchars($current_trip["option_2_3_price"])?>$
                             </span>
-                        </label>
-                    </div>
-                    <div class="options-button">
-                        <label>
-                            <input type="checkbox" name="option_2_4" value="1">
-                            <span class="option">
+                            </label>
+                        </div>
+                        <div class="options-button">
+                            <label>
+                                <input type="hidden" name="option_2_4" value="0">
+                                <input type="checkbox" name="option_2_4" value="1">
+                                <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_2_4"])?>
                             </span>
-                            <span class="price">
+                                <span class="price">
                                 <?php echo htmlspecialchars($current_trip["option_2_4_price"])?>$
                             </span>
-                        </label>
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <div class="options">
-                    <h2>Activities</h2>
-                    <div class="options-button">
-                        <label>
-                            <input type="checkbox" name="option_3_1" value="1">
-                            <span class="option">
+                    <div class="options">
+                        <h2>Activities</h2>
+                        <div class="options-button">
+                            <label>
+                                <input type="hidden" name="option_3_1" value="0">
+                                <input type="checkbox" name="option_3_1" value="1">
+                                <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_3_1"])?>
                             </span>
-                            <span class="price">
+                                <span class="price">
                                 <?php echo htmlspecialchars($current_trip["option_3_1_price"])?>$
                             </span>
-                        </label>
-                    </div>
-                    <div class="options-button">
-                        <label>
-                            <input type="checkbox" name="option_3_2" value="1">
-                            <span class="option">
+                            </label>
+                        </div>
+                        <div class="options-button">
+                            <label>
+                                <input type="hidden" name="option_3_2" value="0">
+                                <input type="checkbox" name="option_3_2" value="1">
+                                <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_3_2"])?>
                             </span>
-                            <span class="price">
+                                <span class="price">
                                 <?php echo htmlspecialchars($current_trip["option_3_2_price"])?>$
                             </span>
-                        </label>
-                    </div>
-                    <div class="options-button">
-                        <label>
-                            <input type="checkbox" name="option_3_3" value="1">
-                            <span class="option">
+                            </label>
+                        </div>
+                        <div class="options-button">
+                            <label>
+                                <input type="hidden" name="option_3_3" value="0">
+                                <input type="checkbox" name="option_3_3" value="1">
+                                <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_3_3"])?>
                             </span>
-                            <span class="price">
+                                <span class="price">
                                 <?php echo htmlspecialchars($current_trip["option_3_3_price"])?>$
                             </span>
-                        </label>
-                    </div>
-                    <div class="options-button">
-                        <label>
-                            <input type="checkbox" name="option_3_4" value="1">
-                            <span class="option">
+                            </label>
+                        </div>
+                        <div class="options-button">
+                            <label>
+                                <input type="hidden" name="option_3_4" value="0">
+                                <input type="checkbox" name="option_3_4" value="1">
+                                <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_3_4"])?>
                             </span>
-                            <span class="price">
+                                <span class="price">
                                 <?php echo htmlspecialchars($current_trip["option_3_4_price"])?>$
                             </span>
-                        </label>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="options">
+                        <label for="number">How many people</label>
+                        <select id="number" name="number" class="options-button-number">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
                     </div>
                 </div>
-                <div class="options">
-                    <label for="number">How many people</label>
-                    <select id="number" name="number" class="options-button-number">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
+
+
+                <div>
+                    <div style="width: 200px; margin: 20px; place-self: center;">
+
+                            <button type="submit" class="options-button" style="margin: 0; border: solid #8FB43A 3px; background: #C8D6A2; font-size: 18px">BOOK</button>
+
+                    </div>
                 </div>
             </form>
         </div>
 
-        <div style="width: 200px; margin: auto">
-            <a href="booking.php?id=<?php echo htmlspecialchars($current_trip["trip_id"])?>">
-                <button class="options-button" style="margin: 0">BOOK</button>
-            </a>
-        </div>
+
 </section>
 
 <div id="contact" class="site-footer">

@@ -19,9 +19,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $date=$_POST["date"];
     $mail=$_POST["mail"];
     $profile_picture=$_POST["profile_picture"];
+
     if($_POST["password"]!=$_SESSION["user"]["password"]){
         $password=password_hash($_POST["password"],PASSWORD_DEFAULT);
+    }else{
+        $password=$_SESSION["user"]["password"];
     }
+
     if(!$mail){
         exit("Please enter a valid email address");
     }
@@ -43,7 +47,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     foreach ($registered_user as &$new_user) {
         if($new_user["mail"]==$mail){
-            $new_user = [ "lname" => $lname, "fname" => $fname, "date" => $date, "mail" => $mail, "password" => $password, "rank" => $new_user['rank'], "discount" => $new_user["discount"], "profile_picture" => $profile_picture ];
+            $new_user = [ "lname" => $lname, "fname" => $fname, "date" => $date, "mail" => $mail, "password" => $password, "rank" => $new_user['rank'], "discount" => $new_user["discount"], "profile_picture" => $profile_picture, "trip_file" => $new_user['trip_file'] ] ;
             $_SESSION['user']['mail'] = $mail;
             $_SESSION['user']['fname'] = $fname;
             $_SESSION['user']['lname'] = $lname;
@@ -142,7 +146,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             <div class="form-item-2">
                 <label class="label-text" for="mail">Password* :</label>
-                <input class="input" type="password" id="password" name="password" required placeholder="Password" value="value="<?php echo htmlspecialchars($_SESSION['user']['password'])?>"">
+                <input class="input" type="password" id="password" name="password" required placeholder="Password" value="<?php echo htmlspecialchars($_SESSION['user']['password'])?>"">
             </div>
 
             <div class="form-item-2">

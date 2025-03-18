@@ -54,6 +54,16 @@
     background-color:#DCDFDA;
     border-radius: 30px;
     justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.book-options-2{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color:#DCDFDA;
+    border-radius: 30px;
+    justify-content: space-evenly;
 }
 
 .options{
@@ -65,6 +75,17 @@
     border-radius: 30px;
     margin: 10px;
     align-items: center;
+}
+
+.info{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+    background-color: #C8D6A2;
+    border-radius: 30px;
+    margin: 10px;
+    align-items: center;
+    padding: 10px;
+    width: auto;
 }
 
 .options h2{
@@ -93,7 +114,6 @@
     padding: 40px;
     text-align: center;
     background: #DCDFDA;
-
 }
 
 .options-button-number{
@@ -143,5 +163,47 @@
 .pic{
     height: 510px;
     width: 825px;
+}
+
+.green-light{
+    display: flex;
+    width: 200px;
+    height: 50px;
+    border-radius: 30px;
+    margin: 10px 20px;
+    padding: 40px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-align: center;
+    background: #DCDFDA;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.red-light{
+    display: flex;
+    width: 200px;
+    height: 50px;
+    border-radius: 30px;
+    margin: 10px 20px;
+    padding: 40px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-align: center;
+    background: #DCDFDA;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.green-light:hover{
+    color: #DCDFDA;
+    background: #41e00b;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.red-light:hover{
+    color: #DCDFDA;
+    background: red;
+    transition: color 0.3s, background-color 0.3s;
 }
 
