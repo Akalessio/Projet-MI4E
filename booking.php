@@ -37,6 +37,8 @@ if($current_trip==''){
     die("error while loading trip information");
 }
 
+$_SESSION['current_trip'] = $current_trip;
+
 if($_SERVER['REQUEST_METHOD']=="POST"){
     if(isset($_POST['end_date']) AND isset($_POST['start_date'])){
         $start_date = $_POST['start_date'];
@@ -130,7 +132,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         file_put_contents($trip_file_path, json_encode([]));
     }
 
-    $reservations_list = json_decode(file_get_contents($trip_file_path, true));
+    $reservations_list = json_decode(file_get_contents($trip_file_path), true);
 
     $error=false;
 

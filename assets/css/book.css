@@ -8,6 +8,26 @@
     border-radius: 30px;
 }
 
+.input-trip-valid{
+    margin-top: 11px;
+    width: auto;
+    height: 30px;
+    display: flex;
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #DCDFDA;
+    border-radius: 30px;
+    align-items: center;
+}
+
+.option-block{
+    display: flex;
+    flex-direction: column;
+    background: #8FB43A;
+    border-radius: 30px;
+    padding: 20px;
+}
+
 .book-presentation{
     display: flex;
     flex-direction: column;
