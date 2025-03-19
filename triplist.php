@@ -94,27 +94,27 @@ if(isset($_SESSION['user'])){
             </a>
         </div>
         <div>
-            <a href="book.php">
+            <a href="book.php?id=3">
                 <img src="assets/img/trip/jp.png" alt="Jurassic park Picture" class="headliner-item">
             </a>
         </div>
         <div>
-            <a href="book.php">
+            <a href="book.php?id=6">
                 <img src="assets/img/trip/hobbit.png" alt="hobbit Picture" class="headliner-item">
             </a>
         </div>
         <div>
-            <a href="book.php">
+            <a href="book.php?id=4">
                 <img src="assets/img/trip/hp.png" alt="Harry Potter Picture" class="headliner-item">
             </a>
         </div>
         <div>
-            <a href="book.php">
+            <a href="book.php?id=2">
                 <img src="assets/img/trip/avatar.png" alt="Avatar Picture" class="headliner-item">
             </a>
         </div>
         <div>
-            <a href="book.php">
+            <a href="book.php?id=5">
                 <img src="assets/img/trip/arcane.png" alt="Arcane Picture" class="headliner-item">
             </a>
         </div>
