@@ -184,58 +184,24 @@ $user = $_SESSION['user'];
                         </h1>
                     </li>
                     <li class="list-reservation">
-                        <p style="font-family: 'Montserrat', sans-serif; font-size: 30px; color: #4B5943">future reservation :</p>
                         <div style="background: #DCDFDA; padding: 7px; border: 5px solid #4B5943; border-radius: 15px; text-align: left">
-                            <ul style="list-style: none">
-                                <li>
-                                    <b>
-                                        5 coeurs sous un toit<br>
-                                    </b>
-                                    Date : 15/03/2025
-                                    Statut : not paid
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="list-reservation">
-                        <p style="font-family: 'Montserrat', sans-serif; font-size: 30px; color: #4B5943">Past reservation :</p>
-                        <div style="background: #DCDFDA; padding: 7px; border: 5px solid #4B5943; border-radius: 15px; text-align: left">
-                            <ul style="list-style: none">
-                                <li>
-                                    <b>
-                                        Star Wars<br>
-                                    </b>
-                                    Date : 9/03/2023
-                                    Statut : paid
-                                </li>
-                                <li>
-                                    <b>
-                                        Star Trek<br>
-                                    </b>
-                                    Date : 15/09/2024
-                                    Statut : paid
-                                </li>
-                                <li>
-                                    <b>
-                                        Cinderella<br>
-                                    </b>
-                                    Date : 15/10/2024
-                                    Statut : canceled
-                                </li>
-                                <li>
-                                    <b>
-                                        Mulan<br>
-                                    </b>
-                                    Date : 09/01/2025
-                                    Statut : canceled
-                                </li>
-                                <li>
-                                    <b>
-                                        Harry Potter<br>
-                                    </b>
-                                    Date : 15/03/2025
-                                    Statut : canceled
-                                </li>
+                            <ul class="list-reservation">
+                                <?php
+
+                                $trip_file = 'assets/php/data/trip_file/' . $_SESSION['user']['trip_file'];
+                                if (file_exists($trip_file)) {
+                                    $trip_list = json_decode(file_get_contents($trip_file), true);
+                                    foreach ($trip_list as $trips) {
+                                        echo '<li class="list-reservation-2">
+                                                   <a href="tripcheck.php?id='.$trips['start_date'].'">
+                                                        '. $trips['trip_name'] .'
+                                                    </a>
+                                                    <br>
+                                                        Depart date : '. $trips['start_date'] .'
+                                            </li>';
+                                    }
+                                }
+                                ?>
                             </ul>
                         </div>
                     </li>
