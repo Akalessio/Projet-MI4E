@@ -26,7 +26,7 @@ function generateTransactionID($length = 12) {
 }
 
 $transaction_id = generateTransactionID();
-$back = "http://localhost:63342/Projet-MI4E/assets/php/save.php";
+$back = "http://localhost:63342/Projet-MI4E/profile.php";
 
 $control = md5($apikey . "#" . $transaction_id . "#" . (int)$_SESSION['new_trip']['price'] . "#" . $seller . "#" . $back . "#");
 
