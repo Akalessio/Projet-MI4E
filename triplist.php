@@ -88,66 +88,97 @@ if(isset($_SESSION['user'])){
 
     </div>
     <div class="trip-list">
-        <div>
-            <a href="book.php?id=1">
-                <img src="assets/img/trip/starwars.png" alt="Star Wars Picture" class="headliner-item">
+        <div class="headliner-item">
+            <a href="book.php?id=1" >
+                <img src="assets/img/trip/starwars.png" alt="Star Wars Picture" style="width: 300px; height: 200px; border-radius: 30px;">
+                <div class="hover-text">Star Wars</div>
             </a>
         </div>
-        <div>
+        <div class="headliner-item">
             <a href="book.php?id=3">
-                <img src="assets/img/trip/jp.png" alt="Jurassic park Picture" class="headliner-item">
+                <img src="assets/img/trip/jp.png" alt="Jurassic park Picture" style="width: 300px; height: 200px; border-radius: 30px;">
+                <div class="hover-text">Jurassic Park</div>
             </a>
         </div>
-        <div>
+        <div class="headliner-item">
             <a href="book.php?id=6">
-                <img src="assets/img/trip/hobbit.png" alt="hobbit Picture" class="headliner-item">
+                <img src="assets/img/trip/hobbit.png" alt="hobbit Picture" style="width: 300px; height: 200px; border-radius: 30px;">
+                <div class="hover-text">Hobbit</div>
             </a>
         </div>
-        <div>
+        <div class="headliner-item">
             <a href="book.php?id=4">
-                <img src="assets/img/trip/hp.png" alt="Harry Potter Picture" class="headliner-item">
+                <img src="assets/img/trip/hp.png" alt="Harry Potter Picture" style="width: 300px; height: 200px; border-radius: 30px;">
+                <div class="hover-text">Harry Potter</div>
             </a>
         </div>
-        <div>
+        <div class="headliner-item">
             <a href="book.php?id=2">
-                <img src="assets/img/trip/avatar.png" alt="Avatar Picture" class="headliner-item">
+                <img src="assets/img/trip/avatar.png" alt="Avatar Picture" style="width: 300px; height: 200px; border-radius: 30px;">
+                <div class="hover-text">Avatar</div>
             </a>
         </div>
-        <div>
+        <div class="headliner-item">
             <a href="book.php?id=5">
-                <img src="assets/img/trip/arcane.png" alt="Arcane Picture" class="headliner-item">
+                <img src="assets/img/trip/arcane.png" alt="Arcane Picture" style="width: 300px; height: 200px; border-radius: 30px;">
+                <div class="hover-text">Arcane</div>
             </a>
         </div>
-        <div>
-            <a href="book.php">
-                <img src="assets/img/trip/starwars.png" alt="Star Wars Picture" class="headliner-item">
+        <div class="headliner-item">
+            <a href="book.php?id=7">
+                <img src="assets/img/trip/startrek.png" alt="Star Trek Picture" style="width: 300px; height: 200px; border-radius: 30px;">
+                <div class="hover-text">Star Trek</div>
             </a>
         </div>
-        <div>
-            <a href="book.php">
-                <img src="assets/img/trip/jp.png" alt="Jurassic park Picture" class="headliner-item">
+        <div class="headliner-item">
+            <a href="book.php?id=8">
+                <img src="assets/img/trip/dune.png" alt="Dune Picture" style="width: 300px; height: 200px; border-radius: 30px;">
+                <div class="hover-text">Dune</div>
             </a>
         </div>
-        <div>
-            <a href="book.php">
-                <img src="assets/img/trip/hobbit.png" alt="hobbit Picture" class="headliner-item">
+        <div class="headliner-item">
+            <a href="book.php?id=9">
+                <img src="assets/img/trip/cyberpunk.png" alt="Cyberpunk Picture" style="width: 300px; height: 200px; border-radius: 30px;">
+                <div class="hover-text">Cyberpunk</div>
             </a>
         </div>
-        <div>
-            <a href="book.php">
-                <img src="assets/img/trip/hp.png" alt="Harry Potter Picture" class="headliner-item">
+        <div class="headliner-item">
+            <a href="book.php?id=10">
+                <img src="assets/img/trip/walkingdead.png" alt="walkingdead picture" style="width: 300px; height: 200px; border-radius: 30px;">
+                <div class="hover-text">The walking dead</div>
             </a>
         </div>
-        <div>
-            <a href="book.php">
-                <img src="assets/img/trip/avatar.png" alt="Avatar Picture" class="headliner-item">
+        <div class="headliner-item">
+            <a href="book.php?id=11">
+                <img src="assets/img/trip/pokemon.png" alt="pokemon picture" style="width: 300px; height: 200px; border-radius: 30px;">
+                <div class="hover-text">Pokemon</div>
             </a>
         </div>
-        <div>
-            <a href="book.php">
-                <img src="assets/img/trip/arcane.png" alt="Arcane Picture" class="headliner-item">
+        <div class="headliner-item">
+            <a href="book.php?id=12">
+                <img src="assets/img/trip/doctorwho.png" alt="doctorwho picture" style="width: 300px; height: 200px; border-radius: 30px;">
+                <div class="hover-text">Doctor Who</div>
             </a>
         </div>
+        <div class="headliner-item">
+            <a href="book.php?id=13">
+                <img src="assets/img/trip/warhammer.png" alt="warhammer picture" style="width: 300px; height: 200px; border-radius: 30px;">
+                <div class="hover-text">Warhammer</div>
+            </a>
+        </div>
+        <div class="headliner-item">
+            <a href="book.php?id=14">
+                <img src="assets/img/trip/heroes.png" alt="heroes picture" style="width: 300px; height: 200px; border-radius: 30px;">
+                <div class="hover-text">Heroes</div>
+            </a>
+        </div>
+        <div class="headliner-item">
+            <a href="book.php?id=15">
+                <img src="assets/img/trip/masseffect.png" alt="masseffect picture" style="width: 300px; height: 200px; border-radius: 30px;">
+                <div class="hover-text">Mass Effect</div>
+            </a>
+        </div>
+
     </div>
 </section>
 

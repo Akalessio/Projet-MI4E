@@ -87,6 +87,8 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 
         $price=0;
 
+    $price+=(int)$current_trip['minimum_price']*$days;
+
     if($option_1_1!=''){
         $price+=(int)$current_trip['option_1_1_price'];
     }
@@ -123,8 +125,9 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     if($option_3_4!=''){
         $price+=(int)$current_trip['option_3_4_price'];
     }
-    $price+=(int)$current_trip['minimum_price']*$days*0.5;
+
     $price*=(int)$number;
+
 
     $trip_file_path = 'assets/php/data/trip_file/' . $_SESSION['user']['trip_file'];
 

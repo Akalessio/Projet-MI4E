@@ -1,17 +1,37 @@
 <?php
 session_start();
 
-if(isset($_SESSION['user'])){
-    $user = $_SESSION['user'];
+if (isset($_GET['status'])) {
+    $id = $_GET['status'];
+    if ($id == 'accepted') {
+        $trip_file = 'assets/php/data/trip_file/' . $_SESSION['user']['trip_file'];
+
+        if (file_exists($trip_file)) {
+            $check = false;
+            $trip = json_decode(file_get_contents($trip_file), true);
+            foreach ($trip as $trips) {
+                if($trips['start_date'] == $_SESSION['new_trip']['start_date']){
+                    $check = true;
+                }
+            }if (!$check){
+                $trip[] = $_SESSION['new_trip'];
+                if (file_put_contents($trip_file, json_encode($trip, JSON_PRETTY_PRINT)) === false) {
+                    die("Error writing to file.");
+                }
+            }
+        }
+    }
 }
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
+
+    <!DOCTYPE html>
+    <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/login.css">
     <link  rel="stylesheet" href="https://db.onlinewebfonts.com/c/485fe91395665a0ac50e25744ff3a19c?family=Get+Schwifty">
 </head>
 <body style="width: 100%; margin: 0; padding: 0; background: #DCDFDA">
@@ -22,7 +42,7 @@ if(isset($_SESSION['user'])){
                 <span style=" font-family: 'Get Schwifty', sans-serif;
                 font-size: 48px;
                 font-weight: bold;
-                color: white;
+                color: #DCDFDA;
                 display: inline-block">
                     Dimension'
                 </span><span style=" font-family: 'Get Schwifty', sans-serif;
@@ -33,14 +53,14 @@ if(isset($_SESSION['user'])){
                     Trip
                 </span>
             </a>
-    </h2>
+        </h2>
     </div>
     <div class="right-icon">
 
         <div class="search-bar">
             <input type="text" placeholder="Search">
             <a href="#">
-                <i class="search"></i>
+                <i class="fas fa-search"></i>
             </a>
         </div>
         <a href="triplist.php" class="mid-link-item">
@@ -54,76 +74,38 @@ if(isset($_SESSION['user'])){
             <img src="assets/img/PP/<?php if(isset($_SESSION['user'])){echo $_SESSION['user']['profile_picture'];}else{echo 1;};?>.png" alt="profile icon" width="50" height="50">
         </a>
         <?php
-            if(!isset($_SESSION['user'])){
-                echo '<a href="login.php" class="mid-link-item">
+        if(!isset($_SESSION['user'])){
+            echo '<a href="login.php" class="mid-link-item">
                         Login
                      </a>';
-            }
+        }
         ?>
     </div>
 </div>
 
-<div class="main-div">
-    <a href="triplist.php" class="link-portal-img">
-        <img src="assets/img/portal2.png" alt="portal image" class="main-portal">
-    </a>
-    <a href="triplist.php" class="link-portal-text">
-        Travel Now!
-    </a>
-</div>
+<div class="form-container-23">
+    <div class="form">
 
-<div class="headliner-box">
-    <a id="new" href="#new" style="text-align: left; margin-left: 10px; font-family: Montserrat, sans-serif; font-size: 4vw; text-decoration: none">\New</a>
-    <div class="headliner-div">
+            <div class="form-item" style="margin: 50px">
+                <label for="loginMail" class="label-text">Purchase's status :</label>
+                <input type="email" id="loginMail" name="loginMail" required class="input" value="<?= $_GET['status'] ?>" readonly>
+            </div>
+            <div class="form-item" style="margin-bottom: 50px">
+                <label for="psw" class="label-text">Transaction's Id :</label>
+                <input type="text" id="psw" name="psw" required class="input" value="<?= $_GET['transaction'] ?>" readonly>
+            </div>
+            <div class="form-item" style="margin-bottom: 50px">
+                <label for="psw" class="label-text">Transaction's Amount :</label>
+                <input type="text" id="psw" name="psw" required class="input" value="<?= $_GET['montant'] ?> $" readonly>
+            </div>
 
-        <div>
-            <a href="book.php">
-                <img src="assets/img/trip/starwars.png" alt="Star Wars Picture" class="headliner-item-2">
-            </a>
-        </div>
-        <div>
-            <a href="book.php">
-                <img src="assets/img/trip/jp.png" alt="Jurassic park Picture" class="headliner-item-2">
-            </a>
-        </div>
-        <div>
-            <a href="book.php">
-                <img src="assets/img/trip/hobbit.png" alt="hobbit Picture" class="headliner-item-2">
-            </a>
-        </div>
-        <div>
-            <a href="book.php">
-                <img src="assets/img/trip/hp.png" alt="Harry Potter Picture" class="headliner-item-2">
-            </a>
-        </div>
-        <div>
-            <a href="book.php">
-                <img src="assets/img/trip/avatar.png" alt="Avatar Picture" class="headliner-item-2">
-            </a>
-        </div>
-        <div>
-            <a href="book.php">
-                <img src="assets/img/trip/arcane.png" alt="Arcane Picture" class="headliner-item-2">
-            </a>
-        </div>
+            <div class="form-item">
+                <a href="profile.php">
+                    <button style="font-family: 'Montserrat', sans-serif; z-index: 999">Back to your profile</button>
+                </a>
+            </div>
+
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-
-</div>
-
-<div class="site-presentation-div">
-<h1 class="site-presentation-title">
-    Travel with Dimension'Trip
-</h1>
-<p class="site-presentation-text">
-    You've always dreamt about visiting your favorite fiction universe<br>
-    with <a href="index.php" style="color: #8FB43A;  text-decoration: none" class="site-presentation-text">Dimension'Trip</a> it's now possible<br>
-    <a href="book.php" style="text-decoration: none;color: #8FB43A;">choose your favorite fiction universe</a>, a date, and take your credit card out<br>
-    and we will find you the hotel for the vacation of your dream<br>
-</p>
 </div>
 
 <div id="contact" class="site-footer">
@@ -150,6 +132,5 @@ if(isset($_SESSION['user'])){
         </a>
     </div>
 </div>
-
 </body>
-</html>
+    </html><?php

@@ -1,27 +1,7 @@
 <?php
 session_start();
 
-if (isset($_GET['status'])) {
-    $id = $_GET['status'];
-    if ($id == 'accepted') {
-        $trip_file = 'assets/php/data/trip_file/' . $_SESSION['user']['trip_file'];
 
-        if (file_exists($trip_file)) {
-            $check = false;
-            $trip = json_decode(file_get_contents($trip_file), true);
-            foreach ($trip as $trips) {
-                if($trips['start_date'] == $_SESSION['new_trip']['start_date']){
-                    $check = true;
-                }
-            }if (!$check){
-                $trip[] = $_SESSION['new_trip'];
-                if (file_put_contents($trip_file, json_encode($trip, JSON_PRETTY_PRINT)) === false) {
-                    die("Error writing to file.");
-                }
-            }
-        }
-    }
-}
 
 if(!isset($_SESSION['user'])){
     header("Location:login.php");

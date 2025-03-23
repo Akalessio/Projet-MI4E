@@ -4,6 +4,11 @@
 
 }
 
+.form-container-23{
+    display: grid;
+    place-items: center;
+}
+
 .form{
     margin-top: 200px;
     display: grid;

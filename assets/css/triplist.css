@@ -45,3 +45,22 @@
     justify-content: center;
     align-content: center;
 }
+
+.hover-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #4B5943;
+    font-size: 15px;
+    background-color: #C8D6A2;
+    border: 5px solid #4B5943;
+    padding: 10px 20px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.headliner-item:hover .hover-text {
+    opacity: 1;
+}

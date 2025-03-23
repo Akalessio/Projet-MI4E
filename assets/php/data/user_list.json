@@ -5,9 +5,53 @@
         "date": "2005-02-10",
         "mail": "ledon@gmail.com",
         "password": "$2y$10$GjsEeHvbiYE6invWx6LpIe1JkZmu0mCQazRrs41s8d.0nrQDFxVK.",
-        "rank": "user",
+        "rank": "admin",
         "discount": "0",
         "profile_picture": "2",
         "trip_file": "bGVkb25AZ21haWwuY29t.json"
+    },
+    {
+        "lname": "Smith",
+        "fname": "John",
+        "date": "2024-08-06",
+        "mail": "jsmith@mail.com",
+        "password": "$2y$10$3C75yOIKD1ThX7XdAMmtne3fh0HORgdobvdj478H1AQqFEwmaVbeu",
+        "rank": "user",
+        "discount": "0",
+        "profile_picture": "1",
+        "trip_file": "anNtaXRoQG1haWwuY29t.json"
+    },
+    {
+        "lname": "Doe",
+        "fname": "Jane",
+        "date": "2025-03-06",
+        "mail": "jdoe@gmail.com",
+        "password": "$2y$10$y8ud5LVV8i9Mw2EcO6pO\/.BVh0KE0skYRlh1oOkXBhzhLmkTOEPqW",
+        "rank": "admin",
+        "discount": "0",
+        "profile_picture": "1",
+        "trip_file": "amRvZUBnbWFpbC5jb20=.json"
+    },
+    {
+        "lname": "Razumowski",
+        "fname": "Alexandre",
+        "date": "2025-03-01",
+        "mail": "razu@gmail.com",
+        "password": "$2y$10$7lojAZRLa4DOItas4WjKa.hL4.rQ1HMpIk3OoC9tPC1X9jgHnfcF.",
+        "rank": "vip",
+        "discount": "0",
+        "profile_picture": "1",
+        "trip_file": "cmF6dUBnbWFpbC5jb20=.json"
+    },
+    {
+        "lname": "Forestier",
+        "fname": "Timmy",
+        "date": "2025-03-07",
+        "mail": "tforestier@gmail.com",
+        "password": "$2y$10$mjxxF03Dl.r.cxUoBEufkujwa31ZyEgUTNRlDLrrH62fpMbYOYkV2",
+        "rank": "user",
+        "discount": "0",
+        "profile_picture": "1",
+        "trip_file": "dGZvcmVzdGllckBnbWFpbC5jb20=.json"
     }
 ]

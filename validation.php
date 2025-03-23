@@ -20,7 +20,33 @@ if(isset($_SESSION['current_trip'])) {
     die('error trip informations not saved');
 }
 
+if (!isset($_SESSION['user'])) {
+    die('you must be logged');
+}
 
+if (!isset($_SESSION['current_trip'])) {
+    die('trip informations error');
+}
+
+if (!isset($_SESSION['new_trip'])) {
+    die('trip informations error');
+}
+
+$trip_file = 'assets/php/data/trip_file/' . $_SESSION['user']['trip_file'];
+
+require('assets/php/getapikey.php');
+
+$apikey = 'zzzz';
+$seller='MI-4_E';
+$apikey = getAPIKey($seller);
+function generateTransactionID($length = 12) {
+    return substr(bin2hex(random_bytes($length)), 0, $length);
+}
+
+$transaction_id = generateTransactionID();
+$back = "http://localhost:9000/solded.php";
+
+$control = md5($apikey . "#" . $transaction_id . "#" . (int)$_SESSION['new_trip']['price'] . "#" . $seller . "#" . $back . "#");
 
 ?>
 
@@ -114,28 +140,28 @@ if(isset($_SESSION['current_trip'])) {
 
            if($_SESSION['new_trip']['option_1_1'] == 1){
                echo '<div class="option-block">
-                        <p>'.$_SESSION['new_trip']['step_type'].': </p>
+                        <p>'.$_SESSION['current_trip']['step_type'].': </p>
                         <input class="input-trip-valid" value="'.$_SESSION['current_trip']['option_1_1'].'" readonly>
                         <input class="input-trip-valid" value="'.$_SESSION['current_trip']['option_1_1_price'] .' $" readonly>
                     </div>';
            }
             if($_SESSION['new_trip']['option_1_2'] == 1){
                 echo '<div class="option-block">
-                        <p>'.$_SESSION['new_trip']['step_type'].': </p>
+                        <p>'.$_SESSION['current_trip']['step_type'].': </p>
                         <input class="input-trip-valid" value="'.$_SESSION['current_trip']['option_1_2'].'" readonly>
                         <input class="input-trip-valid" value="'.$_SESSION['current_trip']['option_1_2_price'] .' $" readonly>
                     </div>';
             }
             if($_SESSION['new_trip']['option_1_3'] == 1){
                 echo '<div class="option-block">
-                        <p>'.$_SESSION['new_trip']['step_type'].': </p>
+                        <p>'.$_SESSION['current_trip']['step_type'].': </p>
                         <input class="input-trip-valid" value="'.$_SESSION['current_trip']['option_1_3'].'" readonly>
                         <input class="input-trip-valid" value="'.$_SESSION['current_trip']['option_1_3_price'] .' $" readonly>
                     </div>';
             }
             if($_SESSION['new_trip']['option_1_4'] == 1){
                 echo '<div class="option-block">
-                        <p>'.$_SESSION['new_trip']['step_type'].': </p>
+                        <p>'.$_SESSION['current_trip']['step_type'].': </p>
                         <input class="input-trip-valid" value="'.$_SESSION['current_trip']['option_1_4'].'" readonly>
                         <input class="input-trip-valid" value="'.$_SESSION['current_trip']['option_1_4_price'] .' $" readonly>
                     </div>';
@@ -292,8 +318,6 @@ if(isset($_SESSION['current_trip'])) {
 
                 ?>
         </div>
-
-
     </div>
 
     <div style="width: 200px; margin: auto; display: flex; place-self: center; justify-content: center; gap: 200px">
@@ -301,9 +325,23 @@ if(isset($_SESSION['current_trip'])) {
             <a href="booking.php?id=<?php echo $_SESSION['current_trip']['trip_id']?>">
                 <button class="red-light" style="margin: 0">Modify reservation</button>
             </a>
-            <a href="assets/php/confirm.php">
-                <button class="green-light" style="margin: 0">Confirm reservation</button>
-            </a>
+
+            <form action="https://www.plateforme-smc.fr/cybank/index.php" method="post">
+
+                    <input type='hidden' name='transaction' value='<?= $transaction_id ?>'>
+
+                    <input type='hidden' name='montant' value='<?php $montant = (int)$_SESSION['new_trip']['price'];echo $montant; ?>'>
+
+                    <input type='hidden' name='vendeur' value='<?= $seller ?>'>
+
+                    <input type='hidden' name='retour' value='<?= $back ?>'>
+
+                    <input type='hidden' name='control' value='<?= $control ?>'>
+
+                    <input class="green-light" type='submit' value="Valid and Pay">
+
+            </form>
+
 
     </div>
 </section>
