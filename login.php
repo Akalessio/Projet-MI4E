@@ -38,7 +38,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     if(!$found){
-        echo "Email or password not found";
         header("location:login.php?error=invalid_credentials");
         exit();
     }
@@ -56,8 +55,17 @@ header("location:profile.php");
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/login.css">
     <link  rel="stylesheet" href="https://db.onlinewebfonts.com/c/485fe91395665a0ac50e25744ff3a19c?family=Get+Schwifty">
+    <script src="assets/js/main.js"></script>
+    <script>
+        (function () {
+            const localTheme = localStorage.getItem('theme');
+            if (localTheme === 'dark'){
+                document.documentElement.classList.add('dark')
+            }
+        })();
+    </script>
 </head>
-<body style="width: 100%; margin: 0; padding: 0; background: #DCDFDA">
+<body style="width: 100%; margin: 0; padding: 0;">
 <div class="site-header">
     <div class="title">
         <h2>
@@ -103,6 +111,9 @@ header("location:profile.php");
                      </a>';
         }
         ?>
+        <div id="theme" class="theme-container">
+            <div class="litte-big-ball"></div>
+        </div>
     </div>
 </div>
 

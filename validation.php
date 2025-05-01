@@ -59,8 +59,9 @@ $control = md5($apikey . "#" . $transaction_id . "#" . (int)$_SESSION['new_trip'
     <link rel="stylesheet" href="assets/css/book.css">
     <link rel="stylesheet" href="assets/css/triplist.css">
     <link  rel="stylesheet" href="https://db.onlinewebfonts.com/c/485fe91395665a0ac50e25744ff3a19c?family=Get+Schwifty">
+    <script src="assets/js/main.js" defer></script>
 </head>
-<body style="width: 100%; margin: 0; padding: 0; background: #DCDFDA">
+<body style="width: 100%; margin: 0; padding: 0;">
 <div class="site-header">
     <div class="title">
         <h2>
@@ -106,6 +107,9 @@ $control = md5($apikey . "#" . $transaction_id . "#" . (int)$_SESSION['new_trip'
                      </a>';
         }
         ?>
+        <div id="theme" class="theme-container">
+            <div class="litte-big-ball"></div>
+        </div>
     </div>
 </div>
 

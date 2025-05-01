@@ -1,3 +1,4 @@
+
 .site-header{
     display: flex;
     flex-direction: row;
@@ -11,6 +12,71 @@
     background-color: black;
     padding: 0 100px;
     z-index: 1000;
+}
+
+body{
+    background: #DCDFDA;
+    color: black;
+}
+
+body.dark{
+    background: #414141;
+    color: white;
+}
+
+#theme {
+    margin: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+.theme-container{
+    width: 60px;
+    height: 30px;
+    background-color: #DCDFDA;
+    border-radius: 30px;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    transition: background-color 0.3s;
+}
+
+.litte-big-ball{
+    width: 26px;
+    height: 26px;
+    background-color: #4B5943;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s;
+}
+
+.theme-container.dark{
+    background-color: #414141;
+}
+
+.theme-container.dark .litte-big-ball{
+    transform: translateX(30px);
+}
+
+.char-counter {
+    color: #333333;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+.show {
+    display: grid;
+    cursor: pointer;
+    margin: 10px;
+    font-size: 25px;
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    place-content: center;
+    text-align: center;
 }
 
 *{

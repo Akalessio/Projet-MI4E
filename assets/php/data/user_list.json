@@ -53,5 +53,16 @@
         "discount": "0",
         "profile_picture": "1",
         "trip_file": "dGZvcmVzdGllckBnbWFpbC5jb20=.json"
+    },
+    {
+        "lname": "estla",
+        "fname": "tope",
+        "date": "2005-08-10",
+        "mail": "topeestla@gmail.com",
+        "password": "$2y$10$Lx.wHwpwksmVIDlAup0lCeuhu0TEwTJjgqs1FukN4oTdrD5BymnoO",
+        "rank": "user",
+        "discount": "0",
+        "profile_picture": "1",
+        "trip_file": "dG9wZWVzdGxhQGdtYWlsLmNvbQ==.json"
     }
 ]

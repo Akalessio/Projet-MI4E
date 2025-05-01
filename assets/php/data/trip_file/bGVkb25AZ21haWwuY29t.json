@@ -1,1 +1,23 @@
-[]
+[
+    {
+        "trip_name": "Dune Adventure",
+        "trip_id": "8",
+        "option_1_1": "1",
+        "option_1_2": "1",
+        "option_1_3": "0",
+        "option_1_4": "0",
+        "option_2_1": "0",
+        "option_2_2": "1",
+        "option_2_3": "1",
+        "option_2_4": "0",
+        "option_3_1": "1",
+        "option_3_2": "1",
+        "option_3_3": "0",
+        "option_3_4": "0",
+        "price": 465300,
+        "start_date": "2025-03-15",
+        "end_date": "2025-03-22",
+        "duration": 7,
+        "number": "2"
+    }
+]
