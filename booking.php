@@ -431,6 +431,14 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
                     </div>
                 </div>
 
+                <div id="price-estimate" style="font-weight: bold; font-size: 24px; place-self: center;" class="">
+                    <div class="options-button" style="place-self: center; background: #8FB43A; width: 400px; height: 200px; display: flex; flex-direction: column; gap: 20px">
+                        Estimated Price:<br>
+                        <div>
+                            <span id="price-amount">0</span> $
+                        </div>
+                    </div>
+                </div>
 
                 <div>
                     <div style="width: 200px; margin: 20px; place-self: center;">
@@ -469,5 +477,65 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         </a>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const priceDisplay = document.getElementById('price-amount');
+        const startDateInput = document.getElementById('start_date');
+        const endDateInput = document.getElementById('end_date');
+        const numberSelect = document.getElementById('number');
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+        const minimumPricePerDay = <?php echo (int)$current_trip['minimum_price']; ?>;
+        const optionPrices = {
+            option_1_1: <?php echo (int)$current_trip['option_1_1_price']; ?>,
+            option_1_2: <?php echo (int)$current_trip['option_1_2_price']; ?>,
+            option_1_3: <?php echo (int)$current_trip['option_1_3_price']; ?>,
+            option_1_4: <?php echo (int)$current_trip['option_1_4_price']; ?>,
+            option_2_1: <?php echo (int)$current_trip['option_2_1_price']; ?>,
+            option_2_2: <?php echo (int)$current_trip['option_2_2_price']; ?>,
+            option_2_3: <?php echo (int)$current_trip['option_2_3_price']; ?>,
+            option_2_4: <?php echo (int)$current_trip['option_2_4_price']; ?>,
+            option_3_1: <?php echo (int)$current_trip['option_3_1_price']; ?>,
+            option_3_2: <?php echo (int)$current_trip['option_3_2_price']; ?>,
+            option_3_3: <?php echo (int)$current_trip['option_3_3_price']; ?>,
+            option_3_4: <?php echo (int)$current_trip['option_3_4_price']; ?>
+        };
+
+        function calculatePrice() {
+            let total = 0;
+
+            const startDate = new Date(startDateInput.value);
+            const endDate = new Date(endDateInput.value);
+
+            if (isNaN(startDate) || isNaN(endDate) || endDate <= startDate) {
+                priceDisplay.textContent = "0";
+                return;
+            }
+
+            const days = (endDate - startDate) / (1000 * 60 * 60 * 24);
+            total += minimumPricePerDay * days;
+
+            checkboxes.forEach(cb => {
+                if (cb.checked && optionPrices.hasOwnProperty(cb.name)) {
+                    total += optionPrices[cb.name];
+                }
+            });
+
+            const number = parseInt(numberSelect.value) || 1;
+            total *= number;
+
+            priceDisplay.textContent = total.toString();
+        }
+
+        [...checkboxes, startDateInput, endDateInput, numberSelect].forEach(el => {
+            el.addEventListener('input', calculatePrice);
+            el.addEventListener('change', calculatePrice);
+        });
+
+        calculatePrice();
+    });
+</script>
+
 </body>
 </html>
