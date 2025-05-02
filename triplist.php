@@ -76,107 +76,110 @@ if(isset($_SESSION['user'])){
         </p>
     </div>
     <div class="selection-field">
+
         <input type="text" placeholder="Search..." class="input-trip">
-        <input type="text" list="Dimension-Type" placeholder="Dimension Type" class="input-trip">
-        <datalist id="Dimension-Type">
-            <option value="Science-fiction">
-            <option value="Fantasy">
-            <option value="Horror">
-            <option value="Magic">
-            <option value="Middle Ages">
-            <option value="Space">
-            <option value="Post-Apocalyptic">
-            <option value="Dystopia">
-            <option value="Utopia">
-        </datalist>
+
+        <select id="Dimension-Type" class="input-trip" placeholder="Dimension Type">
+            <option value="">All Types</option>
+            <option value="sf">SF</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="animation">Animation</option>
+            <option value="dystopia">Dystopia</option>
+        </select>
+
+        <select id="sort-price" class="input-trip">
+            <option value="">Sort by Price</option>
+            <option value="asc">Price: Low → High</option>
+            <option value="desc">Price: High → Low</option>
+        </select>
 
     </div>
     <div class="trip-list">
-        <div class="headliner-item">
+        <div class="headliner-item" data-type="sf" data-price="1500">
             <a href="book.php?id=1" >
                 <img src="assets/img/trip/starwars.png" alt="Star Wars Picture" style="width: 300px; height: 200px; border-radius: 30px;">
                 <div class="hover-text">Star Wars</div>
             </a>
         </div>
-        <div class="headliner-item">
+        <div class="headliner-item" data-type="sf" data-price="1500">
             <a href="book.php?id=3">
                 <img src="assets/img/trip/jp.png" alt="Jurassic park Picture" style="width: 300px; height: 200px; border-radius: 30px;">
                 <div class="hover-text">Jurassic Park</div>
             </a>
         </div>
-        <div class="headliner-item">
+        <div class="headliner-item" data-type="fantasy" data-price="1500">
             <a href="book.php?id=6">
                 <img src="assets/img/trip/hobbit.png" alt="hobbit Picture" style="width: 300px; height: 200px; border-radius: 30px;">
                 <div class="hover-text">Hobbit</div>
             </a>
         </div>
-        <div class="headliner-item">
+        <div class="headliner-item" data-type="fantasy" data-price="1500">
             <a href="book.php?id=4">
                 <img src="assets/img/trip/hp.png" alt="Harry Potter Picture" style="width: 300px; height: 200px; border-radius: 30px;">
                 <div class="hover-text">Harry Potter</div>
             </a>
         </div>
-        <div class="headliner-item">
+        <div class="headliner-item" data-type="sf" data-price="1500">
             <a href="book.php?id=2">
                 <img src="assets/img/trip/avatar.png" alt="Avatar Picture" style="width: 300px; height: 200px; border-radius: 30px;">
                 <div class="hover-text">Avatar</div>
             </a>
         </div>
-        <div class="headliner-item">
+        <div class="headliner-item" data-type="animation" data-price="1500">
             <a href="book.php?id=5">
                 <img src="assets/img/trip/arcane.png" alt="Arcane Picture" style="width: 300px; height: 200px; border-radius: 30px;">
                 <div class="hover-text">Arcane</div>
             </a>
         </div>
-        <div class="headliner-item">
+        <div class="headliner-item" data-type="sf" data-price="1600">
             <a href="book.php?id=7">
                 <img src="assets/img/trip/startrek.png" alt="Star Trek Picture" style="width: 300px; height: 200px; border-radius: 30px;">
                 <div class="hover-text">Star Trek</div>
             </a>
         </div>
-        <div class="headliner-item">
+        <div class="headliner-item" data-type="sf" data-price="1800">
             <a href="book.php?id=8">
                 <img src="assets/img/trip/dune.png" alt="Dune Picture" style="width: 300px; height: 200px; border-radius: 30px;">
                 <div class="hover-text">Dune</div>
             </a>
         </div>
-        <div class="headliner-item">
+        <div class="headliner-item" data-type="dystopia" data-price="2000">
             <a href="book.php?id=9">
                 <img src="assets/img/trip/cyberpunk.png" alt="Cyberpunk Picture" style="width: 300px; height: 200px; border-radius: 30px;">
                 <div class="hover-text">Cyberpunk</div>
             </a>
         </div>
-        <div class="headliner-item">
+        <div class="headliner-item" data-type="dystopia" data-price="1800">
             <a href="book.php?id=10">
                 <img src="assets/img/trip/walkingdead.png" alt="walkingdead picture" style="width: 300px; height: 200px; border-radius: 30px;">
                 <div class="hover-text">The walking dead</div>
             </a>
         </div>
-        <div class="headliner-item">
+        <div class="headliner-item" data-type="animation" data-price="1500">
             <a href="book.php?id=11">
                 <img src="assets/img/trip/pokemon.png" alt="pokemon picture" style="width: 300px; height: 200px; border-radius: 30px;">
                 <div class="hover-text">Pokemon</div>
             </a>
         </div>
-        <div class="headliner-item">
+        <div class="headliner-item" data-type="sf" data-price="1800">
             <a href="book.php?id=12">
                 <img src="assets/img/trip/doctorwho.png" alt="doctorwho picture" style="width: 300px; height: 200px; border-radius: 30px;">
                 <div class="hover-text">Doctor Who</div>
             </a>
         </div>
-        <div class="headliner-item">
+        <div class="headliner-item" data-type="dystopia" data-price="1850">
             <a href="book.php?id=13">
                 <img src="assets/img/trip/warhammer.png" alt="warhammer picture" style="width: 300px; height: 200px; border-radius: 30px;">
                 <div class="hover-text">Warhammer</div>
             </a>
         </div>
-        <div class="headliner-item">
+        <div class="headliner-item" data-type="sf" data-price="2000">
             <a href="book.php?id=14">
                 <img src="assets/img/trip/heroes.png" alt="heroes picture" style="width: 300px; height: 200px; border-radius: 30px;">
                 <div class="hover-text">Heroes</div>
             </a>
         </div>
-        <div class="headliner-item">
+        <div class="headliner-item" data-type="sf" data-price="2200">
             <a href="book.php?id=15">
                 <img src="assets/img/trip/masseffect.png" alt="masseffect picture" style="width: 300px; height: 200px; border-radius: 30px;">
                 <div class="hover-text">Mass Effect</div>

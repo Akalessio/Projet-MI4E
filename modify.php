@@ -20,6 +20,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $mail=$_POST["mail"];
     $profile_picture=$_POST["profile_picture"];
 
+    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
+        exit("Invalid date format. Use YYYY-MM-DD.");
+    }
+
+    $timestamp = strtotime($date);
+    if (!$timestamp) {
+        exit("Invalid birthdate.");
+    }
+
+    if ($timestamp > time()) {
+        exit("Birthdate cannot be in the future.");
+    }
+
     if($_POST["password"]!=$_SESSION["user"]["password"]){
         $password=password_hash($_POST["password"],PASSWORD_DEFAULT);
     }else{

@@ -1,85 +1,81 @@
-document.addEventListener('DOMContentLoaded', () =>{
+document.addEventListener('DOMContentLoaded', () => {
 
-    //dark theme
+    // 🌙 DARK THEME
     const toggleTheme = document.getElementById('theme');
     const pageBody = document.body;
     const localTheme = localStorage.getItem('theme');
 
-    if (localTheme === 'dark'){
+    if (localTheme === 'dark') {
         pageBody.classList.add('dark');
-        toggleTheme.classList.add('dark');
+        toggleTheme?.classList.add('dark');
     }
 
-    toggleTheme.addEventListener('click', () =>{
+    toggleTheme?.addEventListener('click', () => {
         pageBody.classList.toggle('dark');
         toggleTheme.classList.toggle('dark');
         const currentTheme = pageBody.classList.contains('dark') ? 'dark' : 'light';
         localStorage.setItem('theme', currentTheme);
     });
 
-    //form
+    // 🧾 FORM HANDLING (only if form exists)
     const form = document.querySelector('form');
-    const inputs = form.querySelectorAll('input');
-    let passwordInput = document.getElementById('password');
-    if(!passwordInput){
-        passwordInput = document.getElementById('psw');
-    }
 
-    inputs.forEach( input => {
-        if(input.type === 'text' || input.type === 'email' || input.type === 'password'){
-            const max = input.getAttribute('maxlength') || 50;
-            const counter = document.createElement('small');
-            counter.className = 'char-counter';
-            counter.textContent = `0 / ${max}`;
-            input.parentElement.appendChild(counter);
-            input.addEventListener('input', () => {
-                counter.textContent =`${input.value.length} / ${max}`;
-            })
-        }
-    });
+    if (form) {
+        const inputs = form.querySelectorAll('input');
+        let passwordInput = document.getElementById('password') || document.getElementById('psw');
 
-    form.addEventListener('submit', (submit) => {
-        let valid = true;
         inputs.forEach(input => {
-            if (input.hasAttribute('required') && !input.value.trim()){
-                valid = false;
-                alert(`the ${input.name}'s field is required.`);
-            }if (input.type === 'email' && !input.value.match(/^\S+@\S+\.\S+$/)){
-                valid = false;
-                alert("email invalid.");
+            if (['text', 'email', 'password'].includes(input.type)) {
+                const max = input.getAttribute('maxlength') || 50;
+                const counter = document.createElement('small');
+                counter.className = 'char-counter';
+                counter.textContent = `0 / ${max}`;
+                input.parentElement.appendChild(counter);
+                input.addEventListener('input', () => {
+                    counter.textContent = `${input.value.length} / ${max}`;
+                });
             }
         });
-        const terms = document.getElementById('terms');
-        if(!terms.checked){
-            valid = false;
-            alert("accept terms and conditions");
-        }
 
-        if (valid){
-            form.submit();
-        }else{
-            submit.preventDefault();
-        }
-    });
+        form.addEventListener('submit', (event) => {
+            let valid = true;
+            inputs.forEach(input => {
+                if (input.hasAttribute('required') && !input.value.trim()) {
+                    valid = false;
+                    alert(`The ${input.name} field is required.`);
+                }
+                if (input.type === 'email' && !input.value.match(/^\S+@\S+\.\S+$/)) {
+                    valid = false;
+                    alert("Invalid email.");
+                }
+            });
 
-    if(passwordInput.value !== 'xxxxxxxxxx'){
-        const showPassword = document.createElement('button');
-        showPassword.type = 'button';
-        showPassword.textContent = '👁';
-        showPassword.className = 'show';
-        passwordInput.parentElement.appendChild(showPassword);
-        showPassword.addEventListener('click', () => {
-            passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+            const terms = document.getElementById('terms');
+            if (terms && !terms.checked) {
+                valid = false;
+                alert("You must accept the terms and conditions.");
+            }
+
+            if (!valid) event.preventDefault();
         });
-    };
 
+        if (passwordInput && passwordInput.value !== 'xxxxxxxxxx') {
+            const showPassword = document.createElement('button');
+            showPassword.type = 'button';
+            showPassword.textContent = '👁';
+            showPassword.className = 'show';
+            passwordInput.parentElement.appendChild(showPassword);
+            showPassword.addEventListener('click', () => {
+                passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+            });
+        }
+    }
 
-
-    //profile modification
+    // 👤 PROFILE EDITING
     const originValues = {};
     let areModified = false;
 
-    window.enableEdit = function(fieldId){
+    window.enableEdit = function (fieldId) {
         const input = document.getElementById(fieldId);
         const save = input.nextElementSibling.nextElementSibling;
         const cancel = input.nextElementSibling.nextElementSibling.nextElementSibling;
@@ -91,13 +87,13 @@ document.addEventListener('DOMContentLoaded', () =>{
         cancel.style.display = 'inline';
     }
 
-    window.cancelEdit = function(fieldId){
+    window.cancelEdit = function (fieldId) {
         const input = document.getElementById(fieldId);
         input.value = originValues[fieldId];
         disableEdit(fieldId);
     }
 
-    window.enableProfilePicEdit = function(){
+    window.enableProfilePicEdit = function () {
         const select = document.getElementById('profile_picture_select');
         const save = select.nextElementSibling.nextElementSibling;
         const cancel = select.nextElementSibling.nextElementSibling.nextElementSibling;
@@ -109,18 +105,21 @@ document.addEventListener('DOMContentLoaded', () =>{
         cancel.style.display = 'inline';
     }
 
-    window.previewProfilePicture = function(value){
+    window.previewProfilePicture = function (value) {
         const preview = document.getElementById('profile_picture_preview');
-        preview.src = `assets/img/PP/${value}.png`;
+        if (preview) {
+            preview.src = `assets/img/PP/${value}.png`;
+        }
     }
 
-    window.saveEdit = function(fieldId) {
+    window.saveEdit = function (fieldId) {
         const input = document.getElementById(fieldId);
         const original = originValues[fieldId];
         const current = input.value;
         if (current !== original) {
             areModified = true;
-            document.getElementById('submitModif').style.display = 'block';
+            const submitButton = document.getElementById('submitModif');
+            if (submitButton) submitButton.style.display = 'block';
         }
         disableEdit(fieldId);
         if (fieldId === 'profile_picture_select') {
@@ -128,8 +127,7 @@ document.addEventListener('DOMContentLoaded', () =>{
         }
     }
 
-
-    window.disableEdit = function(fieldId){
+    window.disableEdit = function (fieldId) {
         const input = document.getElementById(fieldId);
         const edit = input.nextElementSibling;
         const save = input.nextElementSibling.nextElementSibling;
@@ -145,8 +143,47 @@ document.addEventListener('DOMContentLoaded', () =>{
         cancel.style.display = 'none';
     }
 
+    // 🌍 TRIP FILTERING
+    const filterUniverse = document.getElementById('Dimension-Type');
+    const sortPrice = document.getElementById('sort-price');
+    const searchInput = document.querySelector('.selection-field .input-trip[type="text"]');
+    const trips = Array.from(document.querySelectorAll('.headliner-item'));
+    const container = document.querySelector('.trip-list');
 
+    if (filterUniverse && sortPrice && searchInput && container && trips.length > 0) {
+        function applyFilters() {
+            const selectedUniverse = filterUniverse.value;
+            const priceSort = sortPrice.value;
+            const searchTerm = searchInput.value.trim().toLowerCase();
 
+            let filtered = trips.slice();
 
+            if (selectedUniverse) {
+                filtered = filtered.filter(trip => trip.dataset.type === selectedUniverse);
+            }
+
+            if (searchTerm) {
+                filtered = filtered.filter(trip => {
+                    const name = trip.querySelector('.hover-text')?.textContent.toLowerCase();
+                    return name && name.includes(searchTerm);
+                });
+            }
+
+            if (priceSort) {
+                filtered.sort((a, b) => {
+                    const pa = parseInt(a.dataset.price);
+                    const pb = parseInt(b.dataset.price);
+                    return priceSort === "asc" ? pa - pb : pb - pa;
+                });
+            }
+
+            container.innerHTML = "";
+            filtered.forEach(trip => container.appendChild(trip));
+        }
+
+        filterUniverse.addEventListener('change', applyFilters);
+        sortPrice.addEventListener('change', applyFilters);
+        searchInput.addEventListener('input', applyFilters);
+    }
 
 });
