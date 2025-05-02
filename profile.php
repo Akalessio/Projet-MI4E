@@ -76,44 +76,112 @@ $user = $_SESSION['user'];
         <div class="profile-container-3">
             <div class="my-account">
                 <ul class="account-list">
+
                     <li class="list-item-name">
                         <h1>
                             My Account
                         </h1>
-                        <a href="modify.php">
-                            <img src="assets/img/modif.png" alt="modif-icon" width="50" height="50">
-                        </a>
                     </li>
+
                     <li class="list-item">
                         <label>
                             Firstname
                         </label>
-                        <input type="text" value="<?php echo htmlspecialchars($_SESSION["user"]["fname"]); ?>" id="firstname" class="input-account" readonly>
-                    </li >
+                        <div class="list-item-117">
+                            <input type="text" value="<?php echo htmlspecialchars($_SESSION["user"]["fname"]); ?>" id="firstname" class="input-account" readonly>
+                            <button class="edit" onclick="enableEdit('firstname')"><img src="assets/img/modif.png" alt="modif-icon" width="30" height="30"></button>
+                            <button class="save" onclick="saveEdit('firstname')" style="display:none"><img src="assets/img/check.png" alt="modif-icon" width="30" height="30"></button>
+                            <button class="cancel" onclick="cancelEdit('firstname')" style="display:none"><img src="assets/img/cross.png" alt="modif-icon" width="30" height="30"></button>
+                        </div >
+                    </li>
                     <li class="list-item">
                         <label>
                             Name
                         </label>
-                        <input type="text" value="<?php echo htmlspecialchars($_SESSION["user"]["lname"]); ?>" id="name" class="input-account" readonly>
+                        <div class="list-item-117">
+                            <input type="text" value="<?php echo htmlspecialchars($_SESSION["user"]["lname"]); ?>" id="name" class="input-account" readonly>
+                            <button class="edit" onclick="enableEdit('name')"><img src="assets/img/modif.png" alt="modif-icon" width="30" height="30"></button>
+                            <button class="save" onclick="saveEdit('name')" style="display:none"><img src="assets/img/check.png" alt="modif-icon" width="30" height="30"></button>
+                            <button class="cancel" onclick="cancelEdit('name')" style="display:none"><img src="assets/img/cross.png" alt="modif-icon" width="30" height="30"></button>
+                        </div>
                     </li>
                     <li class="list-item">
                         <label>
                             Birthdate
                         </label>
-                        <input type="text" value="<?php echo htmlspecialchars($_SESSION["user"]["date"]); ?>" id="date" class="input-account" readonly>
+                        <div class="list-item-117">
+                            <input type="text" value="<?php echo htmlspecialchars($_SESSION["user"]["date"]); ?>" id="date" class="input-account" readonly>
+                            <button class="edit" onclick="enableEdit('date')"><img src="assets/img/modif.png" alt="modif-icon" width="30" height="30"></button>
+                            <button class="save" onclick="saveEdit('date')" style="display:none"><img src="assets/img/check.png" alt="modif-icon" width="30" height="30"></button>
+                            <button class="cancel" onclick="cancelEdit('date')" style="display:none"><img src="assets/img/cross.png" alt="modif-icon" width="30" height="30"></button>
+                        </div>
                     </li>
                     <li class="list-item">
                         <label>
                             E-mail
                         </label>
-                        <input type="email" value="<?php echo htmlspecialchars($_SESSION["user"]["mail"]); ?>" id="email" class="input-account" readonly>
+                        <div class="list-item-117">
+                            <input type="email" value="<?php echo htmlspecialchars($_SESSION["user"]["mail"]); ?>" id="email" class="input-account" readonly>
+                            <button class="edit-btn" onclick="enableEdit('email')"><img src="assets/img/modif.png" alt="modif-icon" width="30" height="30"></button>
+                            <button class="save-btn" onclick="saveEdit('email')" style="display:none"><img src="assets/img/check.png" alt="modif-icon" width="30" height="30"></button>
+                            <button class="cancel-btn" onclick="cancelEdit('email')" style="display:none"><img src="assets/img/cross.png" alt="modif-icon" width="30" height="30"></button>
+                        </div>
                     </li>
                     <li class="list-item">
                         <label>
                             Password
                         </label>
-                        <input type="password" value="xxxxxxxxxx" id="password" class="input-account" readonly>
+                        <div class="list-item-117">
+                            <input type="password" value="xxxxxxxxxx" id="password" class="input-account" readonly>
+                            <button class="edit-btn" onclick="enableEdit('password')"><img src="assets/img/modif.png" alt="modif-icon" width="30" height="30"></button>
+                            <button class="save-btn" onclick="saveEdit('password')" style="display:none"><img src="assets/img/check.png" alt="modif-icon" width="30" height="30"></button>
+                            <button class="cancel-btn" onclick="cancelEdit('password')" style="display:none"><img src="assets/img/cross.png" alt="modif-icon" width="30" height="30"></button>
+                        </div>
                     </li>
+                    <li class="list-item">
+                        <label>Profile Picture</label>
+                        <div class="list-item-117">
+                            <select style="color: #333333" id="profile_picture_select" class="input" disabled onchange="previewProfilePicture(this.value)" >
+                                <?php
+                                $current_pic = $_SESSION['user']['profile_picture'];
+                                $options = [
+                                    "1" => "None",
+                                    "2" => "Astronaut",
+                                    "3" => "Robot",
+                                    "4" => "Spiderman",
+                                    "5" => "Alien",
+                                    "6" => "Music"
+                                ];
+                                foreach ($options as $value => $label) {
+                                    $selected = ($value == $current_pic) ? "selected" : "";
+                                    echo "<option value=\"$value\" $selected>$label</option>";
+                                }
+                                ?>
+                            </select>
+                            <button class="edit" onclick="enableProfilePicEdit()"><img src="assets/img/modif.png" width="30"></button>
+                            <button class="save" onclick="saveEdit('profile_picture_select')" style="display:none"><img src="assets/img/check.png" width="30"></button>
+                            <button class="cancel" onclick="cancelEdit('profile_picture_select')" style="display:none"><img src="assets/img/cross.png" width="30"></button>
+                        </div>
+                    </li>
+                    <li class="list-item" style="margin-top: 10px; place-self: center">
+                        <img id="profile_picture_preview" src="assets/img/PP/<?php echo $_SESSION['user']['profile_picture']; ?>.png" alt="preview" width="80" height="80" style="border: 3px solid #4B5943; border-radius: 15px;">
+                    </li>
+                    <li class="list-item">
+                        <form id="profile-form" action="modify.php" method="post" style="display: none;" onsubmit="return gatherAndSubmit()">
+                            <input type="hidden" name="fname" id="hidden-fname">
+                            <input type="hidden" name="lname" id="hidden-lname">
+                            <input type="hidden" name="date" id="hidden-date">
+                            <input type="hidden" name="mail" id="hidden-email">
+                            <input type="hidden" name="password" id="hidden-password">
+                            <input type="hidden" name="profile_picture" id="hidden-profile-picture">
+                            <button type="submit">Submit Modification</button>
+                        </form>
+                        <button class="change-pannel" id="submitModif" style="display:none;border: 4px solid #4B5943" onclick="if(gatherAndSubmit()){ document.getElementById('profile-form').submit(); }">Submit</button>
+
+                    </li>
+
+
+
                     <?php
                     if ($_SESSION["user"]["rank"] == "admin"){
                         echo   '<li class="list-item">
@@ -217,5 +285,16 @@ $user = $_SESSION['user'];
         </a>
     </div>
 </div>
+<script>
+    function gatherAndSubmit() {
+        document.getElementById('hidden-fname').value = document.getElementById('firstname').value;
+        document.getElementById('hidden-lname').value = document.getElementById('name').value;
+        document.getElementById('hidden-date').value = document.getElementById('date').value;
+        document.getElementById('hidden-email').value = document.getElementById('email').value;
+        document.getElementById('hidden-password').value = document.getElementById('password').value;
+        document.getElementById('hidden-profile-picture').value = document.getElementById('profile_picture_select').value;
+        return true;
+    }
+</script>
 </body>
 </html>

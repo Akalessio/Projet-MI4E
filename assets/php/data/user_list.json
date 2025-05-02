@@ -55,14 +55,14 @@
         "trip_file": "dGZvcmVzdGllckBnbWFpbC5jb20=.json"
     },
     {
-        "lname": "estla",
-        "fname": "tope",
+        "lname": "EstLa",
+        "fname": "Tope",
         "date": "2005-08-10",
         "mail": "topeestla@gmail.com",
-        "password": "$2y$10$Lx.wHwpwksmVIDlAup0lCeuhu0TEwTJjgqs1FukN4oTdrD5BymnoO",
+        "password": "$2y$10$BU1kJkWaWKRNnSN1sk4HaegNwqWVJk3mgrHG8g1V2Ltpy1Rjk0DJy",
         "rank": "user",
         "discount": "0",
-        "profile_picture": "1",
+        "profile_picture": "2",
         "trip_file": "dG9wZWVzdGxhQGdtYWlsLmNvbQ==.json"
     }
 ]

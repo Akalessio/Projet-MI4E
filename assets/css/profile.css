@@ -77,6 +77,17 @@
     color: #4B5943;
 }
 
+.list-item-117{
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+    color: #4B5943;
+}
+
+
+
 .list-item-name{
     text-align: left;
     display: flex;
@@ -99,6 +110,17 @@
     color: black;
     background-color: #DCDFDA;
 }
+
+.input{
+    border-radius: 30px;
+    background: #DCDFDA;
+    color: black;
+    width: 400px;
+    height: 50px;
+    font-size: 25px;
+    text-align: center;
+}
+
 
 .green-light{
     width: 100px;
