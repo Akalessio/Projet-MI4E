@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 🌙 DARK THEME
+    //dark theme
     const toggleTheme = document.getElementById('theme');
     const pageBody = document.body;
     const localTheme = localStorage.getItem('theme');
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('theme', currentTheme);
     });
 
-    // 🧾 FORM HANDLING (only if form exists)
+    //form
     const form = document.querySelector('form');
 
     if (form) {
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 👤 PROFILE EDITING
+    //profile edit
     const originValues = {};
     let areModified = false;
 
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cancel.style.display = 'none';
     }
 
-    // 🌍 TRIP FILTERING
+    //trip search
     const filterUniverse = document.getElementById('Dimension-Type');
     const sortPrice = document.getElementById('sort-price');
     const searchInput = document.querySelector('.selection-field .input-trip[type="text"]');
