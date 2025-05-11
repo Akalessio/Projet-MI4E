@@ -186,4 +186,29 @@ document.addEventListener('DOMContentLoaded', () => {
         searchInput.addEventListener('input', applyFilters);
     }
 
+    //remove from basket
+    document.querySelectorAll('.remove-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const tripId = this.dataset.tripId;
+
+            fetch('assets/php/removeBasket.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'trip_id=' + encodeURIComponent(tripId)
+            })
+                .then(res => res.text())
+                .then(response => {
+                    if (response === 'success') {
+                        this.closest('div').remove();
+                    } else {
+                        alert('Error removing trip: ' + response);
+                    }
+                });
+        });
+    });
+
+
+
 });

@@ -7,17 +7,19 @@ if (isset($_GET['status'])) {
         $trip_file = 'assets/php/data/trip_file/' . $_SESSION['user']['trip_file'];
 
         if (file_exists($trip_file)) {
-            $check = false;
             $trip = json_decode(file_get_contents($trip_file), true);
-            foreach ($trip as $trips) {
-                if($trips['start_date'] == $_SESSION['new_trip']['start_date']){
-                    $check = true;
-                }
-            }if (!$check){
-                $trip[] = $_SESSION['new_trip'];
+
+            $basket_path = 'assets/php/data/trip_file/'. 'basket_' . $_SESSION['user']['trip_file'];
+
+
+            if(file_exists($basket_path)) {
+                $basket_list = json_decode(file_get_contents($basket_path), true);
+
+                $trip = array_merge($trip, $basket_list);
                 if (file_put_contents($trip_file, json_encode($trip, JSON_PRETTY_PRINT)) === false) {
                     die("Error writing to file.");
                 }
+                file_put_contents($basket_path, json_encode([], JSON_PRETTY_PRINT));
             }
         }
     }

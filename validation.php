@@ -142,13 +142,13 @@ $control = md5($apikey . "#" . $transaction_id . "#" . (int)$_SESSION['new_trip'
             <?php
 
 
-           if($_SESSION['new_trip']['option_1_1'] == 1){
-               echo '<div class="option-block">
+            if($_SESSION['new_trip']['option_1_1'] == 1){
+                echo '<div class="option-block">
                         <p>'.$_SESSION['current_trip']['step_type'].': </p>
                         <input class="input-trip-valid" value="'.$_SESSION['current_trip']['option_1_1'].'" readonly>
                         <input class="input-trip-valid" value="'.$_SESSION['current_trip']['option_1_1_price'] .' $" readonly>
                     </div>';
-           }
+            }
             if($_SESSION['new_trip']['option_1_2'] == 1){
                 echo '<div class="option-block">
                         <p>'.$_SESSION['current_trip']['step_type'].': </p>
@@ -235,116 +235,106 @@ $control = md5($apikey . "#" . $transaction_id . "#" . (int)$_SESSION['new_trip'
                 Price:
             </h2>
 
-                <?php
+            <?php
 
 
-                if($_SESSION['new_trip']['option_1_1'] == 1){
-                    echo '<div class="option-block">
+            if($_SESSION['new_trip']['option_1_1'] == 1){
+                echo '<div class="option-block">
                         <input class="input-trip-valid" value="'.$_SESSION['current_trip']['option_1_1_price'] .' $ - '.$_SESSION['current_trip']['option_1_1'].'" readonly>
                     </div>';
-                }
-                if($_SESSION['new_trip']['option_1_2'] == 1){
-                    echo '<div class="option-block">
+            }
+            if($_SESSION['new_trip']['option_1_2'] == 1){
+                echo '<div class="option-block">
                         <input class="input-trip-valid" value="'.$_SESSION['current_trip']['option_1_2_price'] .' $ - '.$_SESSION['current_trip']['option_1_2'].'" readonly>
                     </div>';
-                }
-                if($_SESSION['new_trip']['option_1_3'] == 1){
-                    echo '<div class="option-block">
+            }
+            if($_SESSION['new_trip']['option_1_3'] == 1){
+                echo '<div class="option-block">
                         <input class="input-trip-valid" value="'.$_SESSION['current_trip']['option_1_3_price'] .' $ - '.$_SESSION['current_trip']['option_1_3'].'" readonly>
                     </div>';
-                }
-                if($_SESSION['new_trip']['option_1_4'] == 1){
-                    echo '<div class="option-block">
+            }
+            if($_SESSION['new_trip']['option_1_4'] == 1){
+                echo '<div class="option-block">
                         <input class="input-trip-valid" value="'.$_SESSION['current_trip']['option_1_4_price'] .' $ - '.$_SESSION['current_trip']['option_1_4'].'" readonly>
                     </div>';
-                }
-                if($_SESSION['new_trip']['option_2_1'] == 1){
-                    echo '<div class="option-block">
+            }
+            if($_SESSION['new_trip']['option_2_1'] == 1){
+                echo '<div class="option-block">
                         <input class="input-trip-valid" value="'.$_SESSION['current_trip']['option_2_1_price'] .' $ - '.$_SESSION['current_trip']['option_2_1'].'" readonly>
                     </div>';
-                }
-                if($_SESSION['new_trip']['option_2_2'] == 1){
-                    echo '<div class="option-block">
+            }
+            if($_SESSION['new_trip']['option_2_2'] == 1){
+                echo '<div class="option-block">
                         <input class="input-trip-valid" value="'.$_SESSION['current_trip']['option_2_2_price'] .' $ - '.$_SESSION['current_trip']['option_2_2'].'" readonly>
                     </div>';
-                }
-                if($_SESSION['new_trip']['option_2_3'] == 1){
-                    echo '<div class="option-block">
+            }
+            if($_SESSION['new_trip']['option_2_3'] == 1){
+                echo '<div class="option-block">
                         <input class="input-trip-valid" value="'.$_SESSION['current_trip']['option_2_3_price'] .' $ - '.$_SESSION['current_trip']['option_2_3'].'" readonly>
                     </div>';
-                }
-                if($_SESSION['new_trip']['option_2_4'] == 1){
-                    echo '<div class="option-block">
+            }
+            if($_SESSION['new_trip']['option_2_4'] == 1){
+                echo '<div class="option-block">
                         <input class="input-trip-valid" value="'.$_SESSION['current_trip']['option_2_4_price'] .' $ - '.$_SESSION['current_trip']['option_2_4'].'" readonly>
                     </div>';
-                }
-                if($_SESSION['new_trip']['option_3_1'] == 1){
-                    echo '<div class="option-block">
+            }
+            if($_SESSION['new_trip']['option_3_1'] == 1){
+                echo '<div class="option-block">
                         <input class="input-trip-valid" value="'.$_SESSION['current_trip']['option_3_1_price'] .' $ - '.$_SESSION['current_trip']['option_3_1'].'" readonly>
                     </div>';
-                }
-                if($_SESSION['new_trip']['option_3_2'] == 1){
-                    echo '<div class="option-block">
+            }
+            if($_SESSION['new_trip']['option_3_2'] == 1){
+                echo '<div class="option-block">
                         <input class="input-trip-valid" value="'.$_SESSION['current_trip']['option_3_2_price'] .' $ - '.$_SESSION['current_trip']['option_3_2'].'" readonly>
                     </div>';
-                }
-                if($_SESSION['new_trip']['option_3_3'] == 1){
-                    echo '<div class="option-block">
+            }
+            if($_SESSION['new_trip']['option_3_3'] == 1){
+                echo '<div class="option-block">
                         <input class="input-trip-valid" value="'.$_SESSION['current_trip']['option_3_3_price'] .' $ - '.$_SESSION['current_trip']['option_3_3'].'" readonly>
                     </div>';
-                }
-                if($_SESSION['new_trip']['option_3_4'] == 1){
-                    echo '<div class="option-block">
+            }
+            if($_SESSION['new_trip']['option_3_4'] == 1){
+                echo '<div class="option-block">
                         <input class="input-trip-valid" value="'.$_SESSION['current_trip']['option_3_4_price'] .' $ - '.$_SESSION['current_trip']['option_3_4'].'" readonly>
                     </div>';
-                }
+            }
 
-                if($_SESSION['new_trip']['number'] == 1){
-                    echo '<div class="option-block">
+            if($_SESSION['new_trip']['number'] == 1){
+                echo '<div class="option-block">
                         <p>For: </p>
                         <input class="input-trip-valid" value="'.$_SESSION['new_trip']['number'].' person" readonly>
                         
                         <p>Total Price: </p>
                         <input class="input-trip-valid" value="'.$_SESSION['new_trip']['price'].' $" readonly>
                     </div>';
-                }else{
-                    echo '<div class="option-block">
+            }else{
+                echo '<div class="option-block">
                         <p>For: </p>
                         <input class="input-trip-valid" value="'.$_SESSION['new_trip']['number'].' persons" readonly>
                         
                         <p>Total Price: </p>
                         <input class="input-trip-valid" value="'.$_SESSION['new_trip']['price'].' $" readonly>
                     </div>';
-                }
+            }
 
 
 
 
-                ?>
+            ?>
         </div>
     </div>
 
     <div style="width: 200px; margin: auto; display: flex; place-self: center; justify-content: center; gap: 200px">
 
-            <a href="booking.php?id=<?php echo $_SESSION['current_trip']['trip_id']?>">
-                <button class="red-light" style="margin: 0">Modify reservation</button>
-            </a>
+        <a href="booking.php?id=<?php echo $_SESSION['current_trip']['trip_id']?>">
+            <button class="red-light" style="margin: 0">Modify reservation</button>
+        </a>
 
-            <form action="https://www.plateforme-smc.fr/cybank/index.php" method="post">
+        <form action="assets/php/addBasket.php" method="post">
 
-                    <input type='hidden' name='transaction' value='<?= $transaction_id ?>'>
+            <button class="green-light" type='submit'>Valid and add to basket</button>
 
-                    <input type='hidden' name='montant' value='<?php $montant = (int)$_SESSION['new_trip']['price'];echo $montant; ?>'>
-
-                    <input type='hidden' name='vendeur' value='<?= $seller ?>'>
-
-                    <input type='hidden' name='retour' value='<?= $back ?>'>
-
-                    <input type='hidden' name='control' value='<?= $control ?>'>
-
-                    <input class="green-light" type='submit' value="Valid and Pay">
-
-            </form>
+        </form>
 
 
     </div>

@@ -170,11 +170,13 @@
     margin: 50px;
     padding: 45px;
     justify-content: center;
+    animation: scrollImages 30s linear infinite;
+    object-fit: cover;
 }
 
 .book-pic{
     display: flex;
-    overflow: auto;
+    overflow: hidden;
     gap: 50px;
     background: #C8D6A2;
     border-radius: 30px;
@@ -183,6 +185,24 @@
 .pic{
     height: 510px;
     width: 825px;
+}
+
+@keyframes scrollImages {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-100%);
+    }
+    50% {
+        transform: translateX(-200%);
+    }
+    75% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
 }
 
 .green-light{
