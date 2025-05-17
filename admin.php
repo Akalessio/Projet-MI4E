@@ -116,6 +116,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <a href="#contact" class="mid-link-item">
             Contact Us
         </a>
+        <?php
+        if(isset($_SESSION['user'])){
+            echo '<a href="basket.php" class="mid-link-item">
+                        <img src="assets/img/basket.png" alt="Basket" width="50" height="50">
+                     </a>';
+        }
+        ?>
 
         <a href="profile.php">
             <img src="assets/img/PP/<?php if(isset($_SESSION['user'])){echo $_SESSION['user']['profile_picture'];}else{echo 1;};?>.png" alt="profile icon" width="50" height="50">

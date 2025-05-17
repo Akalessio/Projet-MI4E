@@ -8,35 +8,21 @@ if(isset($_SESSION['user'])){
     exit();
 }
 
-if(isset($_SESSION['new_trip'])) {
-    $new_trip = $_SESSION['new_trip'];
-}else{
-    die('error trip informations not saved');
-}
-
-if(isset($_SESSION['current_trip'])) {
-    $current_trip = $_SESSION['current_trip'];
-}else{
-    die('error trip informations not saved');
-}
 
 if (!isset($_SESSION['user'])) {
     die('you must be logged');
 }
 
-if (!isset($_SESSION['current_trip'])) {
-    die('trip informations error');
-}
-
-if (!isset($_SESSION['new_trip'])) {
-    die('trip informations error');
-}
 
 $trip_file = 'assets/php/data/trip_file/' . $_SESSION['user']['trip_file'];
 
 require('assets/php/getapikey.php');
 
 $basket_path = 'assets/php/data/trip_file/'. 'basket_' . $_SESSION['user']['trip_file'];
+
+if (!file_exists($basket_path)) {
+    file_put_contents($basket_path, json_encode([], JSON_PRETTY_PRINT));
+}
 
 $basket_list = json_decode(file_get_contents($basket_path), true);
 
@@ -98,6 +84,13 @@ $back = "http://localhost:9000/solded.php";
         <a href="#contact" class="mid-link-item">
             Contact Us
         </a>
+        <?php
+        if(isset($_SESSION['user'])){
+            echo '<a href="basket.php" class="mid-link-item">
+                        <img src="assets/img/basket.png" alt="Basket" width="50" height="50">
+                     </a>';
+        }
+        ?>
 
         <a href="profile.php">
             <img src="assets/img/PP/<?php if(isset($_SESSION['user'])){echo $_SESSION['user']['profile_picture'];}else{echo 1;};?>.png" alt="profile icon" width="50" height="50">
@@ -174,10 +167,6 @@ $back = "http://localhost:9000/solded.php";
 
     <div style="width: 200px; margin: auto; display: flex; place-self: center; justify-content: center; gap: 200px">
 
-            <a href="booking.php?id=<?php echo $_SESSION['current_trip']['trip_id']?>">
-                <button class="red-light" style="margin: 0">Modify reservation</button>
-            </a>
-
             <form action="https://www.plateforme-smc.fr/cybank/index.php" method="post">
 
                     <input type='hidden' name='transaction' value='<?= $transaction_id ?>'>
@@ -190,7 +179,15 @@ $back = "http://localhost:9000/solded.php";
 
                     <input type='hidden' name='control' value='<?= $control ?>'>
 
-                    <input class="green-light" type='submit' value="Valid and Pay">
+                <?php
+                    if ($basket_list != []){
+                        echo '
+                            <input class="green-light" type="submit" value="Valid and Pay">
+                        ';
+                    }
+                ?>
+
+
 
             </form>
 
