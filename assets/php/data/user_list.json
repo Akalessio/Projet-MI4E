@@ -7,7 +7,7 @@
         "password": "$2y$10$GjsEeHvbiYE6invWx6LpIe1JkZmu0mCQazRrs41s8d.0nrQDFxVK.",
         "rank": "admin",
         "discount": "0",
-        "profile_picture": "3",
+        "profile_picture": "2",
         "trip_file": "bGVkb25AZ21haWwuY29t.json"
     },
     {
@@ -16,7 +16,7 @@
         "date": "2024-08-06",
         "mail": "jsmith@mail.com",
         "password": "$2y$10$3C75yOIKD1ThX7XdAMmtne3fh0HORgdobvdj478H1AQqFEwmaVbeu",
-        "rank": "user",
+        "rank": "vip",
         "discount": "0",
         "profile_picture": "1",
         "trip_file": "anNtaXRoQG1haWwuY29t.json"

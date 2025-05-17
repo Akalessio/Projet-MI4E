@@ -6,6 +6,10 @@ if(!isset($_SESSION['user'])){
     exit();
 }
 
+if($_SESSION['user']['rank']!="admin"){
+    header('location:index.php');
+}
+
 $user = $_SESSION['user'];
 $user_list='assets/php/data/user_list.json';
 
@@ -80,6 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="assets/css/profile.css">
     <link  rel="stylesheet" href="https://db.onlinewebfonts.com/c/485fe91395665a0ac50e25744ff3a19c?family=Get+Schwifty">
     <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/asyncAdmin.js" defer></script>
 </head>
 <body style="width: 100%; margin: 0; padding: 0;">
 <div class="site-header">
@@ -227,9 +232,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </li>
                 <li class="list-reservation">
                     <p style="font-family: 'Montserrat', sans-serif; font-size: 30px; color: #DCDFDA">Change customer status</p>
-                    <form action="admin.php" method="post">
-                        <input type="email"  name="mail" required placeholder="Account E-mail..." class="input-account">
-                        <ul class="ul-button">
+                        <input type="email"  name="mail" required placeholder="Account E-mail..." class="input-account" id="mailChange">
+                        <img src="assets/img/gif/load.gif" alt="loading gif" height="50" width="50" style="place-self: center; display: none" id="loading">
+                        <ul class="ul-button" style="place-self: center">
                             <li>
                                 <button class="green-light" type="submit" name="action" value="add_vip">
                                     Add VIP rank
@@ -261,7 +266,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 </button>
                             </li>
                         </ul>
-                    </form>
                 </li>
             </ul>
         </div>
