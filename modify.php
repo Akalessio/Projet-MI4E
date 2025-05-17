@@ -1,50 +1,89 @@
 <?php
 session_start();
+sleep(2);
+function userDetection(){
+    return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+}
 
-if (!isset($_SESSION['user'])) {
-    header("location:login.php");
+if(!userDetection()){
+    header('Location: ../../index.php');
     exit();
 }
 
-$lname='';
-$fname='';
-$date='';
-$mail='';
-$password='';
-$profile_picture='';
+if (!isset($_GET['field'])) {
+    http_response_code(400);
+    echo json_encode(['error' => 'No field specified.']);
+    exit();
+}
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $fname=$_POST["fname"];
-    $lname=$_POST["lname"];
-    $date=$_POST["date"];
-    $mail=$_POST["mail"];
-    $profile_picture=$_POST["profile_picture"];
+$field = $_GET['field'];
+$headers = array_change_key_case(getallheaders(), CASE_LOWER);
+
+
+    $fname=$_SESSION['user']['fname'];
+    $lname=$_SESSION['user']['lname'];
+    $date=$_SESSION['user']['date'];
+    $mail=$_SESSION['user']['mail'];
+    $profile_picture=$_SESSION['user']['profile_picture'];
+    $password=$_SESSION["user"]["password"];
+
+    switch ($field) {
+        case 'firstname':
+            $fname=$headers['current'];
+            break;
+        case 'lastname':
+            $lname=$headers['current'];
+            break;
+        case 'date':
+            $date=$headers['current'];
+            break;
+        case 'email':
+            $mail=$headers['current'];
+            break;
+        case 'profile_picture_select':
+            $profile_picture=$headers['current'];
+            break;
+        case 'password':
+            if(!password_verify($headers['current'],$_SESSION["user"]["password"])){
+                $password=password_hash($headers['current'],PASSWORD_DEFAULT);
+            }
+            break;
+        default:
+            http_response_code(400);
+            echo json_encode(['error' => 'No field specified.']);
+            exit();
+    }
 
     if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
-        exit("Invalid date format. Use YYYY-MM-DD.");
+        http_response_code(400);
+        echo json_encode(['error' => 'Invalid date format.']);
+        exit();
     }
 
     $timestamp = strtotime($date);
     if (!$timestamp) {
-        exit("Invalid birthdate.");
+        http_response_code(400);
+        echo json_encode(['error' => 'Invalid date format.']);
+        exit();
     }
 
     if ($timestamp > time()) {
-        exit("Birthdate cannot be in the future.");
+        http_response_code(400);
+        echo json_encode(['error' => 'Invalid date format.']);
+        exit();
     }
 
-    if($_POST["password"]!=$_SESSION["user"]["password"]){
-        $password=password_hash($_POST["password"],PASSWORD_DEFAULT);
-    }else{
-        $password=$_SESSION["user"]["password"];
+    if(!$mail || !filter_var($mail, FILTER_VALIDATE_EMAIL)){
+        http_response_code(400);
+        echo json_encode(['error' => 'No email or invalid address specified.']);
+        exit();
     }
 
-    if(!$mail){
-        exit("Please enter a valid email address");
-    }
 
     if(empty($password)){
-        die("Please enter a password");
+        http_response_code(400);
+        echo json_encode(['error' => 'No password specified.']);
+        exit();
     }
 
     $user_file = "assets/php/data/user_list.json";
@@ -52,186 +91,45 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if (file_exists($user_file)) {
         $registered_user = json_decode(file_get_contents($user_file), true);
         if($registered_user == null){
+            http_response_code(400);
+            echo json_encode(['error' => 'User not found.']);
             die("Unable to load user file");
         }
     }else{
-        die("User file does not exist");
+        http_response_code(400);
+        echo json_encode(['error' => 'UserFile not found.']);
+        die();
+    }
+
+    foreach ($registered_user as $new_user) {
+        if($new_user['mail']==$mail && $field == "email" && $new_user['mail'] != $_SESSION['user']['mail']){
+            http_response_code(400);
+            echo json_encode(['error' => 'Mail already in use.']);
+            exit();
+        }
     }
 
     foreach ($registered_user as &$new_user) {
-        if($new_user["mail"]==$mail){
+        if($new_user["mail"]==$_SESSION['user']['mail']){
             $new_user = [ "lname" => $lname, "fname" => $fname, "date" => $date, "mail" => $mail, "password" => $password, "rank" => $new_user['rank'], "discount" => $new_user["discount"], "profile_picture" => $profile_picture, "trip_file" => $new_user['trip_file'] ] ;
             $_SESSION['user']['mail'] = $mail;
             $_SESSION['user']['fname'] = $fname;
             $_SESSION['user']['lname'] = $lname;
             $_SESSION['user']['date'] = $date;
+            $_SESSION['user']['password'] = $password;
             $_SESSION['user']['profile_picture'] = $profile_picture;
         }
     }
 
     if (file_put_contents($user_file, json_encode($registered_user, JSON_PRETTY_PRINT)) === false) {
-        die("Error writing to file.");
+        http_response_code(500);
+        echo json_encode(['error' => 'Unable to write to file.']);
+        exit();
     }
 
 
 
-    header("location: profile.php");
+    echo json_encode(['success' => 'User successfully modified.']);
     exit();
-}
-?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/login.css">
-    <link  rel="stylesheet" href="https://db.onlinewebfonts.com/c/485fe91395665a0ac50e25744ff3a19c?family=Get+Schwifty">
-    <script src="assets/js/main.js" defer></script>
-</head>
-<body style="width: 100%; margin: 0; padding: 0; ">
-<div class="site-header">
-    <div class="title">
-        <h2>
-            <a href="index.php">
-                <span style=" font-family: 'Get Schwifty', sans-serif;
-                font-size: 48px;
-                font-weight: bold;
-                color: #DCDFDA;
-                display: inline-block">
-                    Dimension'
-                </span><span style=" font-family: 'Get Schwifty', sans-serif;
-                font-size: 48px;
-                font-weight: bold;
-                color:#41e00b;
-                display: inline-block">
-                    Trip
-                </span>
-            </a>
-        </h2>
-    </div>
-    <div class="right-icon">
 
-        <div class="search-bar">
-            <input type="text" placeholder="Search">
-            <a href="#">
-                <i class="fas fa-search"></i>
-            </a>
-        </div>
-        <a href="triplist.php" class="mid-link-item">
-            Book a trip
-        </a>
-        <a href="#contact" class="mid-link-item">
-            Contact Us
-        </a>
-        <?php
-        if(isset($_SESSION['user'])){
-            echo '<a href="basket.php" class="mid-link-item">
-                        <img src="assets/img/basket.png" alt="Basket" width="50" height="50">
-                     </a>';
-        }
-        ?>
-
-        <a href="profile.php">
-            <img src="assets/img/PP/<?php if(isset($_SESSION['user'])){echo $_SESSION['user']['profile_picture'];}else{echo 1;};?>.png" alt="profile icon" width="50" height="50">
-        </a>
-        <?php
-        if(!isset($_SESSION['user'])){
-            echo '<a href="login.php" class="mid-link-item">
-                        Login
-                     </a>';
-        }
-        ?>
-        <div id="theme" class="theme-container">
-            <div class="litte-big-ball"></div>
-        </div>
-    </div>
-</div>
-
-<div class="form-container">
-    <div class="form-2">
-        <form action="modify.php" method="post">
-
-            <div class="form-item-2">
-                <label class="label-text" for="fname">First Name* :</label>
-                <input class="input" type="text" id="fname" name="fname" maxlength="50" required placeholder="First Name..." value="<?php echo htmlspecialchars($_SESSION['user']['fname'])?>">
-            </div>
-
-            <div class="form-item-2">
-                <label class="label-text" for="lname">Name* :</label>
-                <input class="input" type="text" id="lname" name="lname" maxlength="50" required placeholder="Name..." value="<?php echo htmlspecialchars($_SESSION['user']['lname'])?>">
-            </div>
-
-            <div class="form-item-2">
-                <label class="label-text" for="mail">E-mail* :</label>
-                <input class="input" type="email" id="mail" name="mail" required placeholder="E-mail" value="<?php echo htmlspecialchars($_SESSION['user']['mail'])?>">
-            </div>
-
-            <div class="form-item-2">
-                <label class="label-text" for="mail">Password* :</label>
-                <input class="input" type="password" id="password" name="password" required placeholder="Password" value="<?php echo htmlspecialchars($_SESSION['user']['password'])?>"">
-            </div>
-
-            <div class="form-item-2">
-                <label class="label-text" for="birthdate">Birthdate* :</label>
-                <input class="input" type="date" id="birthdate" name="date" required value="<?php echo htmlspecialchars($_SESSION['user']['date'])?>">
-            </div>
-
-            <div class="form-item-2">
-               <label class="label-text">Profiles Picture:</label>
-               <select class="input" name="profile_picture" required>
-                   <option value="1">none</option>
-                   <option value="2">astronaut</option>
-                   <option value="3">robot</option>
-                   <option value="4">spiderman</option>
-                   <option value="5">alien</option>
-                   <option value="6">music</option>
-
-               </select>
-            </div>
-
-            <div class="form-item-2-3">
-                <img class="profile_picture" src="assets/img/user.png" alt="user base png">
-                <img class="profile_picture" src="assets/img/PP/2.png" alt="user base png">
-                <img class="profile_picture" src="assets/img/PP/3.png" alt="user base png">
-                <img class="profile_picture" src="assets/img/PP/4.png" alt="user base png">
-                <img class="profile_picture" src="assets/img/PP/5.png" alt="user base png">
-                <img class="profile_picture" src="assets/img/PP/6.png" alt="user base png">
-            </div>
-
-            <div class="form-item-2">
-                <button type="submit" style="font-family: 'Montserrat', sans-serif; margin-bottom: 25px">Save changes</button>
-                <br>
-            </div>
-
-        </form>
-    </div>
-</div>
-
-<div id="contact" class="site-footer">
-    <div>
-        <a href="https://github.com/Akalessio/Projet-MI4E" target="_blank" style="margin-left: 10px; text-decoration: none; font-family: 'Montserrat', sans-serif" class="team-div">
-            <h1 class="mid-link-item-contact" style="pointer-events: none">
-                Contact :
-            </h1>
-            <img src="assets/img/team.png" alt="team-logo" width="50" height="50">
-            <h1 class="mid-link-item">
-                Project-MI4E's team
-            </h1>
-        </a>
-    </div>
-    <div class="social-icon">
-        <a href="https://www.instagram.com/" target="_blank">
-            <img src="assets/img/insta.png" alt="instagram logo" height="75" width="75">
-        </a>
-        <a href="https://x.com/?lang=fr" target="_blank">
-            <img src="assets/img/x.png" alt="x logo" height="50" width="50">
-        </a>
-        <a href="https://www.facebook.com/?locale=fr_FR" target="_blank" style="margin-left: 20px; margin-right: 20px">
-            <img src="assets/img/face.png" alt="facebool logo" height="50" width="50">
-        </a>
-    </div>
-</div>
-</body>
-</html>

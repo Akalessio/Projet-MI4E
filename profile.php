@@ -23,6 +23,7 @@ $user = $_SESSION['user'];
     <link rel="stylesheet" href="assets/css/profile.css">
     <link  rel="stylesheet" href="https://db.onlinewebfonts.com/c/485fe91395665a0ac50e25744ff3a19c?family=Get+Schwifty">
     <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/profileModification.js" defer></script>
 </head>
 <body style="width: 100%; margin: 0; padding: 0; ">
 <div class="site-header">
@@ -68,7 +69,7 @@ $user = $_SESSION['user'];
         ?>
 
         <a href="profile.php">
-            <img src="assets/img/PP/<?php if(isset($_SESSION['user'])){echo $_SESSION['user']['profile_picture'];}else{echo 1;};?>.png" alt="profile icon" width="50" height="50">
+            <img id="pdp" src="assets/img/PP/<?php if(isset($_SESSION['user'])){echo $_SESSION['user']['profile_picture'];}else{echo 1;};?>.png" alt="profile icon" width="50" height="50" >
         </a>
         <a href="assets/php/logout.php" class="mid-link-item">
                         Log-out
@@ -99,6 +100,7 @@ $user = $_SESSION['user'];
                             <button class="edit" onclick="enableEdit('firstname')"><img src="assets/img/modif.png" alt="modif-icon" width="30" height="30"></button>
                             <button class="save" onclick="saveEdit('firstname')" style="display:none"><img src="assets/img/check.png" alt="modif-icon" width="30" height="30"></button>
                             <button class="cancel" onclick="cancelEdit('firstname')" style="display:none"><img src="assets/img/cross.png" alt="modif-icon" width="30" height="30"></button>
+                            <img src="assets/img/gif/load.gif" alt="load-gif" width="30" height="30" style="place-self: center; display: none">
                         </div >
                     </li>
                     <li class="list-item">
@@ -110,6 +112,7 @@ $user = $_SESSION['user'];
                             <button class="edit" onclick="enableEdit('name')"><img src="assets/img/modif.png" alt="modif-icon" width="30" height="30"></button>
                             <button class="save" onclick="saveEdit('name')" style="display:none"><img src="assets/img/check.png" alt="modif-icon" width="30" height="30"></button>
                             <button class="cancel" onclick="cancelEdit('name')" style="display:none"><img src="assets/img/cross.png" alt="modif-icon" width="30" height="30"></button>
+                            <img src="assets/img/gif/load.gif" alt="load-gif" width="30" height="30" style="place-self: center; display: none">
                         </div>
                     </li>
                     <li class="list-item">
@@ -121,6 +124,7 @@ $user = $_SESSION['user'];
                             <button class="edit" onclick="enableEdit('date')"><img src="assets/img/modif.png" alt="modif-icon" width="30" height="30"></button>
                             <button class="save" onclick="saveEdit('date')" style="display:none"><img src="assets/img/check.png" alt="modif-icon" width="30" height="30"></button>
                             <button class="cancel" onclick="cancelEdit('date')" style="display:none"><img src="assets/img/cross.png" alt="modif-icon" width="30" height="30"></button>
+                            <img src="assets/img/gif/load.gif" alt="load-gif" width="30" height="30" style="place-self: center; display: none">
                         </div>
                     </li>
                     <li class="list-item">
@@ -132,6 +136,7 @@ $user = $_SESSION['user'];
                             <button class="edit-btn" onclick="enableEdit('email')"><img src="assets/img/modif.png" alt="modif-icon" width="30" height="30"></button>
                             <button class="save-btn" onclick="saveEdit('email')" style="display:none"><img src="assets/img/check.png" alt="modif-icon" width="30" height="30"></button>
                             <button class="cancel-btn" onclick="cancelEdit('email')" style="display:none"><img src="assets/img/cross.png" alt="modif-icon" width="30" height="30"></button>
+                            <img src="assets/img/gif/load.gif" alt="load-gif" width="30" height="30" style="place-self: center; display: none">
                         </div>
                     </li>
                     <li class="list-item">
@@ -143,6 +148,7 @@ $user = $_SESSION['user'];
                             <button class="edit-btn" onclick="enableEdit('password')"><img src="assets/img/modif.png" alt="modif-icon" width="30" height="30"></button>
                             <button class="save-btn" onclick="saveEdit('password')" style="display:none"><img src="assets/img/check.png" alt="modif-icon" width="30" height="30"></button>
                             <button class="cancel-btn" onclick="cancelEdit('password')" style="display:none"><img src="assets/img/cross.png" alt="modif-icon" width="30" height="30"></button>
+                            <img src="assets/img/gif/load.gif" alt="load-gif" width="30" height="30" style="place-self: center; display: none">
                         </div>
                     </li>
                     <li class="list-item">
@@ -168,6 +174,7 @@ $user = $_SESSION['user'];
                             <button class="edit" onclick="enableProfilePicEdit()"><img src="assets/img/modif.png" width="30"></button>
                             <button class="save" onclick="saveEdit('profile_picture_select')" style="display:none"><img src="assets/img/check.png" width="30"></button>
                             <button class="cancel" onclick="cancelEdit('profile_picture_select')" style="display:none"><img src="assets/img/cross.png" width="30"></button>
+                            <img src="assets/img/gif/load.gif" alt="load-gif" width="30" height="30" style="place-self: center; display: none">
                         </div>
                     </li>
                     <li class="list-item" style="margin-top: 10px; place-self: center">
