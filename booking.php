@@ -80,6 +80,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         $option_3_2=$_POST['option_3_2'];
         $option_3_3=$_POST['option_3_3'];
         $option_3_4=$_POST['option_3_4'];
+        $discount=$_POST['reduction'];
 
         if($option_1_1=='' AND $option_1_2=='' AND  $option_1_3=='' AND  $option_1_4==''){
             die('select at least one' . htmlspecialchars($current_trip['step_type']));
@@ -89,41 +90,46 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 
     $price+=(int)$current_trip['minimum_price']*$days;
 
-    if($option_1_1!=''){
+    if($option_1_1=='1'){
         $price+=(int)$current_trip['option_1_1_price'];
     }
-    if($option_1_2!=''){
+    if($option_1_2=='1'){
         $price+=(int)$current_trip['option_1_2_price'];
     }
-    if($option_1_3!=''){
+    if($option_1_3=='1'){
         $price+=(int)$current_trip['option_1_3_price'];
     }
-    if($option_1_4!=''){
+    if($option_1_4=='1'){
         $price+=(int)$current_trip['option_1_4_price'];
     }
-    if($option_2_1!=''){
+    if($option_2_1=='1'){
         $price+=(int)$current_trip['option_2_1_price'];
     }
-    if($option_2_2!=''){
+    if($option_2_2=='1'){
         $price+=(int)$current_trip['option_2_2_price'];
     }
-    if($option_2_3!=''){
+    if($option_2_3=='1'){
         $price+=(int)$current_trip['option_2_3_price'];
     }
-    if($option_2_4!=''){
+    if($option_2_4=='1'){
         $price+=(int)$current_trip['option_2_4_price'];
     }
-    if($option_3_1!=''){
+    if($option_3_1=='1'){
         $price+=(int)$current_trip['option_3_1_price'];
     }
-    if($option_3_2!=''){
+    if($option_3_2=='1'){
         $price+=(int)$current_trip['option_3_2_price'];
     }
-    if($option_3_3!=''){
+    if($option_3_3=='1'){
         $price+=(int)$current_trip['option_3_3_price'];
     }
-    if($option_3_4!=''){
+    if($option_3_4=='1'){
         $price+=(int)$current_trip['option_3_4_price'];
+    }
+
+    if($discount=='1'){
+        $price = 0;
+        $_SESSION['user']['discount']=0;
     }
 
     $price*=(int)$number;
@@ -139,7 +145,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 
     $error=false;
 
-    if(!$reservations_list==null){
+    if(!is_null($reservations_list)){
         foreach ($reservations_list as $reservation){
             if(($start_date>$reservation['start_date'] AND $start_date<$reservation['end_date']) OR
                 ($end_date>$reservation['start_date'] AND $end_date<$reservation['end_date']) OR
@@ -197,6 +203,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     <link rel="stylesheet" href="assets/css/book.css">
     <link  rel="stylesheet" href="https://db.onlinewebfonts.com/c/485fe91395665a0ac50e25744ff3a19c?family=Get+Schwifty">
     <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/dynamicPrice.js" defer></script>
 </head>
 <body style="width: 100%; margin: 0; padding: 0;">
 <div class="site-header">
@@ -257,6 +264,9 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     </div>
 </div>
 
+<input id="tripId" type="hidden" value="<?= $current_trip["trip_id"]?>">
+<input id="dayValue" type="hidden" value="<?= $current_trip["minimum_price"]?>">
+
 <section class="main-section">
         <div class="display-form">
             <form class="book-options-2" action="booking.php?id=<?php echo htmlspecialchars($current_trip["trip_id"])?>" method="post">
@@ -267,13 +277,22 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 
                         <label for="end_date">End Date</label>
                         <input type="date" id="end_date"  name="end_date" required class="options-button">
+
+                        <?php
+                            if($_SESSION['user']['discount'] == 100){
+                                echo '
+                                    <label for="reduction">Use Free <br>Trip Discount</label>
+                                    <input type="checkbox" id="reduction"  name="reduction" class="options-button" style="margin-bottom: 30px" value="1">
+                                ';
+                            }
+                        ?>
                     </div>
                     <div class="options">
                         <h2><?php echo htmlspecialchars($current_trip["step_type"])?></h2>
                         <div class="options-button">
                             <label>
                                 <input type="hidden" name="option_1_1" value="0">
-                                <input type="checkbox" name="option_1_1" value="1">
+                                <input data-name="option_1_1_price"  type="checkbox" name="option_1_1" value="1">
                                 <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_1_1"])?>
                             </span>
@@ -285,7 +304,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
                         <div class="options-button">
                             <label>
                                 <input type="hidden" name="option_1_2" value="0">
-                                <input type="checkbox" name="option_1_2" value="1">
+                                <input data-name="option_1_2_price"  type="checkbox" name="option_1_2" value="1">
                                 <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_1_2"])?>
                             </span>
@@ -297,7 +316,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
                         <div class="options-button">
                             <label>
                                 <input type="hidden" name="option_1_3" value="0">
-                                <input type="checkbox" name="option_1_3" value="1">
+                                <input data-name="option_1_3_price" type="checkbox" name="option_1_3" value="1">
                                 <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_1_3"])?>
                             </span>
@@ -309,7 +328,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
                         <div class="options-button">
                             <label>
                                 <input type="hidden" name="option_1_4" value="0">
-                                <input type="checkbox" name="option_1_4" value="1">
+                                <input data-name="option_1_4_price"  type="checkbox" name="option_1_4" value="1">
                                 <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_1_4"])?>
                             </span>
@@ -324,7 +343,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
                         <div class="options-button">
                             <label>
                                 <input type="hidden" name="option_2_1" value="0">
-                                <input type="checkbox" name="option_2_1" value="1">
+                                <input data-name="option_2_1_price"  type="checkbox" name="option_2_1" value="1">
                                 <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_2_1"])?>
                             </span>
@@ -336,7 +355,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
                         <div class="options-button">
                             <label>
                                 <input type="hidden" name="option_2_2" value="0">
-                                <input type="checkbox" name="option_2_2" value="1">
+                                <input data-name="option_2_2_price"  type="checkbox" name="option_2_2" value="1">
                                 <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_2_2"])?>
                             </span>
@@ -348,7 +367,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
                         <div class="options-button">
                             <label>
                                 <input type="hidden" name="option_2_3" value="0">
-                                <input type="checkbox" name="option_2_3" value="1">
+                                <input data-name="option_2_3_price"  type="checkbox" name="option_2_3" value="1">
                                 <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_2_3"])?>
                             </span>
@@ -360,7 +379,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
                         <div class="options-button">
                             <label>
                                 <input type="hidden" name="option_2_4" value="0">
-                                <input type="checkbox" name="option_2_4" value="1">
+                                <input data-name="option_2_4_price"  type="checkbox" name="option_2_4" value="1">
                                 <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_2_4"])?>
                             </span>
@@ -375,7 +394,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
                         <div class="options-button">
                             <label>
                                 <input type="hidden" name="option_3_1" value="0">
-                                <input type="checkbox" name="option_3_1" value="1">
+                                <input data-name="option_3_1_price"  type="checkbox" name="option_3_1" value="1">
                                 <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_3_1"])?>
                             </span>
@@ -387,7 +406,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
                         <div class="options-button">
                             <label>
                                 <input type="hidden" name="option_3_2" value="0">
-                                <input type="checkbox" name="option_3_2" value="1">
+                                <input data-name="option_3_2_price"  type="checkbox" name="option_3_2" value="1">
                                 <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_3_2"])?>
                             </span>
@@ -399,7 +418,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
                         <div class="options-button">
                             <label>
                                 <input type="hidden" name="option_3_3" value="0">
-                                <input type="checkbox" name="option_3_3" value="1">
+                                <input data-name="option_3_3_price"  type="checkbox" name="option_3_3" value="1">
                                 <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_3_3"])?>
                             </span>
@@ -411,7 +430,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
                         <div class="options-button">
                             <label>
                                 <input type="hidden" name="option_3_4" value="0">
-                                <input type="checkbox" name="option_3_4" value="1">
+                                <input data-name="option_3_4_price"  type="checkbox" name="option_3_4" value="1">
                                 <span class="option">
                                 <?php echo htmlspecialchars($current_trip["option_3_4"])?>
                             </span>
@@ -484,65 +503,6 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         </a>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const priceDisplay = document.getElementById('price-amount');
-        const startDateInput = document.getElementById('start_date');
-        const endDateInput = document.getElementById('end_date');
-        const numberSelect = document.getElementById('number');
-        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-
-        const minimumPricePerDay = <?php echo (int)$current_trip['minimum_price']; ?>;
-        const optionPrices = {
-            option_1_1: <?php echo (int)$current_trip['option_1_1_price']; ?>,
-            option_1_2: <?php echo (int)$current_trip['option_1_2_price']; ?>,
-            option_1_3: <?php echo (int)$current_trip['option_1_3_price']; ?>,
-            option_1_4: <?php echo (int)$current_trip['option_1_4_price']; ?>,
-            option_2_1: <?php echo (int)$current_trip['option_2_1_price']; ?>,
-            option_2_2: <?php echo (int)$current_trip['option_2_2_price']; ?>,
-            option_2_3: <?php echo (int)$current_trip['option_2_3_price']; ?>,
-            option_2_4: <?php echo (int)$current_trip['option_2_4_price']; ?>,
-            option_3_1: <?php echo (int)$current_trip['option_3_1_price']; ?>,
-            option_3_2: <?php echo (int)$current_trip['option_3_2_price']; ?>,
-            option_3_3: <?php echo (int)$current_trip['option_3_3_price']; ?>,
-            option_3_4: <?php echo (int)$current_trip['option_3_4_price']; ?>
-        };
-
-        function calculatePrice() {
-            let total = 0;
-
-            const startDate = new Date(startDateInput.value);
-            const endDate = new Date(endDateInput.value);
-
-            if (isNaN(startDate) || isNaN(endDate) || endDate <= startDate) {
-                priceDisplay.textContent = "0";
-                return;
-            }
-
-            const days = (endDate - startDate) / (1000 * 60 * 60 * 24);
-            total += minimumPricePerDay * days;
-
-            checkboxes.forEach(cb => {
-                if (cb.checked && optionPrices.hasOwnProperty(cb.name)) {
-                    total += optionPrices[cb.name];
-                }
-            });
-
-            const number = parseInt(numberSelect.value) || 1;
-            total *= number;
-
-            priceDisplay.textContent = total.toString();
-        }
-
-        [...checkboxes, startDateInput, endDateInput, numberSelect].forEach(el => {
-            el.addEventListener('input', calculatePrice);
-            el.addEventListener('change', calculatePrice);
-        });
-
-        calculatePrice();
-    });
-</script>
 
 </body>
 </html>
