@@ -5,13 +5,16 @@ document.addEventListener("DOMContentLoaded", function (){
     const tripId = document.getElementById("tripId").value;
     const dailyPrice = parseInt(document.getElementById("dayValue").value);
     let howMany = document.getElementById("number");
-    const discount = document.getElementById("reduction");
+    const discountExist = document.getElementById("discoutExist").value;
 
     function price(priceFile){
-        if(discount.checked){
-            totalPrice = 0;
-            const price = document.getElementById("price-amount").textContent = `${totalPrice}`;
-            return;
+        if (discountExist == 100){
+            const discount = document.getElementById("reduction");
+            if(discount.checked){
+                totalPrice = 0;
+                const price = document.getElementById("price-amount").textContent = `${totalPrice}`;
+                return;
+            }
         }
         totalPrice = 0;
         checks.forEach(check =>{

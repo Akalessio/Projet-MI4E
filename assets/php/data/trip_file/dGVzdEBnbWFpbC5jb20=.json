@@ -1,0 +1,23 @@
+[
+    {
+        "trip_name": "Warhammer 40k Galaxy Exploration",
+        "trip_id": "13",
+        "option_1_1": "0",
+        "option_1_2": "0",
+        "option_1_3": "1",
+        "option_1_4": "1",
+        "option_2_1": "0",
+        "option_2_2": "0",
+        "option_2_3": "1",
+        "option_2_4": "1",
+        "option_3_1": "0",
+        "option_3_2": "0",
+        "option_3_3": "0",
+        "option_3_4": "0",
+        "price": 104800,
+        "start_date": "2025-05-18",
+        "end_date": "2025-05-25",
+        "duration": 7,
+        "number": "4"
+    }
+]

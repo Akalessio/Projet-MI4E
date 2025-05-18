@@ -64,5 +64,16 @@
         "discount": "0",
         "profile_picture": "2",
         "trip_file": "dG9wZWVzdGxhQGdtYWlsLmNvbQ==.json"
+    },
+    {
+        "lname": "Testttt",
+        "fname": "Test",
+        "date": "2025-05-05",
+        "mail": "test@gmail.com",
+        "password": "$2y$10$GbmS3XkzMNynIxr5Ki18ge6i7faVPXtamcKV\/w.bUMGCsn4H5dYv2",
+        "rank": "user",
+        "discount": "0",
+        "profile_picture": "1",
+        "trip_file": "dGVzdEBnbWFpbC5jb20=.json"
     }
 ]

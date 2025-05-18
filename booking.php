@@ -278,6 +278,8 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
                         <label for="end_date">End Date</label>
                         <input type="date" id="end_date"  name="end_date" required class="options-button">
 
+                        <input type="hidden" value="<?= $_SESSION['user']['discount']  ?>" id="discoutExist">
+
                         <?php
                             if($_SESSION['user']['discount'] == 100){
                                 echo '
